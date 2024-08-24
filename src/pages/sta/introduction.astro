@@ -9,6 +9,8 @@ import BlueText from "../../components/BlueText.astro"
 import InlineEquation from "../../components/InlineEquation.astro" 
 import DisplayEquation from "../../components/DisplayEquation.astro" 
 import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
 ---
 <Layout title="Introduction">
 <Section title="Introduction to Statics"></Section>
@@ -46,12 +48,30 @@ The mutual forces of action and reaction between two particles are equal, opposi
 
 </SubSubSection>
 
+
 <SubSubSection title="Example">
 
 
     <PrairieDrawCanvas id="rep-ff-c" width="600" height="600">
         <small><em>Click and drag to impart a force on the particle and observe its velocity and position changes.</em></small>
     </PrairieDrawCanvas>
+
+    <CalloutContainer slot="cards">
+        <CalloutCard>
+            <p>
+                 The three laws of motion were first stated by <a href="https://en.wikipedia.org/wiki/Isaac_Newton">Isaac Newton</a>
+                 in his <a href="https://en.wikipedia.org/wiki/Philosophiæ_Naturalis_Principia_Mathematica">Philosophiæ Naturalis Principia Mathematica</a>
+                 (Mathematical Principles of Natural Philosophy), originally
+                 published in 1687. By the time Newton wrote the Principia, he
+                 had already developed calculus (which he called "<a href="https://en.wikipedia.org/wiki/Fluxion" title="Fluxion">the science of fluxions</a>"), but in the
+                 Principia he made no explicit use of it, perhaps because he believed geometrical arguments to be more rigorous. Consequently, the
+                 Principia does not express acceleration as the second
+                 derivative of position, and so it does not give the second law
+                 as <InlineEquation equation="\\vec{F} = m\\vec{a}"/>. This form of the second law was written (for the
+                 special case of constant force) at least as early as 1716, by <a href="https://en.wikipedia.org/wiki/Jakob_Hermann" title="Jakob Hermann">Jakob Hermann</a>
+             </p>
+        </CalloutCard>
+    </CalloutContainer>
 
 </SubSubSection>
 
@@ -132,6 +152,7 @@ A <em>rigid body</em> is an extended area of material that
         no extended body can be exactly rigid. Despite this, these
         are very useful models for mechanics and dynamics.
       </p>
+
 
 </SubSubSection>
 
