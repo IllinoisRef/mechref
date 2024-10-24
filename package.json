@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@astrojs/svelte": "^5.7.0",
-    "astro": "^4.12.3",
+    "astro": "^4.16.6",
     "bootstrap-icons": "^1.11.3",
     "fuse.js": "^7.0.0",
     "mathjax": "^3.2.2",
