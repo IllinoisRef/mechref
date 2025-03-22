@@ -1,4 +1,3 @@
-
 /*****************************************************************************/
 
 /** Creates a PrairieDraw object.
@@ -1328,6 +1327,7 @@ PrairieDraw.prototype.setUnits = function(xSize, ySize, canvasWidth, preserveCan
         this.scale($V([yScale, yScale]));
     }
     this._saveTrans = this._trans;
+
 }
 
 /*****************************************************************************/
@@ -3052,7 +3052,7 @@ PrairieDraw.prototype.rightAngleImproved = function(p0Dw, p1Dw, p2Dw) {
     @param {string} text The text to draw. If text begins with "TEX:" then it is interpreted as LaTeX.
     @param {bool} boxed (Optional) Whether to draw a white box behind the text (default: false).
 */
-PrairieDraw.prototype.text = function(posDw, anchor, text, boxed, angle) {
+PrairieDraw.prototype.text = function(posDw, anchor, text, boxed, angle, height, width) {
     if (text === undefined) {
         return;
     }
@@ -3060,7 +3060,7 @@ PrairieDraw.prototype.text = function(posDw, anchor, text, boxed, angle) {
     angle = (angle === undefined) ? 0 : angle;
     var posPx = this.pos2Px(this.pos3To2(posDw));
     if (text.slice(0,4) === "TEX:") {
-        var tex_text = text.slice(4);
+        var tex_text = text.slice(4).replaceAll("$", "", );
         var hash = Sha1.hash(tex_text);
         this._texts = this._texts || {};
         if (hash in this._texts) {
@@ -3085,11 +3085,28 @@ PrairieDraw.prototype.text = function(posDw, anchor, text, boxed, angle) {
             this._ctx.drawImage(img, xPx - offsetPx.e(1), yPx + offsetPx.e(2));
             this._ctx.restore();
         } else {
-            var imgSrc = "text/" + hash + ".png";
-            var img = new Image();
-            img.onload = this.redraw.bind(this);
-            img.src = imgSrc;
-            this._texts[hash] = img;
+            window.MathJax.tex2svgPromise(tex_text, { display: true}).then((node) => {
+                svg = node.firstChild;
+                if (height != undefined){
+                    svg.setAttribute("height", `${height}px`);
+                }
+
+                if (width != undefined){
+                    svg.setAttribute("width", `${width}px`);
+                }
+
+                
+                const xml = new XMLSerializer().serializeToString(svg);
+                const svg64 = btoa(unescape(encodeURIComponent(xml)));
+                const imgSrc = 'data:image/svg+xml;base64,' + svg64;
+                const img = new Image();
+                img.onload = this.redraw.bind(this);
+                img.src = imgSrc;
+                this._texts[hash] = img;
+            }
+            )
+            .catch(error => console.error(error));
+            
         }
     } else {
         var align, baseline, bbRelOffset;

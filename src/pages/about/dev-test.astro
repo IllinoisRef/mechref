@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/BlankLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import Section from "../../components/Section.astro";
 import SubSection from "../../components/SubSection.astro";
 import SubSubSection from "../../components/SubSubSection.astro";
@@ -31,6 +31,16 @@ import Image from "../../components/Image.astro";
             document.querySelector('#jp-main-content-panel').removeChild(leftSidebar)
         }
         
+    </script>
+
+    <div id="math-container"></div>
+
+    <script is:inline>
+        window.MathJax.tex2svgPromise("\\frac{a}{b}")
+        .then((node) => {
+            document.getElementById("math-container").appendChild(node);
+        })
+        .catch((err) => console.error(err));
     </script>
 
     <button onclick="remove_sidebar()" class="btn btn-primary">remove sidebar</button>

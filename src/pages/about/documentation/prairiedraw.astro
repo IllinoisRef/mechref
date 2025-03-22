@@ -75,8 +75,7 @@ import Image from "../../../components/Image.astro";
 
       <PrairieDrawCanvas id="coords" width="300" height="300" />
 
-      <script type="application/javascript">
-        import { idText } from "typescript";
+      <script type="application/javascript" is:inline>
 
         /* <![CDATA[ */
         new PrairieDraw("coords", function () {
@@ -210,9 +209,11 @@ import Image from "../../../components/Image.astro";
       </SubSubSection>
       <SubSubSection title="Text" id="text">
         <p>
-          Text can be drawn using <code>this.text(position, anchor, textString)</code>, which provides the position in 2D to draw the text, and the anchor point relative to the text. If
-          <code>textString</code> starts with <code>TEX:</code> then the rest of the string is interpreted as LaTeX. To support this, the
-          <code>generate_text.py</code> script must be run on the JavaScript file to generate the required images.
+          Text can be drawn using <code>this.text(position, anchor, textString, boxed, angle, height, width)</code>, which provides the position in 2D to draw the text, and the anchor point relative to the text. If<code>textString</code> starts with <code>TEX:</code> then the rest of the string is interpreted as LaTeX. <code>boxed</code> is a boolean refering to whether a box should be drawn around it, <code>angle</code> is the angle of rotation of the text in radians, and <code>height</code> and <code>width</code> represent the dimensions of the text. 
+        </p>
+        <p>
+          <u>Note:</u> Only the most restrictive dimension of the two will be applied. In the example below, even though
+          <code>width</code> is set at 500, <code>height</code> being 30 means the text is 30 pixels tall, and the width is adjusted accordingly.
         </p>
 
         <PrairieDrawCanvas id="text_pdc" width="300" height="300" />
@@ -223,8 +224,10 @@ import Image from "../../../components/Image.astro";
             var O = $V([0, 0]);
             var P = $V([2, 2]);
             this.arrow(O, P);
-            this.text(O, $V([0, 1]), "TEX:$O$");
-            this.text(P, $V([0, -1]), "TEX:$P$");
+            this.text(O, $V([0, 1]), "TEX:O");
+            this.text(P, $V([0, -1]), "TEX:P", false, Math.PI/2, 30, 500);
+          //this.text(P, $V([0, -1]), "TEX:\\text{example}", false, 0, 50, 100)
+
           });
           /* ]]> */
         </script>
@@ -235,8 +238,8 @@ import Image from "../../../components/Image.astro";
         var O = $V([0, 0]);
         var P = $V([2, 2]);
         this.arrow(O, P);
-        this.text(O, $V([0, 1]), "TEX:$O$");
-        this.text(P, $V([0, -1]), "TEX:$P$");
+        this.text(O, $V([0, 1]), "TEX:O");
+        this.text(P, $V([0, -1]), "TEX:P", false, Math.PI/2, 30, 500);
     });
     ` />
 
@@ -257,21 +260,21 @@ import Image from "../../../components/Image.astro";
             var xp0 = $V([1, 0]);
             var xpp = $V([1, 1]);
             this.point(xnn);
-            this.text(xnn, xpp, "(-1,-1)");
+            this.text(xnn, xpp, "TEX:(-1,-1)");
             this.point(xn0);
-            this.text(xn0, xp0, "(-1, 0)");
+            this.text(xn0, xp0, "TEX:(-1, 0)");
             this.point(xnp);
-            this.text(xnp, xpn, "(-1, 1)");
+            this.text(xnp, xpn, "TEX:(-1, 1)");
             this.point(x0n);
-            this.text(x0n, x0p, "( 0,-1)");
+            this.text(x0n, x0p, "TEX:( 0,-1)");
             this.point(x0p);
-            this.text(x0p, x0n, "( 0, 1)");
+            this.text(x0p, x0n, "TEX:( 0, 1)");
             this.point(xpn);
-            this.text(xpn, xnp, "( 1,-1)");
+            this.text(xpn, xnp, "TEX:( 1,-1)");
             this.point(xp0);
-            this.text(xp0, xn0, "( 1, 0)");
+            this.text(xp0, xn0, "TEX:( 1, 0)");
             this.point(xpp);
-            this.text(xpp, xnn, "( 1, 1)");
+            this.text(xpp, xnn, "TEX:( 1, 1)");
           });
           /* ]]> */
         </script>
@@ -288,14 +291,21 @@ import Image from "../../../components/Image.astro";
     var xpn = $V([ 1, -1]);
     var xp0 = $V([ 1,  0]);
     var xpp = $V([ 1,  1]);
-    this.point(xnn); this.text(xnn, xpp, "(-1,-1)");
-    this.point(xn0); this.text(xn0, xp0, "(-1, 0)");
-    this.point(xnp); this.text(xnp, xpn, "(-1, 1)");
-    this.point(x0n); this.text(x0n, x0p, "( 0,-1)");
-    this.point(x0p); this.text(x0p, x0n, "( 0, 1)");
-    this.point(xpn); this.text(xpn, xnp, "( 1,-1)");
-    this.point(xp0); this.text(xp0, xn0, "( 1, 0)");
-    this.point(xpp); this.text(xpp, xnn, "( 1, 1)");
+    this.text(xnn, xpp, "TEX:(-1,-1)");
+      this.point(xn0);
+      this.text(xn0, xp0, "TEX:(-1, 0)");
+      this.point(xnp);
+      this.text(xnp, xpn, "TEX:(-1, 1)");
+      this.point(x0n);
+      this.text(x0n, x0p, "TEX:( 0,-1)");
+      this.point(x0p);
+      this.text(x0p, x0n, "TEX:( 0, 1)");
+      this.point(xpn);
+      this.text(xpn, xnp, "TEX:( 1,-1)");
+      this.point(xp0);
+      this.text(xp0, xn0, "TEX:( 1, 0)");
+      this.point(xpp);
+      this.text(xpp, xnn, "TEX:( 1, 1)");
     });
     /* ]]> */
     ` />
@@ -309,7 +319,7 @@ import Image from "../../../components/Image.astro";
           new PrairieDraw("line", function () {
             this.setUnits(6, 6);
             var O = $V([0, 0]);
-
+            this.text()
             const points = {
               0: [-1.5, -2],
               1: [1.5, -2],
