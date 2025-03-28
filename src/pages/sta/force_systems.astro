@@ -119,6 +119,24 @@ Now we can solve for the center of mass of the distributed load, <InlineEquation
 <DisplayEquation equation='\\bar{x} = \\dfrac{M_R}{F_R}\\' title="Location of resultant force" background="True" />
 
 <Image src='/sta/force_systems/NonuniformLoad.jpg' width='8'> Nonuniform load.</Image>
+
+<div style = "display: flex; justify-content: center; align-items: center;">
+  <div style = "display: flex; gap: 120px;">
+      <div style = "width: 300px; height: 150px; text-align: center;">
+          <div style = "text-align: center; margin-bottom: 10px;">Moment about 0 from force <InlineEquation equation = "dF:"/></div>
+          <div style = "text-align: center; margin-bottom: 10px;"><InlineEquation equation = "\\begin{align} dM &amp;= x * (dF) \\\\ &amp;= x * w * dx \\end{align}"/></div>
+          <div style = "text-align: center; margin-bottom: 10px;">Total moment <InlineEquation equation = "(M_R)"/> about point 0:</div>
+          <div style = "text-align: center;"><InlineEquation equation = "M_R = \\int dM = \\int_{0} ^ {L} x * w(x) \\, dx"/></div>
+      </div>
+      <div style = "width: 300px; height: 150px; text-align: center;">
+        <div style = "text-align: center; margin-bottom: 10px;">Total moment <InlineEquation equation = "(M_R)"/> about point 0:</div>
+          <div style = "text-align: center; margin-bottom: 10px;"><InlineEquation equation = "M_R = \\bar{x} \\ F_R"/></div>
+          <div style = "text-align: center; margin-bottom: 10px;">solve for <InlineEquation equation = "\\bar{x}:"/></div>
+          <div style = "padding-left: 10px;"><InlineEquation equation = "\\bar{x} = \\frac{M_R}{F_R} = \\frac{\\int_{0} ^ {L} x * w \\, dx}{\\int_{0} ^ {L} w \\, dx}"/></div>
+      </div>
+    </div>
+</div>
+
 </SubSubSection>
 
 <!-- from lecture 11 and 12 -->

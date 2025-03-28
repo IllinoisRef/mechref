@@ -81,11 +81,31 @@ In 3D, the value for <InlineEquation equation=" w " />, the distributed load on 
 
 <Image src='/sta/hydrostatic_fluid_pressure/Fluid3DPlate.PNG' width='5'></Image>
 
+<DisplayEquation equation = "F_R = \\rho * g * h * b * L" background = "True" title = "In 3D, the resultant force from the distributed load can be written as" id = "hfp-3D" derivation = "True">
+	<p>
+		<div style = "padding-left: 292px; margin-bottom: 10px;"><InlineEquation equation = "w = p = \\rho * g * h"/><span style = "color: gray"><InlineEquation equation = "\\ \\ \\ \\ \\ [\\frac{N}{m^2}]"/></span></div>
+		<div style = "text-align: center; margin-bottom: 10px;">(force over area)</div>
+		<div style = "text-align: center; margin-bottom: 10px;">To find <InlineEquation equation = "F_R,"/> multiply by area:</div>
+		<div style = "padding-left: 284px; margin-bottom: 10px;"><InlineEquation equation = "F_R = w * (b * L)"/> &larr; volume under distributed load!</div>
+		<div style = "text-align: center;"><InlineEquation equation = "= \\rho * g * h * b * L"/></div>
+	 </p>
+</DisplayEquation>
+
 <p>
 In 2D, the the value for <InlineEquation equation=" w " />, the distributed load on the plate from the fluid, is the pressure <InlineEquation equation=" P " /> at depth <InlineEquation equation=" h " /> <strong> multiplied by the plate depth <InlineEquation equation=" b " />. </strong> To solve for the resultant force from the distributed load we multiply by the length of the plate.
 </p>
 
 <Image src='/sta/hydrostatic_fluid_pressure/Fluid2DPlate.PNG' width='5'></Image>
+
+<DisplayEquation equation = "F_R = \\rho * g * h * b * L" background = "True" title = "In 2D, the resultant force from the distributed load can be written as" id = "hfp-2D" derivation = "True">
+	<p>
+		<div style = "padding-left: 270px; margin-bottom: 10px;"><InlineEquation equation = "w = p * b = \\rho * g * h * b"/><span style = "color: gray"><InlineEquation equation = "\\ \\ \\ \\ \\ [\\frac{N}{m^2}] * [m] = [\\frac{N}{m}]"/></span></div>
+		<div style = "text-align: center; margin-bottom: 10px;">(force over length)</div>
+		<div style = "text-align: center; margin-bottom: 10px;">To find <InlineEquation equation = "F_R,"/> multiply by length:</div>
+		<div style = "text-align: center; margin-bottom: 10px;"><InlineEquation equation = "F_R = w * L = \\rho * g * h * b * L"/></div>
+		<div style = "padding-left: 332px;">&uarr; area under distributed load!</div>
+	 </p>
+</DisplayEquation>
 
 </SubSection>
 
