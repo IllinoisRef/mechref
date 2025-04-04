@@ -108,23 +108,33 @@ The center of mass, center of gravity, and center of volume are all represented 
     </tbody>
 </DisplayTable>
 
-<DisplayEquation title="When are Centers of Gravity, Mass, and Volume the same?" id="com" background="True" equation="" derivation="True">
-    <p>
-        The center of gravity, center of mass, and center of volume of an object are the same when that object has a constant density (is homogeneous) and gravity is constant along the object.
-        <div style = "text-align: center; margin-bottom: 10px;">center of gravity: <InlineEquation equation = "\\bar{x}, \\bar{y}"/></div>
-	    <div style = "text-align: center; margin-bottom: 10px;"><InlineEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dW}{\\int dW} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dW}{\\int dW}"/></div>
-        <div style = "text-align: center; margin-bottom: 10px;">We know that: <InlineEquation equation = "W = m * g"/></div>
-        <div style = "padding-left: 269px; margin-bottom: 10px;"><InlineEquation equation = "dW = m * \\cancel{dg} + dm * g \\ \\ \\ \\ \\"/>assume that gravity = constant</div>
-        <div style = "padding-left: 312px; margin-bottom: 10px;"><InlineEquation equation = "dW = g * dm"/><span style = "color: gray"><InlineEquation equation = "\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ dg = 0"/></span></div>
-        <div style = "text-align: center; margin-bottom: 10px;"><InlineEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} * \\cancel{g} \\ dm}{\\int \\cancel{g} \\ dm}"/></div>
-        <div style = "padding-left: 290px; margin-bottom: 10px;"><InlineEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dm}{\\int dm} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dm}{\\int dm} \\ \\ \\ \\ \\"/>center of mass</div>
-        <div style = "text-align: center; margin-bottom: 10px;">We know that mass = <InlineEquation equation = "\\rho * V"/></div>
-        <div style = "padding-left: 272px; margin-bottom: 10px;"><InlineEquation equation = "dm = \\rho * V * d + V * \\cancel{d} * \\rho \\ \\ \\ \\ \\"/>assuming <InlineEquation equation = "\\rho"/> = constant</div>
-        <div style = "padding-left: 316px; margin-bottom: 10px;"><InlineEquation equation = "dm = \\rho * V * d"/><span style = "color: gray"><InlineEquation equation = "\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\  \\ \\ \\ \\ \\ d \\rho = 0"/></span></div>
-        <div style = "text-align: center; margin-bottom: 10px;"><InlineEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} * \\cancel{\\rho} \\ dV}{\\int \\cancel{\\rho} \\ dV}"/></div>
-        <div style = "padding-left: 290px;"><InlineEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dV}{\\int dV} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dV}{\\int dV} \\ \\ \\ \\ \\"/>center of volume (centroid)</div>
+<p>
+    When are Centers of Gravity, Mass, and Volume the same? Deriving each will make this clearer.
+</p>
+
+<DisplayEquation title = "Center of gravity" id = "cog" background = "True" equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dW}{\\int dW} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dW}{\\int dW}"></DisplayEquation>
+
+<DisplayEquation title = "Center of mass" id = "com" background = "True" equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dm}{\\int dm} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dm}{\\int dm}" derivation = "True" >
+    <p class="text-center">We know that: \(W = m \cdot g\)</p>
+        
+        <DisplayEquation equation =` \\begin{align} \\Rightarrow dW &=  dm \\cdot g  + m \\cdot \\cancel{dg}  && \\text{assuming } g \\text{ is constant} \\\\ 
+        &= g\\cdot dm && dg = 0 \\end{align}` />
+        <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} * \\cancel{g} \\ dm}{\\int \\cancel{g} dm}"/>
+        <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dm}{\\int dm} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dm}{\\int dm}"/>
+</DisplayEquation>
+
+<DisplayEquation title = "Center of volume (centroid)" id = "cov" background = "True" equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dV}{\\int dV} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dV}{\\int dV}" derivation = "True">
+    <p class="text-center">We know that mass = <InlineEquation equation = "\\rho * V \\ \\ \\ \\ \\"/>(<InlineEquation equation = "\\rho"/> = density)</p>
+        <DisplayEquation equation =`\\begin{align} \\Rightarrow  dm &= \\rho * dV + V * \\cancel{d \\rho} && \\text{assuming } \\rho \\text{ is constant} \\\\
+         &= \\rho * dV  && d \\rho = 0 \\end{align}`/>
+        <DisplayEquation equation="\\bar{y} = \\frac{\\int \\tilde{y} * \\cancel{\\rho} \\ dV}{\\int \\cancel{\\rho} \\ dV}" />
+        <DisplayEquation equation="\\bar{y} = \\frac{\\int \\tilde{y} \\ dV}{\\int dV} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dV}{\\int dV}" />
     </p>
 </DisplayEquation>
+
+<p>
+    Conclusion: the center of gravity, center of mass, and center of volume of an object are the same when that object has a constant density (is homogeneous) and gravity is constant along the object.
+</p>
 
 </Section>
 
