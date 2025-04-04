@@ -449,13 +449,13 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
     definition of a derivative:
   </p>
   <p>
-    <DisplayEquation equation="\\frac{dy}{dt}=\\lim_{\\Delta t\\rightarrow0}\\frac{\\Delta y}{\\Delta t}." />
+    <DisplayEquation title="Leibniz notation." id = "rvc-lbz" background = True equation="\\frac{dy}{dt}=\\lim_{\\Delta t\\rightarrow0}\\frac{\\Delta y}{\\Delta t}." />
   </p>
   <p>
     Newton notation is meant to be compact:
   </p>
   <p>
-    <DisplayEquation equation="\\dot{y} = \\frac{dy}{dt}." />
+    <DisplayEquation title="Newton notation." id = "rvc-new" background = True equation="\\dot{y} = \\frac{dy}{dt}." />
   </p>
   <p>
     Note that a superscribed dot always denotes differentiation 
@@ -729,7 +729,7 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
     <b>Cartesian:</b>
   </p>
 
-    <DisplayEquation equation= "\\vec{v} = \\dot{x} \\hat\\imath + \\dot{y} \\hat\\jmath"/>
+    <DisplayEquation title = "Cartesian." id = "rvc-intc" background = True equation= "\\vec{v} = \\dot{x} \\hat\\imath + \\dot{y} \\hat\\jmath"/>
 
   <ul>
     <li>Integrate <InlineEquation equation="\\dot{x}" />  and <InlineEquation equation="\\dot{y}" /> to find \(x\) and \(y\). </li>
@@ -738,7 +738,7 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
     <b>Polar:</b>
   </p>
 
-    <DisplayEquation equation= "\\vec{v} = \\dot{r} \\hat{e}_r + r \\dot{\\theta} \\hat{e}_\\theta"/>
+    <DisplayEquation title = "Polar." id = "rvc-intp" background = True equation= "\\vec{v} = \\dot{r} \\hat{e}_r + r \\dot{\\theta} \\hat{e}_\\theta"/>
 
 
 <ul>
