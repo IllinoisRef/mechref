@@ -10,8 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/svelte": "^5.7.0",
-    "astro": "^4.12.3",
+    "@astrojs/svelte": "^7.0.9",
+    "astro": "^5.6.1",
     "bootstrap-icons": "^1.11.3",
     "fuse.js": "^7.0.0",
     "highlight.js": "^11.10.0",
