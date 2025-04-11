@@ -290,8 +290,9 @@ import DisplayTable from "../../components/DisplayTable.astro"
         To study this problem we need a model. Let's start with the simplest model and then
         gradually consider more complex models.
     </p>
-    <Image src="/dyn/particle_kinetics/red_car.jpg" width="8">The classic American <a
-        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Pony_car">Pony Car</a>:
+    <Image src="/dyn/particle_kinetics/red_car.jpg" width="8"> Figure 1 (The classic American <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Pony_car">Pony Car)</a>
+         :
         a 1965 <a
         target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Ford_Mustang">Ford
         Mustang</a> <a
@@ -427,8 +428,10 @@ import DisplayTable from "../../components/DisplayTable.astro"
       </p>
         <Image src="/dyn/particle_kinetics/avb_09A186_small.jpg">
             <p class="figureCaption">
+               Figure 2:
             <a
-            target="_blank" rel="noopener noreferrer" href="http://www.setra.de/en/coaches-buses/topclass/models/s-411-hd.html">Setra
+            target="_blank" rel="noopener noreferrer" href="http://www.setra.de/en/coaches-buses/topclass/models/s-411-hd.html">
+            Setra
             S 411 HD coach</a> from the TopClass 400 series on the
             Mercedes-Benz Untertürkheim test track. This 10.16 m long
             coach model is relatively compact and has short overhangs,
@@ -479,7 +482,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
       </p>
       <Image id="avb-ft" src="/dyn/particle_kinetics/avb_unterturkheim_border.png">
         <p class="figureCaption">
-          Satellite image of the Mercedes-Benz test track at
+          Figure 3: Satellite image of the Mercedes-Benz test track at
           Untertürkheim, on the <a
           target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Neckar">Neckar
           River</a> just outside of <a
@@ -757,7 +760,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
       </p>
       <p>
         <a
-        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Velodrome">Velodromes</a>
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Velodrome"> Velodromes</a>
         are arenas with tracks designed for high-speed bicycle
         races, as shown below, with speeds up to 85 km/h. The bank
         angle on velodrome tracks is chosen to minimize sideways
@@ -771,7 +774,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
 
       <Image id="avb-fv" alt="Bicycle riders in a velodrome" src="/dyn/particle_kinetics/avb_3886159972_71e0dc52d8_o_600.jpg" >
         <p class="figureCaption">
-          Bicycle riders on a banked turn at the <a
+          Figure 4: Bicycle riders on a banked turn at the <a
           target="_blank" rel="noopener noreferrer" href="http://velodrome.nscsports.org/">Blaine
           velodrome</a>, part of the <a
           target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/National_Sports_Center">National
@@ -940,7 +943,8 @@ import DisplayTable from "../../components/DisplayTable.astro"
       </p>
 
     <Image src="/dyn/particle_kinetics/baseball_field.jpg" width="8">
-        <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Wrigley_Field">Wrigley
+        Figure 5: <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Wrigley_Field">
+          Wrigley
         Field</a> in Chicago, Illinois is the home of
         the <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Chicago_Cubs">Chicago
         Cubs</a> baseball team. In baseball, an “out of the
@@ -1039,32 +1043,31 @@ import DisplayTable from "../../components/DisplayTable.astro"
 
         This functional relationship has no closed form.  However,
         the relationship has been established numerically based on
-        experimental data.  See <a href="#afp-fd">Figure #aft-fd</a>
+        experimental data.  See <a href="#fig6">Figure 6</a>
         for a schematic diagram of the drag coefficient's dependence
-        on the Reynolds number.
-      </p>
-      
-        <Image src="/dyn/particle_kinetics/drag_coefficient.png" width="8" />
-      
-      <em><small><p>
-        Experimental dependence of drag coefficient on Reynolds
-        number for a sphere. Image
-        credit: <a target="_blank" rel="noopener noreferrer" href="http://www.grc.nasa.gov/WWW/k-12/airplane/dragsphere.html">NASA</a>
-        via <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Stokes_number#/media/File:Drag_sphere_nasa.svg">Wikipedia</a>.
-      </p></small></em>
-      
+        on the Reynolds number.</p>
+        
+        <Image id="fig6" src="/dyn/particle_kinetics/drag_coefficient.png" width="8">
+          <p>
+            Figure 6: Experimental dependence of drag coefficient on Reynolds
+             number for a sphere. Image
+             credit: <a target="_blank" rel="noopener noreferrer" href="http://www.grc.nasa.gov/WWW/k-12/airplane/dragsphere.html">NASA</a>
+             via <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Stokes_number#/media/File:Drag_sphere_nasa.svg">Wikipedia</a>.
+           </p>
+        </Image>
 
 </SubSubSubSection>
 
 <SubSubSubSection title="Quadratic drag model">
 
     <p>
-        Notice from <a href="#afp-fd">Figure #aft-fd</a> that there
+        Notice from <a href="#figure6">Figure 6</a> that there
         is a range of Reynolds numbers (<InlineEquation equation="10^3 < {\\rm Re} < 10^5" />),
         characteristic of macroscopic projectiles, for which the
         drag coefficient is approximately constant at about 1/2 (see
         the part of the curve labeled “4”
-        in <a href="#afp-fd">Figure #aft-fd</a>).  That the drag 
+        in <a href="#figure6">
+          Figure 6</a>).  That the drag 
     coefficient is constant means that,
         within this region, the magnitude of the drag force is
         proportional to the square of the object’s speed.
