@@ -894,6 +894,8 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
 
 <SubSubSection title="Polar basis" id="polar_basis">
 
+  <Example title = "Integration in Polar Basis" id = "rvc-xii"> 
+
     <DisplayTable id="polar-basis-table" class="table-sm">
       <thead>
           <tr>
@@ -917,10 +919,16 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
       </tbody>
     </DisplayTable>
 
-<DisplayEquation equation="\\begin{aligned} \\dot{r} &amp;= 2 \\\\    r &amp;=\\int\\dot{r} dt \\\\ r &amp;=2t + c \\\\    r(0) &amp;=1\\quad  ,\\quad c=1 \\\\ r(t) &amp;=2t + 1 \\\\  \\end{aligned} " title="Radial:" background="True"/>
 
-<DisplayEquation equation="\\begin{aligned} r\\dot{\\theta} &amp;=1 \\\\    \\dot{\\theta} &amp;=\\frac{1}{2t+1} \\\\ \\theta &amp;=\\int \\dot{\\theta}  dt \\\\    \\theta &amp;=\\frac{1}{2} ln(2t+1) + c \\\\ \\theta(0) &amp;=0 \\quad , \\quad c=0 \\\\   \\theta(t) &amp;= \\frac{1}{2} ln (2t+1) \\\\  \\end{aligned} " title="Angular:" background="True"/>
 
+  <div slot = "solution">
+    <p>
+        <DisplayEquation equation="\\begin{aligned} \\dot{r} &amp;= 2 \\\\    r &amp;=\\int\\dot{r} dt \\\\ r &amp;=2t + c \\\\    r(0) &amp;=1\\quad  ,\\quad c=1 \\\\ r(t) &amp;=2t + 1 \\\\  \\end{aligned} " title="Radial:"/>
+
+        <DisplayEquation equation="\\begin{aligned} r\\dot{\\theta} &amp;=1 \\\\    \\dot{\\theta} &amp;=\\frac{1}{2t+1} \\\\ \\theta &amp;=\\int \\dot{\\theta}  dt \\\\    \\theta &amp;=\\frac{1}{2} ln(2t+1) + c \\\\ \\theta(0) &amp;=0 \\quad , \\quad c=0 \\\\   \\theta(t) &amp;= \\frac{1}{2} ln (2t+1) \\\\  \\end{aligned} " title="Angular:" />
+    </p>
+  </div>
+</Example>
 	
 </SubSubSection>
 

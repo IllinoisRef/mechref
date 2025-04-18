@@ -53,6 +53,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#steering_geometry'>Steering geometry</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#turning_rigid_bodies'>Turning rigid bodies</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#ackerman_steering'>Ackerman steering geometry</a></li>
+      <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#four-bar-link'>Four-bar linkages</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#knee_joint'>Knee joint</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#suspensions_linkage'>Suspensions with Watt's linkage</a></li>
         </ul>
@@ -1385,6 +1386,44 @@ import DisplayTable from "../../components/DisplayTable.astro"
     </CalloutCard>
   </CalloutContainer>
 </SubSection>
+
+<SubSubSection title = "Four-bar Linkages" id = "four-bar-link">
+
+  <p>
+
+    A planar four-bar linkage consists of four rigid rods in the plane connected by pin joints. We call the rods:
+    <ul>
+      <li>Ground link <em>g</em>: fixed to anchor pivots <em>A</em> and <em>B</em></li>
+      <li>Input link <em>a</em>: driven by input angle &alpha;</li>
+      <li>Output link <em>b</em>: gives output angle &beta;</li>
+      <li> Floating link <em>f</em>: connects the two moving pins <em>C</em> and <em>D</em>
+    </ul>
+
+    We often think of a four-bar linkage as being driven at the input angle &alpha;, resulting in the output angle &beta;. 
+    We only need one input, because the system has exactly <em>N</em><sub>DOF</sub> = 1
+    degree of freedom. We can count the DOF as 9 free variables 
+    (three moving rigid bodies with three variables each) minus 8 constraints (four pin joints with two constraints each).
+      
+    <Image src = "/dyn/rigid_body_kinematics/four-bar-link.png" width= "8">
+
+
+    </Image>
+    
+    
+
+    Four-bar linkages can be used for many mechanical purposes, including to:
+    <p>
+    <ul style="list-style-type: none; padding-left: 1.5em;">
+      <li style="margin-left: 1.5em;">1. convert rotational motion to reciprocating motion (e.g., pumpjack examples below)</li>
+      <li style="margin-left: 1.5em;">2. convert reciprocating motion to rotational motion (e.g., bicycle examples below)</li>
+      <li style="margin-left: 1.5em;">3. constrain motion (e.g., knee joint and suspension examples below)</li>
+      <li style="margin-left: 1.5em;">4. magnify force (e.g., parrotfish jaw examples below)</li>
+    </ul>
+    </p>
+  </p>
+
+</SubSubSection>
+
 
 <SubSubSection title="Knee Joint"  id="knee_joint">
     <p>
