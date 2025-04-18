@@ -166,7 +166,7 @@ rvv_fu_c = new PrairieDraw("rvv-fu-c", function() {
             this.labelLine(ei.x(a.e(1)), a, $V([0, -1]), "TEX:$3\\hat\\jmath$");
         });
 
-    rvv_fn_c = new PrairieDrawAnim("rvv-fn-c", function(t) {
+    /*rvv_fn_c = new PrairieDrawAnim("rvv-fn-c", function(t) {
         this.setUnits(8, 6);
 
         this.addOption("showComponents", false);
@@ -200,7 +200,7 @@ rvv_fu_c = new PrairieDraw("rvv-fu-c", function() {
         }
 
         this.rightAngle(O, a);
-    });
+    });*/
 
     rvv_eo_c = new PrairieDraw("rvv-eo-c", function() {
         this.setUnits(10, 2.6);

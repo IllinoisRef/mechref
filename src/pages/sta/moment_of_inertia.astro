@@ -77,10 +77,10 @@ import Col from "../../components/Col.astro"
         <tr>
             <th>Units</th>
             <td>
-                <InlineEquation equation="length*mass^2"/>
+                <InlineEquation equation="\\mathrm{mass} * \\mathrm{length} ^ 2"/>
             </td>
             <td class="table-shaded">
-                <InlineEquation equation="length^4"/>
+                <InlineEquation equation="\\mathrm{length} ^ 4"/>
             </td>
         </tr>
         <tr>
@@ -110,7 +110,7 @@ import Col from "../../components/Col.astro"
 
 The moment of inertia used in statics is the "second moment of area".
 This is a mass property that determines the amount of torque that is needed to create an angular acceleration about a specific axis of rotation. 
-The dimension of the area moment of inertia is <InlineEquation equation='length^4' />.
+The dimension of the area moment of inertia is <InlineEquation equation='\\mathrm{length} ^ 4' />.
 
 <DisplayEquation equation='I_x = \\int_{A}^{} y^2 \\,dA \\' title="Moment of inertia about the x-axis" background="True" />
 
