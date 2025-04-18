@@ -37,6 +37,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#accelerating_braking'>Accelerating and braking</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#banked_turns'>Banked turns</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#projectiles_air_resistance'>Projectiles with air resistance</a></li>
+      <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#kiiking'>Kiiking</a></li>
         </ul>
     </li>
 </ul>
@@ -45,7 +46,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
 
 <Section title="Particle Kinetics" id="particle_kinetics"></Section>
 
-<SubSection title="Classical mechanics" id=classical_mechanics">
+<SubSection title="Classical mechanics" id="classical_mechanics">
 
     <CalloutContainer slot="cards">
         <CalloutCard>
@@ -148,7 +149,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
     </Example>
 </SubSubSection>
 
-<SubSubSection title="Solution steps" =id"solution_steps">
+<SubSubSection title="Solution steps" id ="solution_steps">
     The steps involved in analyzing a mechanical system with Newton's equations are as follows.
 
     <DisplayEquation equation="\\begin{aligned} &amp;\\text{1. FBD: draw a Free Body Diagram.} \\\\ &amp;\\text{2. Kinematics: determine $\\vec{a}$.} \\\\ &amp;\\text{3. Newton: use $\\vec{F} = m\\vec{a}$.} \\\\ &amp;\\text{4. Algebra: rear and solve as needed.} \\end{aligned}" background="True"/>
@@ -290,7 +291,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
         To study this problem we need a model. Let's start with the simplest model and then
         gradually consider more complex models.
     </p>
-    <Image src="/dyn/particle_kinetics/red_car.jpg" width="8">The classic American <a
+    <Image src="/dyn/particle_kinetics/red_car.jpg" width="8"> The classic American <a
         target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Pony_car">Pony Car</a>:
         a 1965 <a
         target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Ford_Mustang">Ford
@@ -428,7 +429,8 @@ import DisplayTable from "../../components/DisplayTable.astro"
         <Image src="/dyn/particle_kinetics/avb_09A186_small.jpg">
             <p class="figureCaption">
             <a
-            target="_blank" rel="noopener noreferrer" href="http://www.setra.de/en/coaches-buses/topclass/models/s-411-hd.html">Setra
+            target="_blank" rel="noopener noreferrer" href="http://www.setra.de/en/coaches-buses/topclass/models/s-411-hd.html">
+            Setra
             S 411 HD coach</a> from the TopClass 400 series on the
             Mercedes-Benz Untertürkheim test track. This 10.16 m long
             coach model is relatively compact and has short overhangs,
@@ -757,7 +759,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
       </p>
       <p>
         <a
-        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Velodrome">Velodromes</a>
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Velodrome"> Velodromes</a>
         are arenas with tracks designed for high-speed bicycle
         races, as shown below, with speeds up to 85 km/h. The bank
         angle on velodrome tracks is chosen to minimize sideways
@@ -909,7 +911,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
 </SubSubSubSection>
 
 
-<SubSubSection title="Projectiles with air resistance">
+<SubSubSection title="Projectiles with air resistance" id = "projectiles_air_resistance">
 
     <p>
         Consider a spherical object, such as a baseball, moving
@@ -940,7 +942,8 @@ import DisplayTable from "../../components/DisplayTable.astro"
       </p>
 
     <Image src="/dyn/particle_kinetics/baseball_field.jpg" width="8">
-        <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Wrigley_Field">Wrigley
+        <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Wrigley_Field">
+        Wrigley
         Field</a> in Chicago, Illinois is the home of
         the <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Chicago_Cubs">Chicago
         Cubs</a> baseball team. In baseball, an “out of the
@@ -1039,32 +1042,31 @@ import DisplayTable from "../../components/DisplayTable.astro"
 
         This functional relationship has no closed form.  However,
         the relationship has been established numerically based on
-        experimental data.  See <a href="#afp-fd">Figure #aft-fd</a>
+        experimental data.  See <a href="#fig6">Figure #aft-fd</a>
         for a schematic diagram of the drag coefficient's dependence
-        on the Reynolds number.
-      </p>
-      
-        <Image src="/dyn/particle_kinetics/drag_coefficient.png" width="8" />
-      
-      <em><small><p>
-        Experimental dependence of drag coefficient on Reynolds
-        number for a sphere. Image
-        credit: <a target="_blank" rel="noopener noreferrer" href="http://www.grc.nasa.gov/WWW/k-12/airplane/dragsphere.html">NASA</a>
-        via <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Stokes_number#/media/File:Drag_sphere_nasa.svg">Wikipedia</a>.
-      </p></small></em>
-      
+        on the Reynolds number.</p>
+        
+        <Image id="aft-fd" src="/dyn/particle_kinetics/drag_coefficient.png" width="8">
+          <p>
+             Experimental dependence of drag coefficient on Reynolds
+             number for a sphere. Image
+             credit: <a target="_blank" rel="noopener noreferrer" href="http://www.grc.nasa.gov/WWW/k-12/airplane/dragsphere.html">NASA</a>
+             via <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Stokes_number#/media/File:Drag_sphere_nasa.svg">Wikipedia</a>.
+           </p>
+        </Image>
 
 </SubSubSubSection>
 
 <SubSubSubSection title="Quadratic drag model">
 
     <p>
-        Notice from <a href="#afp-fd">Figure #aft-fd</a> that there
+        Notice from <a href="#aft-fd">Figure #aft-fd</a> that there
         is a range of Reynolds numbers (<InlineEquation equation="10^3 < {\\rm Re} < 10^5" />),
         characteristic of macroscopic projectiles, for which the
         drag coefficient is approximately constant at about 1/2 (see
         the part of the curve labeled “4”
-        in <a href="#afp-fd">Figure #aft-fd</a>).  That the drag 
+        in <a href="#aft-fd">
+          Figure #aft-fd</a>).  That the drag 
     coefficient is constant means that,
         within this region, the magnitude of the drag force is
         proportional to the square of the object’s speed.
@@ -1156,8 +1158,8 @@ import DisplayTable from "../../components/DisplayTable.astro"
     </CalloutContainer>
 </SubSubSubSection>
 
-<SubSubSection title="Kiiking">
-    <RedText>This topic is in L13-Notes, slides 9-10. YouTube link  <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/shorts/qvW0sz4kBLQ">https://www.youtube.com/shorts/qvW0sz4kBLQ</a></RedText>. 
+<SubSubSection title="Kiiking" id = "kiiking">           
+    <RedText>This topic is in L13-Notes, slides 9-10. YouTube link:  <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/shorts/qvW0sz4kBLQ">https://www.youtube.com/shorts/qvW0sz4kBLQ</a></RedText>. 
 
 </SubSubSection>
 
