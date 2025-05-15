@@ -45,6 +45,128 @@ import Warning from "../../components/Warning.astro"
 
 <Section title="Material Properties" id="material_properties"></Section>
 
+<SubSection title="Continuum Mechanics Fundamentals" id="continuum_mechanics">
+
+<CalloutContainer slot="cards">
+    <CalloutCard title="Extra!">
+        <p>
+        If you want more details on this topic, consider taking a course in continuum mechanics.
+        </p>
+    </CalloutCard>
+
+    <CalloutCard title="Heads up!">
+        <p>
+            Bold symbols, such as <InlineEquation equation="\\boldsymbol{\\sigma}" /> and <InlineEquation equation="\\boldsymbol{\\varepsilon}" />,
+            represent tensors rather than scalar quantities.
+        </p>
+
+        <p>
+            Additionally, some quantities might be represented with indicial notation. When indices on the right hand side of the equation are repeated, 
+            this represents a summation where the index values range from 1 to 3. 
+            For example, <DisplayEquation equation = "\\sigma_{ij} = C_{ijkl}\\varepsilon_{kl}" />
+            represents <DisplayEquation equation= "\\sigma_{ij} = \\sum_{k=1}^{3}\\sum_{l=1}^{3}C_{ijkl}\\varepsilon_{kl}"/>
+
+            This is a shorthand to make writing long summations easier.
+        </p>
+    </CalloutCard>
+
+</CalloutContainer>
+
+<p>
+Generally, the state of stress a 3D material can be represented as a second-rank tensor (i.e. a matrix) with <InlineEquation equation="3^2 = 9" /> components.
+</p>
+<Image src="/sol/stress/Stress Element.png" id="stress-element" width="7"> Stress element</Image>
+<DisplayEquation equation=  "\\boldsymbol{\\sigma} = \\begin{bmatrix} \\sigma_{11} & \\sigma_{12} & \\sigma_{13} \\\\ \\sigma_{21} & \\sigma_{22} & \\sigma_{23} \\\\ \\sigma_{31} & \\sigma_{32} & \\sigma_{33} \\end{bmatrix} \\" title="Stress tensor." background="True"/>
+
+<p>
+Using indicial notation, component <InlineEquation equation = "(i, j)"/> of this tensor is denoted as <InlineEquation equation="\\sigma_{ij}" />. The same can be said for a material strain tensor.
+</p>
+
+<Image src="/sol/strain/Strain Cube.jpg" width="3"> Strain cube </Image>
+<DisplayEquation equation= "\\boldsymbol{\\varepsilon} = \\begin{bmatrix} \\varepsilon_{11} & \\varepsilon_{12} & \\varepsilon_{13} \\\\ \\varepsilon_{21} & \\varepsilon_{22} & \\varepsilon_{23} \\\\ \\varepsilon_{31} & \\varepsilon_{32} & \\varepsilon_{33} \\end{bmatrix} \\" title="Strain tensor." background="True"/>
+
+<p>
+
+Using indicial notation, component <InlineEquation equation = "(k, l)"/> of this tensor is denoted as <InlineEquation equation="\\varepsilon_{kl}" />. Note
+that both the stress and strain tensors are symmetric, that is <InlineEquation equation="\\sigma_{ij} = \\sigma_{ji}" /> and
+<InlineEquation equation="\\varepsilon_{kl} = \\varepsilon_{lk}" />.
+
+</p>
+
+<p>
+
+For our purposes, lets bound the discussion of material stress-strain behavior to only the elastic range, that is, deformation is linear proportional applied load. 
+This is Hooke’s law. The relationship between stress and strain is referred to as the constitutive relationship of a material. In the most general case, this relationship is defined as a fourth-rank tensor with <InlineEquation equation = "3^4=81"/> components. 
+This elasticity tensor, C, relating the stress and strain tensors is shown in indicial notation (rather than a matrix operation).
+
+</p>
+
+<DisplayEquation equation= "\\sigma_{ij} = C_{ijkl}\\varepsilon_{kl}" title="Hooke's law general form." background="True" derivation = "True" id="mat-hls">
+    This is short form representation of a summation, known as indicial notation. Whenever there are repeated indices on the right hand side of an equation,
+    as with k and l above (repeated in <InlineEquation equation = "C_{ij\\mathbf{kl}}"/> and <InlineEquation equation = "\\varepsilon_{\\mathbf{kl}}"/>), these indices represent 
+    a summation over three dimensions. So the example can be rewritten as shown below, where <InlineEquation equation = "k\\ \\in \\{1 \\ 2 \\ 3\\}"/> and <InlineEquation equation = "l\\ \\in \\{1 \\ 2 \\ 3\\}"/>.
+    
+    <DisplayEquation equation = "\\sigma_{ij} = \\sum_{k=1}^{3}\\sum_{l=1}^{3}C_{ijkl}\\varepsilon_{kl}" />
+</DisplayEquation>
+
+Expanding over these two summations yields:
+<DisplayEquation equation= "\\begin{aligned}\\sigma_{ij} = &C_{ij11}\\varepsilon_{11} + C_{ij12}\\varepsilon_{12} + C_{ij13}\\varepsilon_{13} \\\\ + &C_{ij21}\\varepsilon_{21} + C_{ij22}\\varepsilon_{22} + C_{ij23}\\varepsilon_{23} \\ + C_{ij31}\\varepsilon_{31} + C_{ij32}\\varepsilon_{32} + C_{ij33}\\varepsilon_{33}\\end{aligned}" id="expanded"/>
+
+<p>
+
+What this means is there can be as many as 9 components of strain and 9 material coefficients that contribute to each stress component.
+(You can see the benefit of indicial notation here.)
+
+</p>
+
+<p>
+However, not all 81 components of this tensor are independent, because of symmetry of stress and strain tensors there are only 21 independent components. If
+the material is assumed to be isotropic (having the same behavior in all directions) this is further reduced to just 2 independent components (for instance,
+<InlineEquation equation = "E"/> Young’s modulus and <InlineEquation equation = "\\nu"/>, Poisson’s ratio). With this simplification, the 3D isotropic elastic material constitutive relation can be simplified.
+
+<DisplayEquation equation={
+  `\\begin{bmatrix}
+  \\varepsilon_{11} \\\\ \\varepsilon_{22} \\\\ \\varepsilon_{33} \\\\ 2\\varepsilon_{23} \\\\ 2\\varepsilon_{13} \\\\ 2\\varepsilon_{12}
+  \\end{bmatrix}
+  =
+  \\begin{bmatrix}
+  \\varepsilon_{11} \\\\ \\varepsilon_{22} \\\\ \\varepsilon_{33} \\\\ \\gamma_{23} \\\\ \\gamma_{13} \\\\ \\gamma_{12}
+  \\end{bmatrix}
+  =
+  \\frac{1}{E}
+  \\begin{bmatrix}
+  1 & -\\nu & -\\nu & 0 & 0 & 0 \\\\
+  -\\nu & 1 & -\\nu & 0 & 0 & 0 \\\\
+  -\\nu & -\\nu & 1 & 0 & 0 & 0 \\\\
+  0 & 0 & 0 & 2 + 2\\nu & 0 & 0 \\\\
+  0 & 0 & 0 & 0 & 2 + 2\\nu & 0 \\\\
+  0 & 0 & 0 & 0 & 0 & 2 + 2\\nu
+  \\end{bmatrix}
+  \\begin{bmatrix}
+  \\sigma_{11} \\\\ \\sigma_{22} \\\\ \\sigma_{33} \\\\ \\sigma_{23} \\\\ \\sigma_{13} \\\\ \\sigma_{12}
+  \\end{bmatrix}`
+} title = "Voigt notation." background = "true"/>
+
+</p>
+
+Here the engineering shear strains <InlineEquation equation = \\gamma_{23},\\gamma_{13},\\gamma_{12} /> are introduced.
+This, along with identification of shear stresses <InlineEquation equation = \\sigma_{23},\\sigma_{13},\\sigma_{12} />
+as <InlineEquation equation = \\tau_{23},\\tau_{13},\\tau_{12} />
+allows for the expression for pure axial stress & strain in one direction to be represented as <InlineEquation equation = "\\varepsilon_{11} = \\frac{\\sigma_{11}}{E}" />.
+Rearranging the terms, relation can be expressed in a more general form.
+
+<DisplayEquation equation = "\\sigma = E\\varepsilon" title = "Simplified Hooke's Law." background = "True"/>
+
+Similarly, the expression for pure shear stress & strain can be expressed as <InlineEquation equation = "\\gamma_{12} = \\frac{\\tau_{12}(2+2\\nu)}{E} = \\frac{\\tau_{12}}{G}" />.
+
+Again, this can be expressed in a more general form.
+
+<p>
+<DisplayEquation equation = "\\tau = \\gamma G" title = "Simplified shear stress equation." background = "True"/>
+</p>
+
+</SubSection>
+
 <SubSection title="Stress-Strain Diagram" id="stress-strain_diagram">
 
 A <strong>stress-strain diagram</strong> is the relationship of normal stress as a function of normal strain. One way to collect these measurement is a <strong>uniaxial tension test</strong> in which a specimen at a very slow, constant rate (quasi-static). A load <InlineEquation equation="P" /> and distance <InlineEquation equation="L" /> are measured at frequent intervals.
@@ -61,6 +183,7 @@ A <strong>stress-strain diagram</strong> is the relationship of normal stress as
    
 <Image src='/sol/material_properties/Stress Strain Diagram.png' width='4'> Stress-strain diagram showing key properties</Image>
 </SubSection>
+
 <SubSubSection title="Elastic Behavior" id="elastic_behavior">
 Loading in this region results <strong>elastic behavior</strong>, meaning the material returns to its original shape when unloaded. This region of the diagram is mostly a straight line, limited by the proportional limit). This region ends at <InlineEquation equation="\\sigma_Y" /> (yielding). For <InlineEquation equation="\\sigma \\le \\sigma_{pl}" />, the diagram is linear, and the behavior is elastic. For <InlineEquation equation="\\sigma_{pl} < \\sigma < \\sigma_Y" />, the diagram is nonlinear, but the behavior is still elastic.
 
@@ -150,7 +273,9 @@ Stresses above the plastic limit (<InlineEquation equation="\\sigma_Y < \\sigma"
  After ultimate stress (<InlineEquation equation="\\sigma_u < \\sigma" />), the middle of the material elongates before failure.
 </p>
 
- <strong>Failure</strong>
+</SubSubSection>
+
+<SubSubSection title="Failure" id="failure">
 
 
 <p>
