@@ -119,18 +119,18 @@ The center of mass, center of gravity, and center of volume are all represented 
 <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dW}{\\int dW} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dW}{\\int dW}" title = "Center of gravity" background = "True" id = "cog"/>
 
 <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dm}{\\int dm} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dm}{\\int dm}" title = "Center of mass" background = "True" derivation = "True" id = "com">
-    <p class = "text-center">We know that: <InlineEquation equation = "W = m * g"/></p>
+    <p class = "text-center">We know that: <InlineEquation equation = "W = m \\ g"/></p>
     <DisplayEquation equation = `\\begin{align} \\Rightarrow dW &= dm \\cdot g + m \\cdot \\cancel{dg} && \\text{assuming } g \\text{ is constant} \\\\ 
         &= g\\cdot dm && dg = 0 \\end{align}` />
-    <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} * \\cancel{g} \\ dm}{\\int \\cancel{g} dm}"/>
+    <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ \\cancel{g} \\ dm}{\\int \\cancel{g} dm}"/>
     <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dm}{\\int dm} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dm}{\\int dm}"/>
 </DisplayEquation>
 
 <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dV}{\\int dV} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dV}{\\int dV}" title = "Center of volume (centroid)" background = "True" derivation = "True" id = "cov">
-    <p class="text-center">We know that mass = <InlineEquation equation = "\\rho * V \\ \\ \\ \\ \\"/>(<InlineEquation equation = "\\rho"/> = density)</p>
-    <DisplayEquation equation = `\\begin{align} \\Rightarrow dm &= \\rho * dV + V * \\cancel{d \\rho} && \\text{assuming } \\rho \\text{ is constant} \\\\
-        &= \\rho * dV && d \\rho = 0 \\end{align}`/>
-    <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} * \\cancel{\\rho} \\ dV}{\\int \\cancel{\\rho} \\ dV}"/>
+    <p class="text-center">We know that mass = <InlineEquation equation = "\\rho \\ V \\ \\ \\ \\ \\"/>(<InlineEquation equation = "\\rho"/> = density)</p>
+    <DisplayEquation equation = `\\begin{align} \\Rightarrow dm &= \\rho \\ dV + V \\ \\cancel{d \\rho} && \\text{assuming } \\rho \\text{ is constant} \\\\
+        &= \\rho \\ dV && d \\rho = 0 \\end{align}`/>
+    <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ \\cancel{\\rho} \\ dV}{\\int \\cancel{\\rho} \\ dV}"/>
     <DisplayEquation equation = "\\bar{y} = \\frac{\\int \\tilde{y} \\ dV}{\\int dV} \\ \\ \\ \\bar{x} = \\frac{\\int \\tilde{x} \\ dV}{\\int dV}"/>
 </DisplayEquation>
 

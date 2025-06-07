@@ -274,11 +274,11 @@ Vectors can be written as a magnitude (length) multiplied by the unit vector in 
 The direction of a vector can be written as a unit vector by dividing the vector components by the vector magnitude. 
 </p>
 
-<DisplayEquation equation = "\\hat{u}_A = \\frac{A_x}{|A|} * \\hat{\\imath} + \\frac{A_y}{|A|} * \\hat{\\jmath} + \\frac{A_z}{|A|} * \\hat{k}" title = "The unit vector can be written as" background = "True" derivation = "True" id = "uv">
-  <DisplayEquation equation = `\\begin{align} \\hat{u}_A &= \\frac{A_x}{|A|} * \\hat{\\imath} + \\frac{A_y}{|A|} * \\hat{\\jmath} + \\frac{A_z}{|A|} * \\hat{k} \\\\
-    &= \\frac{1}{|A|} * [A_x * \\hat{\\imath} + A_y * \\hat{\\jmath} + A_z * \\hat{k}] \\\\
-    &= \\frac{1}{|A|} * \\vec{A} \\\\
-    &= \\frac{1}{\\cancel{|A|}} * \\cancel{|A|} * \\hat{u}_A \\\\
+<DisplayEquation equation = "\\hat{u}_A = \\frac{A_x}{|A|} \\ \\hat{\\imath} + \\frac{A_y}{|A|} \\ \\hat{\\jmath} + \\frac{A_z}{|A|} \\ \\hat{k}" title = "The unit vector can be written as" background = "True" derivation = "True" id = "uv">
+  <DisplayEquation equation = `\\begin{align} \\hat{u}_A &= \\frac{A_x}{|A|} \\ \\hat{\\imath} + \\frac{A_y}{|A|} \\ \\hat{\\jmath} + \\frac{A_z}{|A|} \\ \\hat{k} \\\\
+    &= \\frac{1}{|A|} \\ [A_x \\ \\hat{\\imath} + A_y \\ \\hat{\\jmath} + A_z \\ \\hat{k}] \\\\
+    &= \\frac{1}{|A|} \\ \\vec{A} \\\\
+    &= \\frac{1}{\\cancel{|A|}} \\ \\cancel{|A|} \\ \\hat{u}_A \\\\
     &= \\hat{u}_A \\end{align}`/>
 </DisplayEquation>
 
@@ -294,12 +294,12 @@ Alternatively, the vector components can be determined geometrically via the ang
 
 <Image src='/sta/vectors_scalars/UnitVecAngles.jpg' width='3'></Image>
 
-<DisplayEquation equation = `\\begin{align} \\vec{A} &= A_x * \\hat{\\imath} + A_y * \\hat{\\jmath} * A_z * \\hat{k} \\\\
-    &= (|A| * \\cos \\alpha) * \\hat{\\imath} + (|A| * \\cos \\beta) * \\hat{\\jmath} + (|A| * \\cos \\gamma) * \\hat{k} \\end{align}` title = "The vector can be written as" background = "True" derivation = "True" id = "sc">
-    <DisplayEquation equation = `\\begin{align} \\vec{A} &= A_x * \\hat{\\imath} + A_y * \\hat{\\jmath} * A_z * \\hat{k} \\\\
-      &= (|A| * \\cos \\alpha) * \\hat{\\imath} + (|A| * \\cos \\beta) * \\hat{\\jmath} + (|A| * \\cos \\gamma) * \\hat{k} \\\\
-      &= |A| * [\\cos \\alpha * \\hat{\\imath} + \\cos \\beta * \\hat{\\jmath} + \\cos \\gamma * \\hat{k}] \\\\
-      &= |A| * \\hat{u}_A \\end{align}`/>
+<DisplayEquation equation = `\\begin{align} \\vec{A} &= A_x \\ \\hat{\\imath} + A_y \\ \\hat{\\jmath} + A_z \\ \\hat{k} \\\\
+    &= (|A| \\ \\cos \\alpha) \\ \\hat{\\imath} + (|A| \\ \\cos \\beta) \\ \\hat{\\jmath} + (|A| \\ \\cos \\gamma) \\ \\hat{k} \\end{align}` title = "The vector can be written as" background = "True" derivation = "True" id = "sc">
+    <DisplayEquation equation = `\\begin{align} \\vec{A} &= A_x \\ \\hat{\\imath} + A_y \\ \\hat{\\jmath} + A_z \\ \\hat{k} \\\\
+      &= (|A| \\ \\cos \\alpha) \\ \\hat{\\imath} + (|A| \\ \\cos \\beta) \\ \\hat{\\jmath} + (|A| \\ \\cos \\gamma) \\ \\hat{k} \\\\
+      &= |A| \\ [\\cos \\alpha \\ \\hat{\\imath} + \\cos \\beta \\ \\hat{\\jmath} + \\cos \\gamma \\ \\hat{k}] \\\\
+      &= |A| \\ \\hat{u}_A \\end{align}`/>
 </DisplayEquation>
 
 </SubSubSection>
@@ -577,18 +577,18 @@ Alternatively, the vector components can be determined geometrically via the ang
 
 <!-- There's a picture from the Overleaf document that needs to get inserted here - it's figure 8 in the 210 Overleaf File -->
 
-<DisplayEquation equation = "\\vec{A} \\times \\vec{B} = (B_z * A_y - A_z * B_y) * \\hat{\\imath} - (A_x * B_z - A_z * B_x) * \\hat{\\jmath} + (A_x * B_y - A_y * B_x) * \\hat{k}" title = "The cross product can be written as" background = "True" derivation = "True" id = "cp">
+<DisplayEquation equation = "\\vec{A} \\times \\vec{B} = (B_z \\ A_y - A_z \\ B_y) \\ \\hat{\\imath} - (A_x \\ B_z - A_z \\ B_x) \\ \\hat{\\jmath} + (A_x \\ B_y - A_y \\ B_x) \\ \\hat{k}" title = "The cross product can be written as" background = "True" derivation = "True" id = "cp">
   <DisplayEquation equation = `\\begin{align} \\vec{A} \\times \\vec{B} &= \\begin{vmatrix}
       \\hat{\\imath} & \\hat{\\jmath} & \\hat{k} \\\\
       \\textcolor{purple}{A_x} & \\textcolor{green}{A_y} & \\textcolor{blue}{A_z} \\\\
       \\textcolor{purple}{B_x} & \\textcolor{green}{B_y} & \\textcolor{blue}{B_z} \\end{vmatrix} \\\\
     &= \\begin{vmatrix} \\textcolor{green}{A_y} & \\textcolor{blue}{A_z} \\\\
-      \\textcolor{green}{B_y} & \\textcolor{blue}{B_z} \\end{vmatrix} * \\hat{\\imath} - \\begin{vmatrix} \\textcolor{purple}{A_x} & \\textcolor{blue}{A_z} \\\\
-      \\textcolor{purple}{B_x} & \\textcolor{blue}{B_z} \\end{vmatrix} * \\hat{\\jmath} + \\begin{vmatrix} \\textcolor{purple}{A_x} & \\textcolor{green}{A_y} \\\\
-      \\textcolor{purple}{B_x} & \\textcolor{green}{B_y} \\end{vmatrix} * \\hat{k} \\end{align}`/>
+      \\textcolor{green}{B_y} & \\textcolor{blue}{B_z} \\end{vmatrix} \\ \\hat{\\imath} - \\begin{vmatrix} \\textcolor{purple}{A_x} & \\textcolor{blue}{A_z} \\\\
+      \\textcolor{purple}{B_x} & \\textcolor{blue}{B_z} \\end{vmatrix} \\ \\hat{\\jmath} + \\begin{vmatrix} \\textcolor{purple}{A_x} & \\textcolor{green}{A_y} \\\\
+      \\textcolor{purple}{B_x} & \\textcolor{green}{B_y} \\end{vmatrix} \\ \\hat{k} \\end{align}`/>
   <DisplayEquation equation = `\\text{where} \\begin{vmatrix} a & b \\\\
-    c & d \\end{vmatrix} = a * d - b * c`/>
-  <DisplayEquation equation = "\\vec{A} \\times \\vec{B} = (\\textcolor{blue}{B_z} * \\textcolor{green}{A_y} - \\textcolor{blue}{A_z} * \\textcolor{green}{B_y}) * \\hat{\\imath} - (\\textcolor{purple}{A_x} * \\textcolor{blue}{B_z} - \\textcolor{blue}{A_z} * \\textcolor{purple}{B_x}) * \\hat{\\jmath} + (\\textcolor{purple}{A_x} * \\textcolor{green}{B_y} - \\textcolor{green}{A_y} * \\textcolor{purple}{B_x}) * \\hat{k}"/>
+    c & d \\end{vmatrix} = a \\ d - b \\ c`/>
+  <DisplayEquation equation = "\\vec{A} \\times \\vec{B} = (\\textcolor{blue}{B_z} \\ \\textcolor{green}{A_y} - \\textcolor{blue}{A_z} \\ \\textcolor{green}{B_y}) \\ \\hat{\\imath} - (\\textcolor{purple}{A_x} \\ \\textcolor{blue}{B_z} - \\textcolor{blue}{A_z} \\ \\textcolor{purple}{B_x}) \\ \\hat{\\jmath} + (\\textcolor{purple}{A_x} \\ \\textcolor{green}{B_y} - \\textcolor{green}{A_y} \\ \\textcolor{purple}{B_x}) \\ \\hat{k}"/>
 </DisplayEquation>
 
 </SubSubSubSection>

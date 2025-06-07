@@ -88,7 +88,7 @@ The magnitude of the equivalent force <InlineEquation equation='F_R' /> is the a
 
 For a constant distributed load of magnitude c applied to a bar over a length l, the resultant force magnitude is 
 
-<DisplayEquation equation='F_R = c*l\\' title="Rectangular Distributed Load" background="True" />
+<DisplayEquation equation='F_R = c \\ l\\' title="Rectangular Distributed Load" background="True" />
 
 the resultant force location is at <InlineEquation equation='l/2' />.
 
@@ -100,7 +100,7 @@ the resultant force location is at <InlineEquation equation='l/2' />.
 
 For a triangular distributed load (a uniformly varying load), the magnitude of the load is equivalent to the area of the triangle. 
 
-<DisplayEquation equation='F_R = 0.5*c*l\\' title="Triangular Distributed Load" background="True"/>
+<DisplayEquation equation='F_R = 0.5 \\ c \\ l\\' title="Triangular Distributed Load" background="True"/>
 
 The location of <InlineEquation equation='F_R' /> is 1/3 from the base of the triangle. 
 
@@ -118,7 +118,7 @@ More complex distributed loads can be reduced to two distributed loads of unifor
 
 The location of <InlineEquation equation='F_R' /> on the beam can be found by solving for the moment <InlineEquation equation='M_R' /> about a point. In this case we will take the moment about the point <InlineEquation equation='x' />=0 and setting it equivalent to the moment produced by the resultant force <InlineEquation equation='F_R' /> at <InlineEquation equation='x' />=0. 
 
-<DisplayEquation equation='M_R = \\int_{0}^{L} x*w(x) \\,dx = \\bar{x}*F_R\\' title="Moment from distributed load" background="True" />
+<DisplayEquation equation='M_R = \\int_{0}^{L} x \\ w(x) \\,dx = \\bar{x} \\ F_R\\' title="Moment from distributed load" background="True" />
 
 Now we can solve for the center of mass of the distributed load, <InlineEquation equation='\\bar{x}' />, using
 
@@ -129,16 +129,16 @@ Now we can solve for the center of mass of the distributed load, <InlineEquation
 <div class = "row">
   <div class = "col-md-6 col-12">
     <p class = "text-center">Moment about 0 from force <InlineEquation equation = "dF:"/></p>
-    <DisplayEquation equation = `\\begin{align} dM &= x * (dF) \\\\
-    &= x * w * dx \\end{align}`/>
+    <DisplayEquation equation = `\\begin{align} dM &= x \\ (dF) \\\\
+    &= x \\ w \\ dx \\end{align}`/>
     <p class = "text-center">Total moment <InlineEquation equation = "(M_R)"/> about point 0:</p>
-    <DisplayEquation equation = "M_R = \\int dM = \\int_{0} ^ {L} x * w(x) \\, dx"/>
+    <DisplayEquation equation = "M_R = \\int dM = \\int_{0} ^ {L} x \\ w(x) \\, dx"/>
   </div>
   <div class = "col-md-6 col-12" >
     <p class = "text-center">Total moment <InlineEquation equation = "(M_R)"/> about point 0:</p>
-    <DisplayEquation equation = "M_R = \\bar{x} * F_R"/>
+    <DisplayEquation equation = "M_R = \\bar{x} \\ F_R"/>
     <p class = "text-center">solve for <InlineEquation equation = "\\bar{x}:"/></p>
-    <DisplayEquation equation = "\\bar{x} = \\frac{M_R}{F_R} = \\frac{\\int_{0} ^ {L} x * w \\, dx}{\\int_{0} ^ {L} w \\, dx}"/>
+    <DisplayEquation equation = "\\bar{x} = \\frac{M_R}{F_R} = \\frac{\\int_{0} ^ {L} x \\ w \\, dx}{\\int_{0} ^ {L} w \\, dx}"/>
   </div>
 </div>
 
