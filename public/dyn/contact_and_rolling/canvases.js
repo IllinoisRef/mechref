@@ -603,8 +603,8 @@ $(document).ready(function() {
         var M = $V([0, -rho]);
         var rhoEnd = M.rotate(-Math.PI / 3.2, O);
         var rEnd = $V([r, 0]).rotate(Math.PI / 2 - Math.PI / 3.2, O).add(C);
-        var et = this.getOption("reversed") ? $V([-1, 0]) : $V([1, 0]);
-        var en = $V([0, 1]);
+        var I = this.getOption("reversed") ? $V([-1, 0]) : $V([1, 0]);
+        var J = $V([0, 1]);
         var vC = this.getOption("reversed") ? $V([-1, 0]) : $V([1, 0]);
         this.line(O, rhoEnd, "grid");
         this.labelLine(O, rhoEnd, $V([0, -1]), "TEX:$\\rho$");
@@ -626,11 +626,11 @@ $(document).ready(function() {
         this.text(M, MLabelPos, "TEX:$M$");
         var PLabelPos = this.getOption("reversed") ? $V([-1, -1]) : $V([1, -1]);
         this.text(M, PLabelPos, "TEX:$P$");
-        this.arrow(M, M.add(et));
-        this.arrow(M, M.add(en));
-        var etLabelPos = this.getOption("reversed") ? $V([1, 1]) : $V([1, -1]);
-        this.labelLine(M, M.add(et), etLabelPos, "TEX:$\\hat{e}_t$");
-        this.labelLine(M, M.add(en), $V([1, 1]), "TEX:$\\hat{e}_n$");
+        this.arrow(M, M.add(I));
+        this.arrow(M, M.add(J));
+        var ILabelPos = this.getOption("reversed") ? $V([1, 1]) : $V([1, -1]);
+        this.labelLine(M, M.add(I), ILabelPos, "TEX:$\\hat{I}$");
+        this.labelLine(M, M.add(J), $V([1, 1]), "TEX:$\\hat{J}$");
         if (this.getOption("reversed")) {
             this.circleArrow(C, r + 0.2, 0.1, 0.8, "angVel", true, 0.1);
             this.circleArrow(C, r + 0.8, 0.1, 0.8, "angAcc", true, 0.1);
@@ -655,8 +655,8 @@ $(document).ready(function() {
         var M = $V([0, rho]);
         var rhoEnd = M.rotate(-Math.PI / 6, O);
         var rEnd = $V([r, 0]).rotate(Math.PI / 2 - Math.PI / 3.2, O).add(C);
-        var et = this.getOption("reversed") ? $V([-1, 0]) : $V([1, 0]);
-        var en = $V([0, -1]);
+        var I = this.getOption("reversed") ? $V([-1, 0]) : $V([1, 0]);
+        var J = $V([0, 1]);
         var vC = this.getOption("reversed") ? $V([-1, 0]) : $V([1, 0]);
         this.line(O, rhoEnd, "grid");
         this.labelLine(O, rhoEnd, $V([0, 1]), "TEX:$\\rho$");
@@ -678,10 +678,10 @@ $(document).ready(function() {
         this.text(M, PLabelPos, "TEX:$P$");
         var MLabelPos = this.getOption("reversed") ? $V([1, 1]) : $V([-1, 1]);
         this.text(M, MLabelPos, "TEX:$M$");
-        this.arrow(M, M.add(et));
-        this.arrow(M, M.add(en));
-        this.labelLine(M, M.add(et), $V([1, 0]), "TEX:$\\hat{e}_t$");
-        this.labelLine(M, M.add(en), $V([0.7, -1.3]), "TEX:$\\hat{e}_n$");
+        this.arrow(M, M.add(I));
+        this.arrow(M, M.add(J));
+        this.labelLine(M, M.add(I), $V([1, 0]), "TEX:$\\hat{I}$");
+        this.labelLine(M, M.add(J), $V([0.7, -1.3]), "TEX:$\\hat{J}$");
         if (this.getOption("reversed")) {
             this.circleArrow(C, r + 0.2, 0.1, 0.8, "angVel", true, 0.1);
             this.circleArrow(C, r + 0.8, 0.1, 0.8, "angAcc", true, 0.1);
