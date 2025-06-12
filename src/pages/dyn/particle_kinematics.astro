@@ -29,22 +29,22 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
   <ul class='list-group list-group-flush py-0'> 
     <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#position_vectors'>Position vectors</a>
 		<ul class='list-group list-group-flush py-0'> 
-            <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#transformation_position_vectors'>Transformation</a></li>  
+            <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#Transformation_position_vectors'>Transformation of position vectors</a></li>  
         </ul>
     </li> 
-	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#velocity_acceleration_vectors'>Velocity and Acceleration vectors</a>
+	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#velocity_acceleration_vectors'>Velocity and acceleration vectors</a>
 		<ul class='list-group list-group-flush py-0'> 
-            <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#cartesian_basis'>Cartesian</a></li>  
-			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#polar_basis'>Polar</a></li> 
-			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#summary_table'>Summary</a></li>
+            <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#cartesian_basis'>Velocity and acceleration in Cartesian basis</a></li>  
+			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#polar_basis'>Velocity and acceleration in polar basis</a></li> 
+			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#summary_table'>Summary table</a></li>
         </ul>
     </li> 
 	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#rotating_frames'>Rotating frames</a>
 		<ul class='list-group list-group-flush py-0'> 
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#angular_velocity'>Angular velocity</a></li>  
-			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#derivatives_rotations'>Derivatives and rotations</a></li> 
+			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#derivatives_rotations'>Vector derivatives and rotations</a></li> 
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#rotations_2D'>Rotations in 2D</a></li>
-			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#rotations_positions'>Rotations and vector positions</a></li>
+			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#rotations_positions'>Rotations and vector "positions"</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#rotations_properties'>Properties of rotations</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#rodrigues_formula'>Rodrigues' rotations formula</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#angular_acceleration'>Angular acceleration</a></li>
@@ -55,10 +55,10 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#normal_basis'>Normal basis</a></li>
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#curvature'>Curvature and torsion</a></li>  
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#derivatives_angular_velocity'>Basis derivatives and angular velocity</a></li> 
-			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#normal_tangential_acceleration'>Normal and Tangential kinematics</a></li>
+			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#normal_tangential_acceleration'>Normal and tangential kinematics</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#system_comparison'>Tangent lines and osculating circles</a></li>
       <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#curvature_on_curves'>Curvature on curves</a></li>
-			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#system_comparison'>Systems comparison</a></li>
+			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#system_comparison'>System comparison: Cartesian/polar/tangent-normal</a></li>
         </ul>
     </li> 
 	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#applications_pk'>Applications</a>
@@ -71,7 +71,7 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
 </div>
 
 
-<Section title="Particle Kinematics" id="particle_kinematics">
+<Section title="Particle kinematics" id="particle_kinematics">
 
     <p>
         The two basic geometric objects we are using are
@@ -220,7 +220,7 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
 </SubSubSection>
 
 
-<SubSubSection title="Velocity and acceleration in Polar basis"  id="polar_basis">
+<SubSubSection title="Velocity and acceleration in polar basis"  id="polar_basis">
 
         <p>
           Computing velocity and acceleration in a polar basis must take account of the fact that the basis vectors are not constant.
@@ -706,7 +706,7 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
 			
 </SubSubSection>
 
-<SubSection title="Tangential and Normal basis" id="tangential_normal_basis"></SubSection>
+<SubSection title="Tangential and normal basis" id="tangential_normal_basis"></SubSection>
 
 <SubSubSection title="Normal basis" id="normal_basis">
 
@@ -893,7 +893,7 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
   
 </SubSubSection>
 
-<SubSubSection title="Normal and Tangential kinematics" id="normal_tangential_acceleration">
+<SubSubSection title="Normal and tangential kinematics" id="normal_tangential_acceleration">
 
     <p>
       While the motion of a point \(P\) along a path defines the
@@ -1162,7 +1162,7 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
 </SubSubSection>
 
 
-<SubSection title="Curvature on curves " id="curvature_on_curves">
+<SubSubSection title="Curvature on curves " id="curvature_on_curves">
     <p>
       Given a parametric curve, its curvature can be directly
       evaluated with:
@@ -1228,7 +1228,7 @@ import InlineCanvas from "../../components/InlineCanvas.astro"
     </DisplayEquation>
 </SubSubSection>
 
-<SubSubSection title="System comparison: Cartesian/Polar/Tangent-Normal" id="system_comparison">
+<SubSubSection title="System comparison: Cartesian/polar/tangent-normal" id="system_comparison">
 
     <DisplayTable id="systemcomp_table" class_ = "table-sm">
     <thead>

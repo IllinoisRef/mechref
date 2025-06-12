@@ -25,10 +25,12 @@ import DisplayTable from "../../components/DisplayTable.astro"
 <div slot="navtree">
   <ul class='list-group list-group-flush py-0'> 
     <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#classical_mechanics'>Classical mechanics</a>
-    </li> 
-    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#methods_assumed'>Methods of assumed forces and motion</a>
+      <ul class='list-group list-group-flush py-0'>
+    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#methods_assumed'>Method of assumed forces and method of assumed motion</a>
     </li> 
     <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#solution_steps'>Solution steps</a>
+    </li>
+      </ul>
     </li>
     <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#numerical_integration'>Numerical integration</a>
     </li>
@@ -37,14 +39,13 @@ import DisplayTable from "../../components/DisplayTable.astro"
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#accelerating_braking'>Accelerating and braking</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#banked_turns'>Banked turns</a></li>
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#projectiles_air_resistance'>Projectiles with air resistance</a></li>
-      <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#kiiking'>Kiiking</a></li>
         </ul>
     </li>
 </ul>
 </div>
 
 
-<Section title="Particle Kinetics" id="particle_kinetics"></Section>
+<Section title="Particle kinetics" id="particle_kinetics"></Section>
 
 <SubSection title="Classical mechanics" id="classical_mechanics">
 
@@ -667,7 +668,7 @@ import DisplayTable from "../../components/DisplayTable.astro"
     </CalloutContainer>
 </SubSubSubSection>
 
-<SubSubSubSection title="2D Rigid body model">
+<SubSubSubSection title="2D rigid body model">
     <p>
         We now use a single rigid body model for the bus and we will
         do everything in 2D. Below we see a front-on diagram of the

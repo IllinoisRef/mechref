@@ -27,7 +27,7 @@ import Row from "../../components/Row.astro"
 
 <div slot="navtree">
   <ul class='list-group list-group-flush py-0'> 
-    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#center_of_mass'>Center of mass</a>
+    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#center_of_mass'>Center of mass (COM)</a>
         <ul class='list-group list-group-flush py-0'> 
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#recap_com'>Recap</a></li>  
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#basic_shapes_com'>Basic shapes</a></li>  
@@ -42,7 +42,7 @@ import Row from "../../components/Row.astro"
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#simple_shapes_moi'>Simplified shapes</a></li>  
         </ul>
     </li> 
-    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#instant_center_center'>Instantaneous center</a>
+    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#instant_center'>Instantaneous center (M)</a>
         <ul class='list-group list-group-flush py-0'> 
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#graphical_rules_ic'>Graphical rules for finding M</a>
         </ul>
@@ -61,7 +61,7 @@ import Row from "../../components/Row.astro"
 </div>
 
 
-<Section title="Rigid Body Kinetics"></Section>
+<Section title="Rigid body kinetics"></Section>
 
 <SubSection title="Center of mass (COM)" id="center_of_mass">
 
@@ -302,7 +302,7 @@ import Row from "../../components/Row.astro"
 
 </SubSubSection>
 
-<SubSubSection title="Basic Shapes" id="basic_shapes_com">
+<SubSubSection title="Basic shapes" id="basic_shapes_com">
     <p>
         The centers of mass listed below are all computed directly from the integral <a href="#rcm-cm">#rcm-cm</a>. Note
         the center of mass provided is the vector from point \(O\) (the reference origin).
@@ -521,7 +521,7 @@ import Row from "../../components/Row.astro"
     </DisplayEquationCustom>
 </SubSubSection>
 
-<SubSection title="Moment of Inertia"  id="moment_of_inertia">
+<SubSection title="Moment of inertia"  id="moment_of_inertia">
 
     <p>
         The moment of inertia of a body, written <InlineEquation equation="I_{P,\\hat{a}}" />, is
@@ -1337,7 +1337,7 @@ import Row from "../../components/Row.astro"
 	
 </SubSection>
 
-<SubSection title=" Graphical rules for finding M" id="graphical_rules_ic">
+<SubSubSection title=" Graphical rules for finding M" id="graphical_rules_ic">
 
 	<p>
 		(Assuming that figure is drawn to scale, including velocity vectors)
@@ -1433,7 +1433,7 @@ import Row from "../../components/Row.astro"
 
 
 
-</SubSection>
+</SubSubSection>
 
 <SubSection title="Euler's laws of motion" id="euler-motion">
     <p>
@@ -1681,7 +1681,7 @@ import Row from "../../components/Row.astro"
     </CalloutContainer>
 
 </SubSubSubSection>
-<SubSubSubSection title="Traction, acceleration, and braking" >
+<SubSubSubSection title="2D multi-body model" >
         <p>
         To understand how forces and moments act on the wheels, we
         need to separate out the <a href="#ava-sr">single rigid-body
@@ -1896,7 +1896,7 @@ import Row from "../../components/Row.astro"
 <SubSubSection title="Banked turns"  id="banked_turns">
 
 </SubSubSection>
-<SubSubSubSection title="2D Rigid body model" >
+<SubSubSubSection title="2D rigid body model" >
           <p>
             We now use a single rigid body model for the bus and we will
             do everything in 2D. Below we see a front-on diagram of the

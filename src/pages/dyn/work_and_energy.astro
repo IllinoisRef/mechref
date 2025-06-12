@@ -27,36 +27,38 @@ import Col from "../../components/Col.astro"
 
 <div slot="navtree">
   <ul class='list-group list-group-flush py-0'> 
-    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#energy'>Energy</a></li>
+    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#energy'>Energy</a>
         <ul class='list-group list-group-flush py-0'> 
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#potential_energy'>Potential energy</a></li>  
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#kinetic_energy'>Kinetic energy</a></li>  
-			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#energy_summary'>Summary energy</a></li>  
+			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#energy_summary'>Summary</a></li>  
         </ul>	
-	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#work'>Work</a></li>
+	</li>
+	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#work'>Work</a>
         <ul class='list-group list-group-flush py-0'>  
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#work_force'>Work done by a force</a></li>  
-			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#conserv_nonconserv_forces'>Conservative vs Non-conservative forces</a></li>  
+			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#conserv_nonconserv_forces'>Conservative vs non-conservative forces</a></li>  
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#work_friction'>Work done by friction</a></li> 
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#work_moment'>Work done by a moment</a></li> 
         </ul>
-	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#friction'>Friction</a></li>
+	</li>
+	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#friction'>Friction</a>
         <ul class='list-group list-group-flush py-0'>   
 			<li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#solution_procedure'>Solution procedure</a></li>  
         </ul>
+	</li>
 	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#momentum'>Momentum</a></li>
 	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#impulse'>Impulse</a></li>
 	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#collisions'>Collisions</a></li>
-	<li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#app_work_energy'>Applications</a></li>
   </ul>
 </div>
 
 
-<Section title="Work and Energy"></Section>
+<Section title="Work and energy"></Section>
 
 <SubSection title="Energy"  id="energy"></SubSection>
 
-<SubSubSection title="Potential Energy" id="potential_energy" >
+<SubSubSection title="Potential energy" id="potential_energy" >
 
 <DisplayEquation equation="\\begin{aligned}\\vec{F} &amp;= -\\nabla V \\\\&amp; = -\\frac{\\partial V}{\\partial x}\\hat{\\imath} -\\frac{\\partial V}{\\partial y}\\hat{\\jmath} - \\frac{\\partial V}{\\partial z}\\hat{k}\\end{aligned}" id="ren-efp" title="Force and potential energy." background="True" derivation="True">
 	<p>
@@ -202,7 +204,7 @@ import Col from "../../components/Col.astro"
 
 </SubSubSection>
 
-<SubSubSection title="Kinetic Energy" id="kinetic_energy" >
+<SubSubSection title="Kinetic energy" id="kinetic_energy" >
 
 <DisplayEquation id="ren-ek" equation="T = \\frac{1}{2}mv^2" title="Kinetic energy of a point mass." background="True" derivation="true">
 	<p>
@@ -367,7 +369,7 @@ import Col from "../../components/Col.astro"
     <DisplayEquation equation=" W = \\Delta{E} = E_f  -   E_0" background="True"  title="Work-Energy Principal" id="wan-we" />
 </SubSection>
 
-<SubSubSection title="Work done by a Force"  id="work_force">
+<SubSubSection title="Work done by a force"  id="work_force">
 
 	<DisplayEquation equation="\\begin{aligned}W &amp;= \\int_{\\vec{r}_1}^{\\vec{r}_2} \\vec{F} \\cdot d\\vec{r} \\\\&amp; = \\int_{t_1}^{t_2} \\vec{F} \\cdot \\dot{\\vec{r}}dt\\end{aligned}" background="True" title="Work done by a force \\(\\vec{F}\\)." id="ren-wf"/>
 
@@ -435,7 +437,7 @@ import Col from "../../components/Col.astro"
 
 </SubSubSection>
 
-<SubSubSection title="Conservative vs Non-conservative forces"  id="conserv_nonconserv_forces">
+<SubSubSection title="Conservative vs non-conservative forces"  id="conserv_nonconserv_forces">
 
 	<p>
 		A conservative force is one such that the work done by the force only depends on the initial 
@@ -458,7 +460,7 @@ import Col from "../../components/Col.astro"
 	</p>
 </SubSubSection>
 
-<SubSubSection title="Work done by Friction"  id="work_friction">
+<SubSubSection title="Work done by friction"  id="work_friction">
 
 <DisplayEquation equation=" W = \\Delta{E} = E_f  -   E_i  " background="True"   id="wan-wf"> </DisplayEquation>
 
@@ -500,7 +502,7 @@ import Col from "../../components/Col.astro"
 </SubSubSection>
 
     
-<SubSubSection title="Work done by a Moment"  id="work_moment">
+<SubSubSection title="Work done by a moment"  id="work_moment">
 
 <DisplayEquation equation=" W = \\int_{\\theta_0}^{\\theta_f} M_z \\,d\\theta = \\int_{t_0}^{t_f} M_z \\ \\dot{\\theta} \\,d\\theta " background="True"  id="wan-wm"> </DisplayEquation>
 
@@ -1245,10 +1247,6 @@ import Col from "../../components/Col.astro"
 
 </SubSection>
 
-<SubSection title="Applications"  id="app_work_energy">
-
-
-</SubSection>
 
 
 </Layout>
