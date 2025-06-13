@@ -8,6 +8,8 @@ import InlineEquation from "../../components/InlineEquation.astro"
 import DisplayEquation from "../../components/DisplayEquation.astro" 
 import Warning from "../../components/Warning.astro"
 import Example from "../../components/Example.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
 ---
 <Layout title = "Hydrostatic fluid pressure" description = "Analyze how density, gravity, and height affect the forces and moments applied to submerged objects.">
 
@@ -68,8 +70,12 @@ For an incompressible fluid (density <InlineEquation equation='\\rho' />) at res
 
 <SubSection title="Pressure, distributed loads, and free body diagrams" id="fluid_pressure_FBD">
 
-<p> Hydrostatic fluid pessure is a type of distributed load. If you need a refresher on distributed loads, see the <a href="https://www.mechref.org/sta/force_systems/?origin=sidebar#distributed_loads">Distributed Loads Reference Page</a>. 
-</p> 
+<CalloutContainer slot = "cards">
+	<CalloutCard title = "Review?">
+		<p> Hydrostatic fluid pessure is a type of distributed load. If you need a refresher on distributed loads, see the <a href="https://www.mechref.org/sta/force_systems/?origin=sidebar#distributed_loads">Distributed Loads Reference Page</a>. 
+		</p>
+	</CalloutCard>
+</CalloutContainer>
 
 <Image src='/sta/hydrostatic_fluid_pressure/FluidPlateExample.PNG' width='5'></Image>
 

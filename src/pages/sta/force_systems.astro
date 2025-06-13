@@ -7,6 +7,8 @@ import SubSubSection from "../../components/SubSubSection.astro"
 import BlueText from "../../components/BlueText.astro" 
 import InlineEquation from "../../components/InlineEquation.astro" 
 import DisplayEquation from "../../components/DisplayEquation.astro" 
+import CalloutCard from "../../components/CalloutCard.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
 ---
 <Layout title = "Force systems" description = "Learn about equivalent systems, concentrated forces, and different types of distributed loads.">
 
@@ -81,6 +83,14 @@ Distributed loads (usually written as <InlineEquation equation='w(x)' />) are fo
 The magnitude of the equivalent force <InlineEquation equation='F_R' /> is the area under the <InlineEquation equation='w(x)' /> curve. The location of the resultant force <InlineEquation equation='F_R' /> is the location of the centroid of the shape of the force curve. 
 
 <!--Later, we can add a side comment about examples of distributed loads in real life. For example, books on a bookshelf, air pressure over a lake, the distribution of loads on on the ground over your foot when you take a step-->
+
+<CalloutContainer slot="cards">
+  <CalloutCard title="Heads up!">
+    <p>
+      <strong><a href = "/sta/hydrostatic_fluid_pressure/#fluid_pressure_FBD">Pressure, distributed loads, and free body diagrams</a></strong> builds on this content.
+    </p>
+  </CalloutCard>
+</CalloutContainer>
 
 </SubSection>
 
