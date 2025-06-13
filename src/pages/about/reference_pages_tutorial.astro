@@ -10,9 +10,19 @@ import Row from '../components/Row.astro';
 import Col from '../components/Col.astro';
 ---
 
-<Layout title="About">
+<Layout title="References pages tutorial">
 
-<SubSection title="Navigation and usage">
+<div slot = "navtree">
+    <ul class='list-group list-group-flush py-0'>
+        <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#navigation_and_usage'>Navigation and usage</a></li>
+        <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#in_page_features'>In-page features</a></li>
+        <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#improving_student_learning'>Improving student learning</a></li>
+    </ul>
+</div>
+
+<Section title = "Refernces pages tutorial"/>
+
+<SubSection title="Navigation and usage" id = "navigation_and_usage">
         <p class="mb-5 d-none d-xl-block">
             Use the expandable sidebar menu on the left to explore the topics for a certain course, and navigate to your desired page.
         </p>
@@ -31,14 +41,14 @@ import Col from '../components/Col.astro';
     </CalloutContainer>
 </SubSection>
 
-<SubSection title="In-page features">
+<SubSection title="In-page features" id = "in_page_features">
         <p>Pages contain blue boxes, meant to give you helpful tips, extra information, or show applications of the material being discussed!</p>
         <p>You can also find an in-page navigation menu, showing you all the sections and subsections in the page, and allow you to navigate to them in one click. On phones and tablets, this is located at the top of the page, and on desktops and laptops it is below the sidebar menu.
                 </p>
 </SubSection>
 
  
-<SubSection title="Improving student learning">
+<SubSection title="Improving student learning" id = "improving_student_learning">
 <p>These reference pages have been designed to help you access critical information when working on homeworks or studying for quizzes and exams.  </p>
 <p> Feedback from students was that they preferred web-based resources versus a textbook. </p>
  <Image src="/about/referencePage.PNG" width="5"/>
