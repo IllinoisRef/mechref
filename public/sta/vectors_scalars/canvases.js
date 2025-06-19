@@ -30,9 +30,9 @@ $(document).ready(function(){
         
         var msg;
         if (sameVecs) {
-            msg = "TEX:\\sf $\\vec{a}$ \\ is \\ the \\ same \\ as \\ $\\vec{b}$";
+            msg = "TEX:\\sf $\\vec{a}$ \\text{ is the same as } $\\vec{b}$";
         } else {
-            msg = "TEX:\\sf $\\vec{a}$ \\ is \\ different \\ to \\ $\\vec{b}$";
+            msg = "TEX:\\sf $\\vec{a}$ \\text{ is different to } $\\vec{b}$";
         }
         var T = this.posNm2Dw($V([0.5, 0]));
         this.text(T, $V([0, -1]), msg);
