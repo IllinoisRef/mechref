@@ -220,10 +220,12 @@ for filename in tex_files:
             content = match.group(1).strip()
             required_modules.append("CalloutCard")
             return (
+                "<CalloutContainer slot=\"cards\">\n"
                 f"    <CalloutCard title=\"Extra!\">\n"
-                "        <u class=\"m-0\">Callout Card</u>\n"
+                "        <p class=\"m-0\"><u>Callout Card</u></p>\n"
                 f"        {content}\n"
-                "    </CalloutCard>"
+                "    </CalloutCard>\n"
+                "</CalloutContainer>"
             )
         raw = re.sub(callout_regex, transform_callout, raw)
         # -=-=-=- End LATEX Callout -=-=-=-=-
