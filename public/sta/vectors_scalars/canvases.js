@@ -492,7 +492,6 @@ rvv_fu_c = new PrairieDraw("rvv-fu-c", function() {
         rvv_fp2_c.redraw();
         rvv_fu_c.redraw();
         rvv_fl_c.redraw();
-        rvv_fn_c.redraw();
         rvv_eo_c.redraw();
         rvv_fx_c.redraw();
         rvv_fm_c.redraw();

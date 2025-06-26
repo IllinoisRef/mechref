@@ -363,4 +363,17 @@ $(document).ready(function(){
         this.text($V([r1x, r1y]), $V([0, r1y - 2.5*width_m1]), "TEX:$m_1$");
         this.text($V([r2x, r2y]), $V([0, r2y - 2.5*width_m2]), "TEX:$m_2$");
     });
+
+    $(window).on("resize", function(){
+        ren_xgp_c.redraw();
+        ren_xsp_c.redraw();
+        ren_cf_c.redraw();
+        rec_xlm_c.redraw();
+        rec_xlm_f.redraw();
+        rec_xam_c.redraw();
+        rec_xam_f.redraw();
+        rec_xr_c.redraw();
+        rec_eco_c.redraw();
+        rec_ico_c.redraw();
+    });
 })
