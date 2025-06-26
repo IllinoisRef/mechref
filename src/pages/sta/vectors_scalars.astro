@@ -13,33 +13,35 @@ import InlineEquation from "../../components/InlineEquation.astro"
 import Center from "../../components/Center.astro"
 import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
 import Warning from "../../components/Warning.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
 ---
 <Layout title = "Vectors and scalars" description = "Understand the ways to describe vectors, which have magnitude and direction, and scalars, which only have magnitude.">
 
 <div slot="navtree">
   <ul class='list-group list-group-flush py-0'> 
-    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#scalars_vs_vectors'>Scalars vs. vectors</a>
-        <ul class='list-group list-group-flush py-0'> 
-            <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#vectors'>Vectors</a>
-              <ul class = 'list-group list-group-flush py-0'>
-                <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsubsection' href = '#notation'>Notation</a></li>
-              </ul>
-            </li> 
-            <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#scalars'>Scalars</a></li> 
-        </ul>
-    </li> 
-    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#vector_operations'>Vector operations</a>
-        <ul class='list-group list-group-flush py-0'> 
-            <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#scaling_vectors'>Scaling vectors</a></li> 
-            <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#vector_addition_and_subtraction'>Vector addition and subtraction</a></li> 
-        </ul>
-    </li>
-    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#unit_vectors'>Unit vectors</a></li>
-    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#vector_magnitude_and_direction'>Vector magnitude and direction</a>
-      <ul class='list-group list-group-flush py-0'> 
-          <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsection' href = '#directional_cosines'>Directional cosines</a></li>
+    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#scalars_vs_vectors'>Scalars vs. vectors</a></li>
+    <li class = 'list-group-item py-0'><a class='text-decoration-none subsection' href = '#scalars'>Scalars</a></li> 
+    <li class = 'list-group-item py-0'><a class='text-decoration-none subsection' href = '#vectors'>Vectors</a>
+      <ul class = 'list-group list-group-flush py-0'>
+        <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsection' href = '#vector_magnitude_and_direction'>Vector magnitude and direction</a></li>
+        <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsection' href = '#unit_vectors'>Unit vectors</a></li>
+        <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsection' href = '#vector_representation'>Vector representation</a>
+          <ul class = 'list-group list-group-flush py-0'>
+            <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsubsection' href = '#coordinates'>Coordinates</a></li>
+            <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsubsection' href = '#angles'>Angles</a></li>
+            <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsubsection' href = '#unit_vectors_representation'>Unit vectors</a></li>
+          </ul>
+        </li>
+        <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsection' href = '#vector_operations'>Vector operations</a>
+          <ul class = 'list-group list-group-flush py-0'> 
+            <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsubsection' href = '#scaling_vectors'>Scaling vectors</a></li> 
+            <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsubsubsection' href = '#vector_addition_and_subtraction'>Vector addition and subtraction</a></li> 
+          </ul>
+        </li>
       </ul>
-    </li>
+    </li> 
     <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#scalar_and_vector_products'>Scalar and vector products</a>
         <ul class='list-group list-group-flush py-0'> 
             <li class='list-group-item py-0'><a class='text-decoration-none subsubsection' href='#dot_product'>Dot product</a>
@@ -69,9 +71,74 @@ import Warning from "../../components/Warning.astro"
 
 <!-- I'm not sure we need a reference page for this - or maybe put it at the end? -->
 
-<SubSection title="Scalars vs. vectors" id="scalars_vs_vectors"></SubSection>
+<SubSection title="Scalars vs. vectors" id="scalars_vs_vectors">
 
-<SubSubSection title="Vectors" id="vectors">
+  <DisplayTable id="mvdiag_table-bis">
+    <thead>
+        <tr>
+	        <th/>        
+	        <th>
+		        <strong>Scalar</strong>
+          </th>
+          <th>
+            <strong>Vector</strong>
+          </th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>
+          <strong>Characteristics</strong>
+        </th>
+        <td>
+          Average location of <br> the mass of an object
+        </td>
+	      <td>
+          Average location of <br> the weight of an object 
+        </td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <th>
+          <strong>Examples</strong>
+        </th>
+        <td>
+          mass, length, moment of inertia
+        </td>
+	      <td>
+          Forces, moment, stress
+        </td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <th>
+          <strong>Notation</strong>
+        </th>
+        <td>
+          <InlineEquation equation = "m, l, I"/>
+        </td>
+	      <td>
+          <InlineEquation equation = "\\vec{F}, \\textbf{F}, \\tilde{F}"/><br/>
+          unit vector: magnitude of (length) 1<br/>
+          <InlineEquation equation = "\\hat{\\imath}, \\hat{F}"/>
+        </td>
+      </tr>
+    </tbody>
+  </DisplayTable>
+
+</SubSection>
+
+<SubSection title="Scalars" id="scalars">
+
+<p>
+While a vector represents magnitude and direction, a <em>scalar</em> is a number that represents a magnitude, but with no directional information. Some examples of scalar quantities can be mass, length, time, speed, or temperature. 
+</p>
+
+</SubSection>
+
+<SubSection title="Vectors" id="vectors">
   <p>
     A <em>vector</em> is an arrow with a length and a direction. Just like positions, vectors exist before we measure or describe them. Unlike positions, vectors can mean many different things, such as position vectors, velocities, etc. Vectors are not anchored to particular positions in space, so we can slide a vector around and locate it at any position.
     </p>
@@ -94,7 +161,8 @@ import Warning from "../../components/Warning.astro"
   </Center>
 </SubSubSection>
 
-<SubSubSubSection title="Notation" id="notation">
+<!--
+<SubSubSection title="Notation" id="notation">
 
     <p>
         Some textbooks differentiate between <em>free
@@ -110,87 +178,9 @@ import Warning from "../../components/Warning.astro"
         (length one) vectors we will use an over-hat <InlineEquation equation="\\hat{a}" />.
       </p>
 </SubSubSubSection>
+-->
 
-
-<SubSubSection title="Scalars" id="scalars">
-
-<p>
-While a vector represents magnitude and direction, a <em>scalar</em> is a number that represents a magnitude, but with no directional information. Some examples of scalar quantities can be mass, length, time, speed, or temperature. 
-</p>
-
-</SubSubSection>
-
-<SubSection title="Vector operations" id="vector_operations"></SubSection>
-
-<SubSubSection title="Scaling vectors" id="scaling_vectors">
-
-<p>
-Vectors can be multiplied by a scalar number, which multiplies their length. 
-</p>
-
-<Center>
-  <PrairieDrawCanvas id="rvv-fp2-c" width="600" height="500" />
-</Center>
-
-</SubSubSection>
-
-<SubSubSection title="Vector addition and subtraction" id="vector_addition_and_subtraction">
-
-<p>
-Vectors can be added or subtracted together, using the parallelogram law of addition or the head-to-tail rule.
-</p>
-
-<Center>
-  <PrairieDrawCanvas id="rvv-fp1-c" width="600" height="500" />
-</Center>
-
-
-</SubSubSection>
-
-<SubSection title="Unit vectors" id="unit_vectors">
-
-  <p>
-    A <em>unit vector</em> is any vector with a length of
-    one. We use the special over-hat notation <InlineEquation equation="\\hat{a}" /> to
-    indicate when a vector is a unit vector. Any non-zero vector
-    <InlineEquation equation="\\vec{a}" /> gives a unit vector <InlineEquation equation="\\hat{a}" /> that specifies the
-    direction of <InlineEquation equation="\\vec{a}" />.
-  </p>
-
-  <DisplayEquation title="Normalization to unit vector." id="rvv-eu" background="True" equation="\\begin{aligned} \\hat{a} =\\frac{\\vec{a}}{a}\\end{aligned}" derivation="True">
-    <p>
-      If we compute the length of <InlineEquation equation="\\hat{a}" /> then we find:
-      
-      <DisplayEquation equation="        \\| \\hat{a} \\| = \\left\\| \\frac{\\vec{a}}{a} \\right\\|        = \\frac{\\|\\vec{a}\\|}{a} = \\frac{a}{a} = 1," />
-
-      so <InlineEquation equation="\\hat{a}" /> is really a unit vector, and it is in the
-      same direction as <InlineEquation equation="\\vec{a}" /> as they differ only by a
-      scalar factor.
-    </p>
-  </DisplayEquation>
-
-  <p>
-    Any vector can be written as the product of its length and
-    direction:
-  </p>
-
-  <DisplayEquation title="Vector decomposition into length and direction." id="rvv-ei" background="True" equation=" \\begin{aligned} \\vec{a} = a\\hat{a}\\end{aligned}" derivation="True">
-    <p>
-      This follows from rearranging <a
-      href="#rvv-eu">#rvv-eu</a>.
-    </p>
-  </DisplayEquation>
-
-  <Center>
-    <PrairieDrawCanvas id="rvv-fu-c" width="500" height="350">
-    <p>
-      Three vectors and their decompositions into lengths and directional unit vectors.
-    </p>
-    </PrairieDrawCanvas>
-  </Center>
-</SubSection>
-
-<SubSection title="Vector magnitude and direction" id="vector_magnitude_and_direction">
+<SubSubSection title="Vector magnitude and direction" id="vector_magnitude_and_direction">
 
 <p>
 Vectors can be written as a magnitude (length) multiplied by the unit vector in the same direction as the original vector. 
@@ -282,17 +272,116 @@ The direction of a vector can be written as a unit vector by dividing the vector
     &= \\hat{u}_A \\end{align}`/>
 </DisplayEquation>
 
-</SubSection>
+</SubSubSection>
 
-<SubSubSection title = "Directional cosines" id = "directional_cosines">
+<SubSubSection title="Unit vectors" id="unit_vectors">
+
+  <p>
+    A <em>unit vector</em> is any vector with a length of
+    one. We use the special over-hat notation <InlineEquation equation="\\hat{a}" /> to
+    indicate when a vector is a unit vector. Any non-zero vector
+    <InlineEquation equation="\\vec{a}" /> gives a unit vector <InlineEquation equation="\\hat{a}" /> that specifies the
+    direction of <InlineEquation equation="\\vec{a}" />.
+  </p>
+
+  <DisplayEquation title="Normalization to unit vector." id="rvv-eu" background="True" equation="\\begin{aligned} \\hat{a} =\\frac{\\vec{a}}{a}\\end{aligned}" derivation="True">
+    <p>
+      If we compute the length of <InlineEquation equation="\\hat{a}" /> then we find:
+      
+      <DisplayEquation equation="        \\| \\hat{a} \\| = \\left\\| \\frac{\\vec{a}}{a} \\right\\|        = \\frac{\\|\\vec{a}\\|}{a} = \\frac{a}{a} = 1," />
+
+      so <InlineEquation equation="\\hat{a}" /> is really a unit vector, and it is in the
+      same direction as <InlineEquation equation="\\vec{a}" /> as they differ only by a
+      scalar factor.
+    </p>
+  </DisplayEquation>
+
+  <p>
+    Any vector can be written as the product of its length and
+    direction:
+  </p>
+
+  <DisplayEquation title="Vector decomposition into length and direction." id="rvv-ei" background="True" equation=" \\begin{aligned} \\vec{a} = a\\hat{a}\\end{aligned}" derivation="True">
+    <p>
+      This follows from rearranging <a
+      href="#rvv-eu">#rvv-eu</a>.
+    </p>
+  </DisplayEquation>
+
+  <Center>
+    <PrairieDrawCanvas id="rvv-fu-c" width="500" height="350">
+    <p>
+      Three vectors and their decompositions into lengths and directional unit vectors.
+    </p>
+    </PrairieDrawCanvas>
+  </Center>
+</SubSubSection>
+
+  <SubSubSection title = "Vector representation" id = "vector_representation"/>
+    <SubSubSubSection title = "Coordinates" id = "coordinates">
+      <Image src = '/sta/vectors_scalars/test.png' width = '5'/>
+        <CalloutContainer slot = "cards">
+          <CalloutCard title = "Review?">
+            <p>
+              Need a review of <strong>Cartesian coordinates?</strong>
+            </p>
+            <p>
+              This content has also been in <a href = "/sta/cartesian_coordinates">Statics.</a>
+            </p>
+          </CalloutCard>
+      </CalloutContainer>
+    </SubSubSubSection>
+    <SubSubSubSection title = "Angles" id = "angles">
+      <Image src = '/sta/vectors_scalars/test2.png' width = '5'/>
+    </SubSubSubSection>
+    <SubSubSubSection title = "Unit vectors" id = "unit_vectors_representation">
+      <Image src = '/sta/vectors_scalars/test3.png' width = '5'/>
+        <CalloutContainer slot = "cards">
+          <CalloutCard title = "Review?">
+            <p>
+              The vector equation is derived <a href="/sta/vectors_scalars#rvv-eu">here.</a><br>
+              The magnitude equation is derived  <a href = "/sta/vectors_scalars#rvv-ei">here.</a>
+            </p>
+          </CalloutCard>
+      </CalloutContainer>
+    </SubSubSubSection>
+
+<SubSubSection title="Vector operations" id="vector_operations"></SubSubSection>
+
+<SubSubSubSection title="Scaling vectors" id="scaling_vectors">
+
+<p>
+Vectors can be multiplied by a scalar number, which multiplies their length. 
+</p>
+
+<Center>
+  <PrairieDrawCanvas id="rvv-fp2-c" width="600" height="500" />
+</Center>
+
+</SubSubSubSection>
+
+<SubSubSubSection title="Vector addition and subtraction" id="vector_addition_and_subtraction">
+
+<p>
+Vectors can be added or subtracted together, using the parallelogram law of addition or the head-to-tail rule.
+</p>
+
+<Center>
+  <PrairieDrawCanvas id="rvv-fp1-c" width="600" height="500" />
+</Center>
+
+
+</SubSubSubSection>
+
+<!--<SubSubSection title = "Directional cosines" id = "directional_cosines">
 
 <p>
 Alternatively, the vector components can be determined geometrically via the angles of each component with respect to the Cartesian Axes. 
-</p>
+</p>-->
 
 <!-- There's a picture from the Overleaf document that needs to get inserted here - it's figure 7 in the 210 Overleaf File -->
 
-<Image src='/sta/vectors_scalars/UnitVecAngles.jpg' width='3'></Image>
+<!--<Image src='/sta/vectors_scalars/UnitVecAngles.jpg' width='3'></Image>
 
 <DisplayEquation equation = `\\begin{align} \\vec{A} &= A_x \\ \\hat{\\imath} + A_y \\ \\hat{\\jmath} + A_z \\ \\hat{k} \\\\
     &= (|A| \\ \\cos \\alpha) \\ \\hat{\\imath} + (|A| \\ \\cos \\beta) \\ \\hat{\\jmath} + (|A| \\ \\cos \\gamma) \\ \\hat{k} \\end{align}` title = "The vector can be written as" background = "True" derivation = "True" id = "sc">
@@ -302,7 +391,7 @@ Alternatively, the vector components can be determined geometrically via the ang
       &= |A| \\ \\hat{u}_A \\end{align}`/>
 </DisplayEquation>
 
-</SubSubSection>
+</SubSubSection>-->
 
 <SubSection title="Scalar and vector products" id="scalar_and_vector_products"></SubSection>
 
