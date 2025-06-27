@@ -112,7 +112,17 @@ import Item from "../../components/Item.astro";
                 <InlineEquation equation="\\sigma_{\\text{max}} = 3  \\times 25 \\text{ MPa} = 75 \\text{ MPa}"/>
             </p>
         </SubSubSection>
+    
     <SubSection id="Applications" title="Application of Stress Concentrations">
+        
+    <CalloutContainer slot="cards">
+        <CalloutCard title="Review!">
+            <p>
+            More information on plastic deformation and yield stress can be found <a href = 'https://www.mechref.org/sol/material_properties/?origin=coursemenu'> here</a>.
+            </p>
+        </CalloutCard>
+    </CalloutContainer>
+        
         <p>
         <strong>What happens if the stress exceeds the yield strength of the material? Plastic Deformation</strong>
         </p>
@@ -130,7 +140,7 @@ import Item from "../../components/Item.astro";
             yield strength of the material, while the nominal stress remains below the material's yield strength.
         </p>
         <p>
-            Once yeilding occurs:
+            Once yielding occurs:
             <Itemize>
                 <Item>Some areas reach their maximum stress limit and start deforming permanently.
                     This means that these areas cannot bear any additional stress. </Item>
