@@ -16,7 +16,7 @@ import DisplayEquation from "../../components/DisplayEquation.astro"
 
 ---
 <!-- Suggestion for a real world example -->
-<Layout title = "Shear force & bending moment diagrams" description = "Learn how to analyze shear and bending moments along beams and other structures.">
+<Layout title = "Internal forces" description = "Learn how to analyze shear and bending moments along beams and other structures.">
 
     <div slot="navtree">
         <ul class='list-group list-group-flush py-0'> 
@@ -26,7 +26,7 @@ import DisplayEquation from "../../components/DisplayEquation.astro"
       </ul>
     </div>
 
-<Section title="Shear force & bending moment diagrams" id="shear_moment_diagrams">
+<Section title="Internal forces" id="shear_moment_diagrams">
 <p>
 Internal forces of a member can be determined by creating an imaginary cut in a member, and then solving for the internal shear force, normal force, and bending moment (which, after the cut, become "external" forces that can be solved for). 
 </p>
@@ -118,18 +118,18 @@ The general procedures for creating shear / bending moment diagrams are:</p>
                 Internal shear force <br> <InlineEquation equation="(V)"/>
             </th>
             <td>
-                (+) concentrated force <InlineEquation equation="\\rightarrow"/>
+                (+) concentrated force results in
                 <br>
                 (+) jump in internal shear force
                 <br>
                 <br>
-                concentrated moment <InlineEquation equation="\\rightarrow"/>
+                concentrated moment results in
                 no effect
             </td>
 	    <td>
             <DisplayEquation equation="\\frac{dV}{dx} = w(x)" />
 
-            (-) distributed load <InlineEquation equation="\\rightarrow"/>
+            (-) distributed load results in
             <br>
             (-) internal shear slope	    
         </td>
@@ -146,14 +146,14 @@ The general procedures for creating shear / bending moment diagrams are:</p>
                 Internal bending moment <br><InlineEquation equation="(M)"/>
             </th>
             <td>
-                (+, CCW) moment <InlineEquation equation="\\rightarrow"/>
+                (+, CCW) moment results in
                 <br>
                 (-) jump in internal moment            
             </td>
 	    <td>
             <DisplayEquation equation="\\frac{dM}{dx} = V(x)" />
 
-            (+) shear force <InlineEquation equation="\\rightarrow"/>
+            (+) shear force results in
             <br>
             (+) internal moment slope 	    
         </td>
