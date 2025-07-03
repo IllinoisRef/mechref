@@ -1114,6 +1114,8 @@ PrairieDraw.prototype.setOption = function(name, value, redraw, trigger, setRese
     if (redraw) {
         this.redraw();
     }
+
+    this.currentmovement = this.getOption("movement");
 }
 
 /** Get the value of an option.
@@ -3606,6 +3608,8 @@ PrairieDrawAnim.prototype.toggleAnim = function() {
     } else {
         this.startAnim();
     }
+
+    this.currentmovement = this.getOption("movement");
 }
 
 /** Register a callback on animation state changes.
@@ -3693,6 +3697,8 @@ PrairieDrawAnim.prototype.reset = function() {
     this.resetView3D(false);
     this.resetTime(false);
     this.redraw();
+
+    this.setOption("movement", this.currentmovement);
 }
 
 /** Stop all action and computation.
