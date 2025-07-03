@@ -89,49 +89,7 @@ $(document).ready(function() {
     rep_ff_c.activateMouseTracking();
     rep_ff_c.activateAnimOnClick();
 
-    rvv_fc_c = new PrairieDrawAnim("rvv-fc-c", function(t) {
-        this.setUnits(8, 4);
-    
-            this.addOption("otherLength", false);
-            this.addOption("otherDir", false);
-    
-            var O1 = $V([1.96 * Math.sin(1.6 * t - 0.7), 0.97 * Math.cos(0.9 * t + 1)]);
-            var O2 = $V([2.4 * Math.sin(t + 1), 0.94 * Math.cos(0.6 * t + 2)]);
-            var V1 = $V([1.5, 0.7]);
-            var V2 = $V([1.5, 0.7]);
-    
-            var sameVecs = true;
-    
-            if (this.getOption("otherDir")) {
-                sameVecs = false;
-                V1 = V1.rotate(-Math.PI/6, $V([0, 0]));
-                V2 = V2.rotate(Math.PI/6, $V([0, 0]));
-            }
-            if (this.getOption("otherLength")) {
-                sameVecs = false;
-                V1 = V1.x(1.4);
-                V2 = V2.x(0.8);
-            }
-            this.translate($V([-0.9, -0.3]));
-            this.arrow(O1, O1.add(V1), "position");
-            this.labelLine(O1, O1.add(V1), $V([0, 1]), "TEX:$\\vec{a}$");
-            this.arrow(O2, O2.add(V2), "angMom");
-            this.labelLine(O2, O2.add(V2), $V([0, -1]), "TEX:$\\vec{b}$");
-            
-            var msg;
-            if (sameVecs) {
-                msg = "TEX:\\sf $\\vec{a}$ is the same as $\\vec{b}$";
-            } else {
-                msg = "TEX:\\sf $\\vec{a}$ is different to $\\vec{b}$";
-            }
-            var T = this.posNm2Dw($V([0.5, 0]));
-            this.text(T, $V([0, -1]), msg);
-        });
-
-    
-
         $( window ).on( "resize", function() {
-            rvv_fc_c.redraw();
             rep_ff_c.redraw();
         })
 }); // end of document.ready()

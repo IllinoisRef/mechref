@@ -1663,4 +1663,28 @@ $(document).ready(function(){
                 $('button[class~="reset-time:aml-fw-c"]').css("visibility", "hidden");
             }
         });
+
+        $(window).on("resize", function(){
+            rkg_fw_c.redraw();
+            rkg_fr_c.redraw();
+            rkg_xp_c.redraw();
+            rkg_xc_c.redraw();
+            rkg_fd_c.redraw();
+            rkc_cm_c.redraw();
+            rkc_xcl_c.redraw();
+            rkc_xcp_c.redraw();
+            rkc_xcp_cs.redraw();
+            rkc_xcf_c.redraw();
+            rkc_xcf_s.redraw();
+            rkc_xlc_c.redraw();
+            rkc_xtp_c.redraw();
+            rkc_xtp_sa.redraw();
+            rkc_xtp_s1.redraw();
+            rkc_xtp_s2.redraw();
+            avs_ft_c.redraw();
+            avs_fr_c.redraw();
+            aml_fk_c.redraw();
+            aml_fs_c.redraw();
+            aml_fw_c.redraw();
+        });
 })

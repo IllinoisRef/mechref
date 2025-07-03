@@ -680,7 +680,7 @@ $(document).ready(function() {
         this.text(M, MLabelPos, "TEX:$M$");
         this.arrow(M, M.add(I));
         this.arrow(M, M.add(J));
-        this.labelLine(M, M.add(I), $V([1, 0]), "TEX:$\\hat{I}$");
+        this.labelLine(M, M.add(I), $V([1, 0.3]), "TEX:$\\hat{I}$");
         this.labelLine(M, M.add(J), $V([0.7, -1.3]), "TEX:$\\hat{J}$");
         if (this.getOption("reversed")) {
             this.circleArrow(C, r + 0.2, 0.1, 0.8, "angVel", true, 0.1);
@@ -704,5 +704,7 @@ $(document).ready(function() {
 
     $( window ).on( "resize", function() {
         rko_fr_c.redraw();
+        rko_ff_c.redraw();
+        rko_fc_c.redraw();
     })
 }); // end of document.ready()

@@ -1993,6 +1993,7 @@ $(document).ready(function() {
         rkr_fg_c.redraw();
         rkr_fe_c.redraw();
         rkr_fc_c.redraw();
+        rkg_fr_c.redraw();
         rkt_ft_c.redraw();
         rkt_fo_c.redraw();
         aov_fe_c.redraw();

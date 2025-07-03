@@ -112,6 +112,7 @@ $(document).ready(function(){
             drawOmega(rP2, theta2, omega2, "TEX:$\\omega_2$");
         }
     });
+
     rcm_er_c = new PrairieDraw("rcm-er-c", function() {
         this.setUnits(5, 5 / this.goldenRatio);
     
@@ -140,5 +141,10 @@ $(document).ready(function(){
         this.centerOfMass(O);
         this.text(ej, $V([0, -1.5]), "TEX:$\\ell_x$");
         this.text(ei.x(2), $V([-1.5, 0]), "TEX:$\\ell_y$");
+    });
+
+    $(window).on("resize", function(){
+        rkg_fw_c.redraw();
+        rcm_er_c.redraw();
     });
 })

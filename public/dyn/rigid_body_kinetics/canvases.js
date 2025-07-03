@@ -2273,5 +2273,47 @@ $(document).ready(function() {
         this.measurement(Q2, Q1, "TEX:$h_1$");
         this.measurement(Q3, Q2, "TEX:$h_2$");
     });
+
+    $(window).on("resize", function(){
+        rcm_cm_c.redraw();
+        rcm_xc_c.redraw();
+        rcm_xc_s1.redraw();
+        rcm_xc_s2.redraw();
+        rcm_cm_cb.redraw();
+        rcm_xl_c.redraw();
+        rcm_xl_cd.redraw();
+        rcm_xl_cf.redraw();
+        rcm_er_c.redraw();
+        rcm_et_c.redraw();
+        rcm_ee_c.redraw();
+        rcm_eg_c.redraw();
+        rcm_ei_c.redraw();
+        rcm_ec_c.redraw();
+        rcm_es_c.redraw();
+        rem_ei_c.redraw();
+        rem_ec_c.redraw();
+        rem_xs_c.redraw();
+        rem_xs_c3.redraw();
+        rem_el_c.redraw();
+        rem_xc_c.redraw();
+        rem_xc_c3.redraw();
+        rem_ea_c.redraw();
+        rem_xl_c.redraw();
+        rem_xl_cd.redraw();
+        rem_ep_c.redraw();
+        rem_er_c.redraw();
+        rem_ey_c.redraw();
+        rem_es_c.redraw();
+        rem_eo_c.redraw();
+        rem_ek_c.redraw();
+        rem_eh_c.redraw();
+        rem_eb_c.redraw();
+        rem_ew_c.redraw();
+        ava_fr_c.redraw();
+        ava_fm_c.redraw();
+        ava_fc_c.redraw();
+        avb_fr_c.redraw();
+        avb_fb_c.redraw();
+    });
 });
 
