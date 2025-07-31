@@ -1,0 +1,103 @@
+---
+import Layout from "../../layouts/Layout.astro" 
+import Image from "../../components/Image.astro" 
+import Section from "../../components/Section.astro" 
+import SubSection from "../../components/SubSection.astro" 
+import SubSubSection from "../../components/SubSubSection.astro" 
+import BlueText from "../../components/BlueText.astro" 
+import RedText from "../../components/RedText.astro" 
+import InlineEquation from "../../components/InlineEquation.astro"
+import Center from "../../components/Center.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import Enumerate from "../../components/Enumerate.astro"
+import Item from "../../components/Item.astro"
+import Warning from "../../components/Warning.astro"
+import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import DisplayEquation from "../../components/DisplayEquation.astro"
+import DisplayEquationCustom from "../../components/DisplayEquationCustom.astro"
+import Example from "../../components/Example.astro"
+import InlineCanvas from "../../components/InlineCanvas.astro"
+import Row from "../../components/Row.astro"
+import Col from "../../components/Col.astro"
+import SubSubSubSection from "../../components/SubSubSubSection.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+---
+
+<Layout title = "Suspensions with Watt's linkage" description = "Learn how rigid body kinematics applies to suspensions with Watt's linkage.">
+
+
+
+
+
+
+  <div hidden>
+    <PrairieDrawCanvas id = "rkg-fw-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-xp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-xc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-fd-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-cm-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcl-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcp-cs" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcf-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcf-s" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xlc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-sa" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-s1" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-s2" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avs-ft-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avs-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "aml-fk-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "aml-fs-c" width = "1" height = "1"/>
+  </div>
+
+<Section title="Suspensions with Watt's linkage"  id="suspensions_linkage">
+    <p>Apart from being one of the inventors of the <a
+      href="http://en.wikipedia.org/wiki/Watt_steam_engine">steam
+      engine</a> and having <a
+      href="http://en.wikipedia.org/wiki/Watt">an SI unit</a> named
+      after him, <a
+      href="http://en.wikipedia.org/wiki/James_Watt">James Watt</a>
+      also developed a linkage to produce approximate straight line
+      motion. <a
+      href="http://en.wikipedia.org/wiki/Watt's_linkage">Watt's
+      linkage</a> consists of two long near-parallel links and a
+      small floating link between them, with the near-linear motion
+      occurring for a coupler point midway along the floating
+      link. This linkage is commonly used in suspension systems, as
+      shown below.
+      </p>
+
+      <PrairieDrawCanvas id="aml-fw-c" width="600" height="288" class="figureImage">
+  
+        <p class="controls">
+          <button class="option-toggle:aml-fw-c:showLinkage" onclick="aml_fw_c.toggleOption('showLinkage')">show linkage</button>
+          <button class="anim-toggle:aml-fw-c" onclick="aml_fw_c.toggleAnim()">animation</button>
+          <button class="reset-time:aml-fw-c" onclick="aml_fw_c.resetTime()">reset</button>
+        </p>
+        <p class="figureCaption">
+          <i>The rear suspension of a 1998 <a
+          href="http://en.wikipedia.org/wiki/Ford_Ranger_EV">Ford
+          Ranger EV</a>.  Image credit: <a
+          href="http://commons.wikimedia.org/wiki/File:GSFRRearViewUnderCropped.jpg">Wikimedia
+          Commons</a> (<a
+          href="http://creativecommons.org/licenses/sa/1.0/">CC SA
+          1.0</a>) (<a
+          href="aml_GSFRRearViewUnderCropped.jpg">full-sized
+          image</a>).</i>
+        </p>
+      </PrairieDrawCanvas>
+    <CalloutContainer slot = "cards">
+      <CalloutCard title = "Reference material">
+        <p>
+          This application uses <a href = "/dyn/rigid_body_kinematics#rigid_bodies">rigid bodies.</a>
+        </p>
+    </CalloutCard>
+  </CalloutContainer>
+</Section>
+
+<script src="/dyn/rigid_body_kinematics/canvases.js" is:inline></script>
+</Layout>

@@ -1,0 +1,570 @@
+---
+import Layout from "../../layouts/Layout.astro" 
+import Image from "../../components/Image.astro" 
+import Section from "../../components/Section.astro" 
+import SubSection from "../../components/SubSection.astro" 
+import SubSubSection from "../../components/SubSubSection.astro" 
+import BlueText from "../../components/BlueText.astro" 
+import RedText from "../../components/RedText.astro" 
+import Itemize from "../../components/Itemize.astro" 
+import Item from "../../components/Item.astro" 
+import DisplayEquation from "../../components/DisplayEquation.astro"
+import DisplayEquationCustom from "../../components/DisplayEquationCustom.astro"
+import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import InlineCanvas from "../../components/InlineCanvas.astro"
+import InlineEquation from "../../components/InlineEquation.astro"
+import Example from "../../components/Example.astro"
+import Center from "../../components/Center.astro"
+import SubSubSubSection from "../../components/SubSubSubSection.astro"
+import Warning from "../../components/Warning.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+import Col from "../../components/Col.astro"
+import Row from "../../components/Row.astro"
+---
+<Layout title = "Accelerating and braking" description = "Learn how rigid body kinetics applies to accelerating and braking.">
+
+<div slot="navtree">
+  <ul class='list-group list-group-flush py-0'> 
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#point_mass_model'>Point mass model</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#2d_rigid_body_model'>2D rigid body model</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#traction_acceleration_and_braking'>Traction, acceleration, and braking</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#2d_multi_body_model'>2D multi-body model</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#more_complex_models'>More complex models</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#brake_system_design'>Brake system design</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#car_model'>Car model</a></li>
+  </ul>
+</div>
+
+
+    <div hidden>
+        <PrairieDrawCanvas id = "rcm-cm-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xc-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xc-s1" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xc-s2" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-cm-cb" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xl-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xl-cd" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xl-cf" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-er-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-et-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-ee-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-eg-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-ei-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-ec-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-es-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ei-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ec-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xs-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xs-c3" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-el-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xc-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xc-c3" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ea-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xl-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xl-cd" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ep-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-el-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-er-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ey-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-es-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-eo-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ek-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-eh-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-eb-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ew-c" width = "1" height = "1"/>
+    </div>
+
+<Section title="Accelerating and braking"  id="accelerating_braking">
+ 
+<p>
+        What happens when we step on the gas or brake in a car? The
+        car pushes against the road to either accelerate (gas pedal)
+        or decelerate (brake pedal). But how are the forces on the
+        car and wheels distributed? What determines whether the
+        wheels grip the road or lose traction and spin or slide?
+    </p>
+
+    <p>
+        To study this problem we need a model. Let's start with the simplest model and then
+        gradually consider more complex models.
+    </p>
+    <Image src="/dyn/particle_kinetics/red_car.jpg" width="8"> The classic American <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Pony_car">Pony Car</a>:
+        a 1965 <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Ford_Mustang">Ford
+        Mustang</a> <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Fastback">Fastback</a>
+        with the <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Golden_Gate_Bridge">Golden
+        Gate Bridge</a> in the background. Image source: <a
+        target="_blank" rel="noopener noreferrer" href="http://www.flickr.com/photos/aresauburnphotos/4704100327/">flikr
+        image </a> by <a
+        target="_blank" rel="noopener noreferrer" href="http://www.flickr.com/photos/aresauburnphotos/">Nick
+        Ares</a> <a
+        target="_blank" rel="noopener noreferrer" href="http://creativecommons.org/licenses/by-sa/2.0/">(CC
+        BY-SA 2.0)</a> (<a href="/public/dyn/particle_kinetics/red_car_full.jpg">full-sized
+        image</a>).</Image>
+
+    <CalloutContainer slot="cards">
+        <CalloutCard title="Reference material">
+            <Itemize>
+                <Item><a href="/dyn/particle_kinetics">Kinetics of point masses</a></Item>
+                <Item><a href="/dyn/rigid_body_kinetics">Kinetics of rigid bodies</a></Item>
+            </Itemize>
+        </CalloutCard>
+        <CalloutCard title="Extra links">
+            <Itemize>
+                <Item><a
+                    target="_blank" rel="noopener noreferrer" href="http://www.youtube.com/watch?v=JAAZGDY7Fq0">Video of
+                    a burnout</a> with a deliberate loss of traction.</Item>
+                <Item><a
+                    target="_blank" rel="noopener noreferrer" href="http://www.youtube.com/watch?v=_07GEGeLR5c">Video of
+                    a wheelie</a>, where the front wheels lose contact.</Item>
+                <Item><a target="_blank" rel="noopener noreferrer" href="http://www.youtube.com/watch?v=_07GEGeLR5c"><a
+                    target="_blank" rel="noopener noreferrer" href="http://www.youtube.com/watch?v=HnVkeZXsXjo">Video of
+                    braking</a> in which the rear wheels lose contact.</Item>
+                <Item><a
+                    target="_blank" rel="noopener noreferrer" href="http://www.youtube.com/watch?v=unwujSVpZwA">Another
+                    burnout video</a>, taken to the point of destruction.</Item>
+            </Itemize>
+        </CalloutCard>
+    </CalloutContainer>
+
+</Section>
+
+<SubSection title = "Point mass model" id = "point_mass_model">
+
+    <p>
+        The simplest model of a car is to treat the entire vehicle
+        as a point mass. On a <button
+        class="seq-toggle:ava-fp-c:fbd" onclick="ava_fp_c.stepSequence('fbd')">free body diagram</button>
+        we have vertical force balance for a stationary car. When
+        the car <button
+        class="seq-step:ava-fp-c:motion:stationary" onclick="ava_fp_c.stepSequence('motion', 'stationary')">accelerates</button>,
+        there is a horizontal forward force on the car, and a
+        corresponding backwards horizontal force on the ground. As
+        the car picks up speed, <a
+        target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Drag_%28physics%29">air
+        resistance</a> produces a backwards force. On the diagram we
+        have drawn some forces offset from the center of mass, so
+        that the vectors don't overlap. Because we are assuming a
+        point mass model, however, all vectors are really acting at
+        the same point.
+      </p>
+      <p>
+        While cruising at a constant speed, there is a balance
+        between the horizontal driving force and the drag force due
+        to air resistance. When the car <button
+        class="seq-step:ava-fp-c:motion:cruising" onclick="ava_fp_c.stepSequence('motion', 'cruising')">brakes</button>,
+        there is a backwards force that slows the car down to a
+        stop.
+      </p>
+
+    <Center>
+        <PrairieDrawCanvas id="ava-fp-c" width="600" height="600" />
+    </Center>
+        
+      <p>
+        <button class="seq-step:ava-fp-c:motion:stationary" onclick="ava_fp_c.stepSequence('motion', 'stationary')">accelerate</button>
+        <button class="seq-step:ava-fp-c:motion:cruising" onclick="ava_fp_c.stepSequence('motion', 'cruising')">brake</button>
+        <button class="seq-toggle:ava-fp-c:fbd" onclick="ava_fp_c.stepSequence('fbd')">free body diagram</button>
+        <button class="option-toggle:ava-fp-c:components" onclick="ava_fp_c.toggleOption('components')">components</button>
+        <button class="anim-toggle:ava-fp-c" onclick="ava_fp_c.toggleAnim()">animation</button>
+      </p>
+      <p>
+        We can think of the force vectors (such as the ground force
+        on the car) as either in separate horizontal and vertical
+        <button
+        class="option-toggle:ava-fp-c:components" onclick="ava_fp_c.toggleOption('components')">components</button>
+        or as unified vectors. It may be helpful to pause the
+        <button class="anim-toggle:ava-fp-c" onclick="ava_fp_c.toggleAnim()">animation</button>
+        during <button
+        class="seq-step:ava-fp-c:motion:stationary" onclick="ava_fp_c.stepSequence('motion', 'stationary')">acceleration</button>
+        and <button
+        class="seq-step:ava-fp-c:motion:cruising" onclick="ava_fp_c.stepSequence('motion', 'cruising')">braking</button>
+        to consider the forces at work.
+      </p>
+
+</SubSection>
+<SubSection title="2D rigid body model" id = "2d_rigid_body_model">
+        <p>
+        Consider a car sitting stationary on the ground, as shown
+        below. We will take the entire car plus wheels to be a
+        single rigid body. Clearly this is inaccurate (the wheels
+        can't turn), but it is <a href="roq.html#roq.su">still
+        useful</a>.
+        </p>
+        <p>
+        We start with the car stationary, sitting on the
+        road. Gravity acts downward through the center of mass,
+        while there are upwards reaction forces on the wheels and
+        corresponding equal and opposite forces downwards on the
+        ground. Because the car is not accelerating, the total
+        forces on the car are in balance, as we can see on the
+        <button onclick="ava_fr_c.stepSequence('fbd');">free body
+        diagram</button>.
+        </p>
+        <p>
+        When the driver <button
+        class="seq-step:ava-fr-c:motion:stationary" onclick="ava_fr_c.stepSequence('motion', 'stationary');">presses down on the gas
+        pedal</button>, this results in the car pushing back on the
+        road, giving a net forward force on the driving wheels (the
+        back wheels for our car), and the car accelerates up to
+        cruising speed. Here we are including <a
+        target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Drag_%28physics%29">air
+        resistance</a> but neglecting <a
+        target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Rolling_resistance">rolling
+        resistance</a>, and while cruising at constant speed the
+        driving force exactly balances the drag force from air
+        resistance. When the driver <button
+        class="seq-step:ava-fr-c:motion:cruising" onclick="ava_fr_c.stepSequence('motion', 'cruising');">presses down on the
+        brake pedal</button>, the car pushes on the road to slow
+        down, giving backward forces on both wheels and causing the
+        car to decelerate to a stop.
+        </p>
+
+            <PrairieDrawCanvas id="ava-fr-c" width="600" height="400" show_border="False">
+                <button class="seq-step:ava-fr-c:motion:stationary" onclick="ava_fr_c.stepSequence('motion', 'stationary');">accelerate</button>
+                <button class="seq-step:ava-fr-c:motion:cruising" onclick="ava_fr_c.stepSequence('motion', 'cruising');">brake</button>
+                <button class="seq-toggle:ava-fr-c:fbd" onclick="ava_fr_c.stepSequence('fbd');">free body diagram</button>
+                <button class="option-toggle:ava-fr-c:components" onclick="ava_fr_c.toggleOption('components');">components</button>
+                <button class="anim-toggle:ava-fr-c" onclick="ava_fr_c.toggleAnim();">animation</button>
+            </PrairieDrawCanvas>
+
+        
+        <p>
+        Repeat the <button
+        class="seq-step:ava-fr-c:motion:stationary" onclick="ava_fr_c.stepSequence('motion', 'stationary');">acceleration</button>/<button
+        class="seq-step:ava-fr-c:motion:cruising" onclick="ava_fr_c.stepSequence('motion', 'cruising');">braking</button>
+        cycle a few times while showing the <button
+        class="seq-toggle:ava-fr-c:fbd" onclick="ava_fr_c.stepSequence('fbd');">free body
+        diagram</button>. Observe the horizontal and vertical forces
+        of the road on the car wheels. Also view the forces both in
+        <button class="option-toggle:ava-fr-c:components" onclick="ava_fr_c.toggleOption('components');">vector
+        components</button> and as total force vectors.
+        </p>
+        <p>
+        The vertical forces of the road on the car always need to
+        balance the gravitational force, but we can see that the
+        distribution between front and rear wheels changes as the
+        car accelerates and decelerates. This is because the
+        horizontal driving and braking forces are below the center
+        of mass and produce a moment. The vehicle is not rotating,
+        so this moment must be counteracted by the ground
+        forces. The force directions mean that the rear wheels take
+        more weight during acceleration, while the front wheels take
+        more weight during braking.
+        </p>
+</SubSection>
+
+<SubSection title="Traction, acceleration, and braking" id = "traction_acceleration_and_braking">
+        <p>
+        The maximum force with which the car can push against the
+        road is limited by the <a href="rff.html">friction
+        coefficient</a> of the tire multiplied by the normal
+        force. This applies both during acceleration and braking.
+        </p>
+        <p>
+        To accelerate as hard as possible, we should thus use a <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Automobile_layout#Rear-wheel-drive_layouts">rear-wheel
+        drive</a> layout. If we accelerate too hard, however, then
+        the back wheels will slip and experience <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Wheelspin">wheelspin</a>,
+        because the <a href="rff.html">dynamic coefficient of
+        friction</a> is lower than the static coefficient.  While
+        high-performance applications generally want to maintain
+        traction in all cases, the impressive effects of traction
+        loss are sometimes deliberately produced. Spinning the rear
+        wheels in a <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Burnout_(vehicle)">burnout</a>
+        produces smoke as the tires vaporize due to the heat from
+        friction. <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Drag_racing">Drag
+        racers</a> perform a burnout at the start of a race to clean
+        the tires and heat them to an optimal temperature. To easily
+        produce a burnout a <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Line_lock">line lock</a>
+        can be installed to enable the brakes to be applied only to
+        the front wheels (although this is often illegal on street
+        cars). Alternatively, a burnout <a
+        target="_blank" rel="noopener noreferrer" href="http://youtu.be/rSwOTV-jbns">can be performed</a> by
+        disengaging the clutch, running the engine at a high revs,
+        and then rapidly engaging the clutch. The high <a
+        href="rkm">angular momentum</a> of the engine then provides
+        a <a href="rkm">rotational impulse</a> to the rear wheels,
+        causing them to lose traction.
+        </p>
+        <p>
+        Even if traction is maintained during acceleration, a second
+        problem that may occur is that the torque from the rear
+        wheels can be enough to lift the front wheels off the
+        ground, so that the vehicle performs a <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Wheelie">wheelie</a>. This
+        occurs very easily for motorbikes and BMX bicycles, due to a
+        high center of mass to wheelbase ratio, but <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/File:Pro_Street_Camaro_at_launch.JPG">can
+        also occur for cars</a> with poor geometry and sufficient
+        power.
+        </p>
+        <p>
+        The problems of wheel slip and wheel lift-off occur in
+        reverse while braking. Any car with well-maintained brakes
+        has sufficient braking power to cause the wheels to lock,
+        even in dry conditions with good traction. For this reason
+        many cars now include <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Anti-lock_braking_system">anti-lock
+        braking systems (ABS)</a>, which detect wheel locking and
+        rapidly pulse the brake force to prevent locking. Even
+        better than this are <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Electronic_brakeforce_distribution">electronic
+        brakeforce distribution (EBD)</a> systems, which apply the
+        maximal brake force to each wheel while maintaining traction
+        and control, better than any unassisted human driver could
+        achieve. Due to the weight transfer to the front wheels
+        during braking, the front brakes generally apply much
+        greater force and thus wear out sooner than the rear brakes.
+        </p>
+
+    <CalloutContainer slot="cards">
+        <CalloutCard>
+            <p>
+                Using ABS to mean <em>Anti-lock Brake System</em> is an
+                example of a <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Backronym">backronym</a>. This
+                is where the name ABS came first, and then <em>Anti-lock
+                Brake System</em> was made up later to fit the letters as
+                an <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Acronym_and_initialism">ackronym</a>. In
+                fact ABS comes from the German phrase <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wiktionary.org/wiki/ABS_brake">Antiblockiersystem</a>
+                (literally: Anti Locking System).
+            </p>
+        </CalloutCard>
+    </CalloutContainer>
+
+</SubSection>
+<SubSection title="2D multi-body model" id = "2d_multi_body_model">
+        <p>
+        To understand how forces and moments act on the wheels, we
+        need to separate out the <a href="#ava-sr">single rigid-body
+        model</a> into multiple rigid bodies. The simplest version
+        of this has one rigid body for the body, and four rigid
+        bodies for the wheels. We will assume that the two front
+        wheels always act as a pair (same forces, same motion), and
+        similarly for the two back wheels.
+        </p>
+        <p>
+        Again we start with the car stationary, and on the <button
+        class="seq-toggle:ava-fm-c:fbd" onclick="ava_fm_c.stepSequence('fbd');">free body diagram</button>
+        we see the balance of vertical forces. Remember that the
+        force shown on each wheel is really doubled, as there are
+        two front and two rear wheels.
+        </p>
+        <p>
+        If we now <button
+        class="seq-step:ava-fm-c:motion:stationary" onclick="ava_fm_c.stepSequence('motion', 'stationary');">accelerate</button>,
+        then we see a clockwise moment applied to the rear (driving)
+        wheels. This causes the wheel to rotate, but friction forces
+        means that it must <a href="rkl.html">roll without
+        slipping</a>, so there must be a forward contact force
+        causing it to accelerate forwards. Counteracting this is a
+        backwards reaction force from the car on the wheel. On the
+        car we see that there are equal and opposite forces and
+        moments at the axles. Just as in the <a
+        href="#ava-sr">single rigid body</a> case, we have a net
+        horizontal force causing forward acceleration, and moment
+        balance means that the weight of the car is transferred
+        primarily to the rear wheels.
+        </p>
+        <PrairieDrawCanvas id="ava-fm-c" width="600" height="400" show_border="False">
+            <button class="seq-step:ava-fm-c:motion:stationary" onclick="ava_fm_c.stepSequence('motion', 'stationary');">accelerate</button>
+            <button class="seq-step:ava-fm-c:motion:cruising" onclick="ava_fm_c.stepSequence('motion', 'cruising');">brake</button>
+            <button class="seq-toggle:ava-fm-c:fbd" onclick="ava_fm_c.stepSequence('fbd');">free body diagram</button>
+            <button class="option-toggle:ava-fm-c:components" onclick="ava_fm_c.toggleOption('components');">components</button>
+            <button class="anim-toggle:ava-fm-c" onclick="ava_fm_c.toggleAnim();">animation</button>
+        </PrairieDrawCanvas>
+        <p>
+        <button
+        class="seq-step:ava-fm-c:motion:cruising" onclick="ava_fm_c.stepSequence('motion', 'cruising');">Braking</button>
+        applies backwards moments to both wheels, causing them to
+        slow down. To maintain non-slip, there is a backwards force
+        from the ground at the point of contact. Because the wheel
+        is slowing down, the car pushes forward on the axle. The
+        ground/axle forces are trying to rotate the wheel forward,
+        which must be counteracted by the braking moment. The
+        braking moment is thus counteracting both the rotational
+        inertia of the wheel, as well as the force couple from the
+        ground/axle forces. Of these, the force couple is much
+        larger (stopping a wheel without the car attached would be
+        comparatively easy for the brakes). During braking we see
+        again the weight being transferred to the front wheels.
+        </p>
+</SubSection>
+<SubSection title="More complex models" id = "more_complex_models">
+        <p>
+        While we can learn a lot about car performance from the
+        simple <a href="#ava-sr">rigid body</a> and <a
+        href="#ava-sm">multi-body</a> models, there is a great deal
+        of physics neglected by these models, which can be important
+        for engineering design.
+        </p>
+        <p>
+        Both the car and the tires are deformable bodies. The
+        deformation of the tire is responsible for the <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Contact_patch">contact
+        patch</a> which generates the friction forces that allow a
+        car to accelerate and brake. The physics of the frictional
+        contact between the tire and ground can be very complex, as
+        can the geometry of the tire. Modern <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Tire">tires</a> have
+        complex <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Tread">tread</a> patterns
+        with grooves and lugs that are designed to channel away
+        water and snow, maintaining traction even in challenging
+        conditions.
+        </p>
+        <p>
+        As well as being individually deformable, the wheels are are
+        not rigidly connected to the car body <a href="#ava-sr">as
+        above</a>, but they are actually connected by a <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Suspension_(vehicle)">suspension
+        system</a>, consisting of <a href="aml.html">linkages</a>,
+        <a href="rff.html">springs</a>, and <a
+        href="rff.html">shock absorbers</a>. These enable both a
+        comfortable ride and safe handling of the vehicle.
+        </p>
+        <p>
+        The simple models above included a simple model of <a
+        target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Drag_%28physics%29">air
+        resistance</a>, but they neglected <a
+        target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Rolling_resistance">rolling
+        resistance</a>. This is the force primarily produced by the
+        tire being compressed and re-expanded at the contact with
+        the ground as it rolls, producing a backward force on the
+        wheel. Using steel wheels on steel can result in trains
+        having up to <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Rolling_resistance#Rolling_resistance_coefficient_examples">ten
+        times lower</a> coefficients of rolling resistance than car
+        tires, which is one reason for the efficiency of rail
+        transport.
+        </p>
+        
+    <CalloutContainer slot="cards">
+        <CalloutCard>
+            <p>
+                <a target="_blank" rel="noopener noreferrer" href="http://dx.doi.org/10.1159/000328223">There is
+                evidence</a> that the wrinkling of fingers in
+                water may serve the same purpose as tread patters on
+                tires, improving traction in wet conditions by forming
+                channels to carry away water. This hypothesis is supported
+                by the fact that <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Wrinkle#Water-immersion_wrinkling">finger
+                wrinkling</a> relies on an active nervous system response,
+                meaning that the fingers of corpses cannot wrinkle (but
+                what about zombies' fingers?).
+            </p>
+        </CalloutCard>
+    </CalloutContainer>
+        
+</SubSection>
+<SubSection title="Brake system design" id = "brake_system_design">
+        <p>
+        The above model shows equal brake force applied on the front
+        and rear wheels. This both inefficient and dangerous, as the
+        rear wheels will lock while the front wheels are still
+        turning. See #avs for steering and sliding. We want to apply
+        more force on the front brakes, so that we can deliver the
+        most total force while still having no sliding. This can be
+        achieved by <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Electronic_brakeforce_distribution">electronic
+        brakeforce distribution (EBD)</a> systems, however
+        traditional systems are also possible.
+        </p>
+        <p>
+        The basic outline of a brake system is that the brake pedal
+        pushes on a <em>master cylinder</em>, which compresses
+        hydraulic <em>brake fluid</em> in the <em>brake
+        lines</em>. This then pushes on <em>slave cylinders</em> in
+        each wheel, which push the <em>brake pads</em> onto the
+        <em>brake rotors</em> (for disc brakes; drum brakes are
+        somewhat different). The combination of slave cylinders and
+        brake pads and their housing is called a <em>brake
+        caliper</em>.
+        </p>
+        <p>
+        To apply more force to the front brakes, one simple system
+        used in practice is to have the front-wheel slave cylinders
+        have a larger diameter than those on the rear
+        wheels. Because the pressure in the brake lines is the same
+        everywhere, the force exerted by the pistons is proportional
+        to their cross-sectional area, resulting in more force with
+        the larger-diameter front-wheel cylinders.
+        </p>
+        <p>
+        Modern cars use more advanced systems. The master cylinder
+        typically contains two pistons in a parallel arrangement, so
+        that it can apply pressure to the front or rear brake lines
+        even if the other brake line develops a leak. A <em>metering
+        valve</em> applies pressure to the rear brakes before the
+        front, improving vehicle steering stability and allowing
+        mixed drum/disc systems to be used. A <em>pressure
+        differential valve</em> detects brake hydraulic leaks by
+        sensing different front/rear line pressures. A
+        <em>proportioning valve</em> assists with applying a
+        different pressure distribution to the rear brakes.
+        </p>
+</SubSection>
+<SubSection title="Car model" id = "car_model">
+        <p>
+        This is a <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Ford_Mustang_(first_generation)">1965
+        Ford Mustang</a> <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Fastback">Fastback</a>. The
+        mass of the car body is 1100 kg and each of the wheels has
+        mass 20 kg, giving a total mass of 1180 kg. We assume that
+        the wheels are uniform cylinders. The dimensions of the car
+        are shown below.
+        </p>
+        <table>
+        <tr>
+            <td>
+            <Center>
+                <PrairieDrawCanvas id="ava-fc-c" width="400" height="400" show_border="False" />
+            </Center>
+            <td>
+            <p>
+                <DisplayEquation equation="\\begin{aligned}    h_1 &amp;= {0.31\\rm\\ m} &amp; \\ell_1 &amp;= {0.98\\rm\\ m} \\\\    h_2 &amp;= {0.29\\rm\\ m} &amp; \\ell_2 &amp;= {1.41\\rm\\ m} \\\\    h_3 &amp;= {0.79\\rm\\ m} &amp; \\ell_3 &amp;= {1.41\\rm\\ m} \\\\    &amp; &amp; \\ell_4 &amp;= {0.80\\rm\\ m}    \\end{aligned}" />
+            </p>
+            </td>
+        </tr>
+        </table>
+        <p>
+        The force of <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Drag_(physics)">air
+        resistance</a> was computed above using the <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Drag_equation">quadratic
+        drag equation</a> which is a good approximation for
+        medium- to high-velocity motion in air:
+        </p>
+        <p><InlineEquation equation="F_{\\rm D} = \\frac{1}{2} \\rho v^2 C_{\\rm D} A" /></p>
+        <p>
+        Here <InlineEquation equation="F_{\\rm D}" /> is the drag force, <InlineEquation equation="\\rho = 1.23\\rm\\ kg/m^3"/> is the air density, \(v\) is the velocity, <InlineEquation equation="C_{\\ D}" /> is the drag coefficient (taken to be 0.3 for the
+        Mustang), and \(A\) is the reference area (approximately the
+        cross-sectional area, taken to be \(2.2\rm\ m^2\) for the
+        Mustang).
+        </p>
+</SubSection>
+
+    <div hidden>
+        <PrairieDrawCanvas id = "avb-fg-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "avb-fp-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "avb-fr-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "avb-fb-c" width = "1" height = "1"/>
+    </div>
+
+
+</Layout>
+
+<script src="/dyn/rigid_body_kinetics/canvases.js" is:inline></script>

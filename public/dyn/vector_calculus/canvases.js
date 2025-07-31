@@ -175,115 +175,6 @@ $(document).ready(function(){
         this.text($V([3.3, 1]), $V([0, 0]), "TEX:$A = a b \\sin\\theta$");
     });
 
-    rvc_fi_c = new PrairieDraw("rvc-fi-c", function() {
-        this.setUnits(12, 8);
-
-        this.addOption("t", 0);
-        this.addOption("logN", 0);
-        this.addOption("N", 1);
-        this.addOption("showLabels", true);
-        this.addOption("showAnchoredVelocity", true);
-        this.addOption("showExact", false);
-        this.addOption("showApprox", false);
-
-        var t = this.getOption("t");
-        var logN = this.getOption("logN");
-
-        var N = Math.floor(Math.exp(logN));
-        this.setOption("N", N, false);
-
-        var tMax = 10;
-        var O = $V([0, 0]);
-
-        var f = function(t) {
-            return $V([
-                2 * Math.cos(t / tMax * 3 / 2 * Math.PI) - 2 + 6 * Math.sin(t / tMax / 2 * Math.PI) + t * t / 20,
-                3 - 3 * Math.cos(t / tMax * 3 / 2 * Math.PI)
-            ]);
-        }.bind(this);
-
-        var df = function(t) {
-            return $V([
-                -2 * Math.sin(t / tMax * 3 / 2 * Math.PI) * 1 / tMax * 3 / 2 * Math.PI
-                    + 6 * Math.cos(t / tMax / 2 * Math.PI) * 1 / tMax / 2 * Math.PI + 2 * t / 20,
-                3 * Math.sin(t / tMax * 3 / 2 * Math.PI) * 1 / tMax * 3 / 2 * Math.PI
-            ]);
-        }.bind(this);
-
-        var nExact = 100;
-        var pExact = [];
-        for (var i = 0; i <= nExact; i++) {
-            pExact.push(f(i / nExact * t));
-        }
-
-        var vExactEnd = df(t);
-
-        var pApprox = [O];
-        for (var i = 0; i < N; i++) {
-            var tI = i / N * t;
-            var dtI = t / N;
-            pApprox.push(pApprox[pApprox.length - 1].add(df(tI).x(dtI)));
-        }
-
-        var pExactEnd = pExact[pExact.length - 1];
-        var pApproxEnd = pApprox[pApprox.length - 1];
-
-        if (this.getOption("showAnchoredVelocity")) {
-            this.save();
-            this.translate($V([3, 2]));
-            this.arrow(O, vExactEnd, "velocity");
-            if (this.getOption("showLabels")) {
-                this.labelLine(O, vExactEnd, $V([0, 1]), "TEX:$\\vec{a}(t)$");
-            }
-            this.restore();
-        }
-
-        this.translate($V([-5, -3]));
-
-        if (this.getOption("showApprox") && t > 0) {
-            for (var i = 1; i < pApprox.length; i++) {
-                this.arrow(pApprox[i - 1], pApprox[i], "angle");
-            }
-            if (this.getOption("showLabels")) {
-                var iLabel = Math.floor(pApprox.length / 2);
-                if (pApprox.length % 2 === 0) {
-                    var labelPoint = pApprox[iLabel - 1].add(pApprox[iLabel]).x(0.5);
-                    if (pApprox.length > 2) {
-                        var pPrev = pApprox[iLabel - 1];
-                        var dpPrev = pApprox[iLabel - 2].subtract(pPrev);
-                        var pNext = pApprox[iLabel];
-                        var dpNext = pApprox[iLabel + 1].subtract(pNext);
-                        var otherPoints = [pPrev.add(dpPrev.x(0.1)), pNext.add(dpNext.x(0.1))];
-                    } else {
-                        var otherPoints = [pApprox[iLabel - 1], pApprox[iLabel].add($V([0, -0.01]))];
-                    }
-                } else {
-                    var labelPoint = pApprox[iLabel];
-                    var otherPoints = [pApprox[iLabel - 1], pApprox[iLabel + 1]];
-                }
-                this.labelIntersection(labelPoint, otherPoints, "TEX:$\\vec{a}(\\tau_i)\\Delta\\tau$");
-            }
-            this.arrow(O, pApproxEnd, "acceleration");
-            if (this.getOption("showLabels")) {
-                this.labelLine(O, pApproxEnd, $V([0, -1]), "TEX:$\\vec{S}_N$");
-            }
-        }
-
-        if (this.getOption("showExact")) {
-            if (t > 0) {
-                this.polyLine(pExact);
-                this.arrow(O, pExactEnd, "position");
-                if (this.getOption("showLabels")) {
-                    this.labelLine(O, pExactEnd, $V([0, 1]), "TEX:$\\int_0^t \\vec{a}(\\tau)\\,d\\tau$");
-                }
-            }
-            this.arrow(pExactEnd, pExactEnd.add(vExactEnd), "velocity");
-            if (this.getOption("showLabels")) {
-                this.labelLine(pExactEnd, pExactEnd.add(vExactEnd), $V([0, 1]), "TEX:$\\vec{a}(t)$");
-            }
-        }
-    });
-
     rvc_fd_c = new PrairieDraw("rvc-fd-c", function() {
         this.setUnits(12, 4);
         
@@ -688,14 +579,124 @@ $(document).ready(function(){
         this.restore();
     });
 
+    rvc_fi_c = new PrairieDraw("rvc-fi-c", function() {
+        this.setUnits(12, 8);
+
+        this.addOption("t", 0);
+        this.addOption("logN", 0);
+        this.addOption("N", 1);
+        this.addOption("showLabels", true);
+        this.addOption("showAnchoredVelocity", true);
+        this.addOption("showExact", false);
+        this.addOption("showApprox", false);
+        this.addOption("movement", "translate");
+
+        var t = this.getOption("t");
+        var logN = this.getOption("logN");
+
+        var N = Math.floor(Math.exp(logN));
+        this.setOption("N", N, false);
+
+        var tMax = 10;
+        var O = $V([0, 0]);
+
+        var f = function(t) {
+            return $V([
+                2 * Math.cos(t / tMax * 3 / 2 * Math.PI) - 2 + 6 * Math.sin(t / tMax / 2 * Math.PI) + t * t / 20,
+                3 - 3 * Math.cos(t / tMax * 3 / 2 * Math.PI)
+            ]);
+        }.bind(this);
+
+        var df = function(t) {
+            return $V([
+                -2 * Math.sin(t / tMax * 3 / 2 * Math.PI) * 1 / tMax * 3 / 2 * Math.PI
+                    + 6 * Math.cos(t / tMax / 2 * Math.PI) * 1 / tMax / 2 * Math.PI + 2 * t / 20,
+                3 * Math.sin(t / tMax * 3 / 2 * Math.PI) * 1 / tMax * 3 / 2 * Math.PI
+            ]);
+        }.bind(this);
+
+        var nExact = 100;
+        var pExact = [];
+        for (var i = 0; i <= nExact; i++) {
+            pExact.push(f(i / nExact * t));
+        }
+
+        var vExactEnd = df(t);
+
+        var pApprox = [O];
+        for (var i = 0; i < N; i++) {
+            var tI = i / N * t;
+            var dtI = t / N;
+            pApprox.push(pApprox[pApprox.length - 1].add(df(tI).x(dtI)));
+        }
+
+        var pExactEnd = pExact[pExact.length - 1];
+        var pApproxEnd = pApprox[pApprox.length - 1];
+
+        if (this.getOption("showAnchoredVelocity")) {
+            this.save();
+            this.translate($V([3, 2]));
+            this.arrow(O, vExactEnd, "velocity");
+            if (this.getOption("showLabels")) {
+                this.labelLine(O, vExactEnd, $V([0, 1]), "TEX:$\\vec{a}(t)$");
+            }
+            this.restore();
+        }
+
+        this.translate($V([-5, -3]));
+
+        if (this.getOption("showApprox") && t > 0) {
+            for (var i = 1; i < pApprox.length; i++) {
+                this.arrow(pApprox[i - 1], pApprox[i], "angle");
+            }
+            if (this.getOption("showLabels")) {
+                var iLabel = Math.floor(pApprox.length / 2);
+                if (pApprox.length % 2 === 0) {
+                    var labelPoint = pApprox[iLabel - 1].add(pApprox[iLabel]).x(0.5);
+                    if (pApprox.length > 2) {
+                        var pPrev = pApprox[iLabel - 1];
+                        var dpPrev = pApprox[iLabel - 2].subtract(pPrev);
+                        var pNext = pApprox[iLabel];
+                        var dpNext = pApprox[iLabel + 1].subtract(pNext);
+                        var otherPoints = [pPrev.add(dpPrev.x(0.1)), pNext.add(dpNext.x(0.1))];
+                    } else {
+                        var otherPoints = [pApprox[iLabel - 1], pApprox[iLabel].add($V([0, -0.01]))];
+                    }
+                } else {
+                    var labelPoint = pApprox[iLabel];
+                    var otherPoints = [pApprox[iLabel - 1], pApprox[iLabel + 1]];
+                }
+                this.labelIntersection(labelPoint, otherPoints, "TEX:$\\vec{a}(\\tau_i)\\Delta\\tau$");
+            }
+            this.arrow(O, pApproxEnd, "acceleration");
+            if (this.getOption("showLabels")) {
+                this.labelLine(O, pApproxEnd, $V([0, -1]), "TEX:$\\vec{S}_N$");
+            }
+        }
+
+        if (this.getOption("showExact")) {
+            if (t > 0) {
+                this.polyLine(pExact);
+                this.arrow(O, pExactEnd, "position");
+                if (this.getOption("showLabels")) {
+                    this.labelLine(O, pExactEnd, $V([0, 1]), "TEX:$\\int_0^t \\vec{a}(\\tau)\\,d\\tau$");
+                }
+            }
+            this.arrow(pExactEnd, pExactEnd.add(vExactEnd), "velocity");
+            if (this.getOption("showLabels")) {
+                this.labelLine(pExactEnd, pExactEnd.add(vExactEnd), $V([0, 1]), "TEX:$\\vec{a}(t)$");
+            }
+        }
+    });
+
     $( window ).on( "resize", function() {
         rvv_ed_c.redraw();
         rvv_fn_c.redraw();
         rvv_eo_c.redraw();
         rvv_fx_c.redraw();
-        rvc_fi_c.redraw();
         rvc_fd_c.redraw();
         rvc_fp_c.redraw();
         rvc_fc_c.redraw();
+        rvc_fi_c.redraw();
     } );
 })

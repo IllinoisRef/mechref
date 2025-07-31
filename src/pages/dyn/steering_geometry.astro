@@ -1,0 +1,300 @@
+---
+import Layout from "../../layouts/Layout.astro" 
+import Image from "../../components/Image.astro" 
+import Section from "../../components/Section.astro" 
+import SubSection from "../../components/SubSection.astro" 
+import SubSubSection from "../../components/SubSubSection.astro" 
+import BlueText from "../../components/BlueText.astro" 
+import RedText from "../../components/RedText.astro" 
+import InlineEquation from "../../components/InlineEquation.astro"
+import Center from "../../components/Center.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import Enumerate from "../../components/Enumerate.astro"
+import Item from "../../components/Item.astro"
+import Warning from "../../components/Warning.astro"
+import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import DisplayEquation from "../../components/DisplayEquation.astro"
+import DisplayEquationCustom from "../../components/DisplayEquationCustom.astro"
+import Example from "../../components/Example.astro"
+import InlineCanvas from "../../components/InlineCanvas.astro"
+import Row from "../../components/Row.astro"
+import Col from "../../components/Col.astro"
+import SubSubSubSection from "../../components/SubSubSubSection.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+---
+
+<Layout title = "Steering geometry" description = "Learn how rigid body kinematics applies to steering geometry.">
+
+
+<div slot="navtree">
+  <ul class='list-group list-group-flush py-0'> 
+    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#turning_rigid_bodies'>Turning rigid bodies</a></li>
+    <li class='list-group-item py-0'><a class='text-decoration-none subsection' href='#ackerman_steering'>Ackerman steering geometry</a></li>
+</ul>
+</div>
+
+
+
+
+  <div hidden>
+    <PrairieDrawCanvas id = "rkg-fw-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-xp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-xc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-fd-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-cm-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcl-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcp-cs" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcf-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcf-s" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xlc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-sa" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-s1" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-s2" width = "1" height = "1"/>
+  </div>
+
+<Section title="Steering geometry" id="steering_geometry">
+   
+
+    <p>
+      We are all familiar with the idea that turning the steering
+      wheel in a car rotates the front wheels, causing the car to
+      steer into a turn. But why do we normally steer with the
+      front wheels rather than the rear wheels (or all four
+      wheels, as shown below)? Do both front wheels turn the same
+      amount, or is something more complicated going on?
+    </p>
+
+    <Image src="/dyn/rigid_body_kinematics/avs_Mercedes_Kubelwagen_G5_600.jpg" width="6">
+      <p class="figureCaption">
+        A <a
+        href="http://www.autoevolution.com/cars/mercedes-benz-g5-w152-1937.html#aeng_mercedes-benz-g5-w152-1937-20">Mercedes-Benz
+        Typ G 5 (W 152, 1937–1941)</a> housed in <a
+        href="http://en.wikipedia.org/wiki/Technikmuseum_Speyer">Technik
+        Museum Speyer</a>, showing the use of a four-wheel
+        steering system.  Image source: <a
+        href="http://commons.wikimedia.org/wiki/File:Mercedes_K%C3%BCbelwagen_G5.jpg">Wikimedia
+        Commons</a> (<a
+        href="http://creativecommons.org/licenses/by-sa/3.0/deed.en">CC
+        BY-SA 3.0</a>) (<a
+        href="avs_Mercedes_Kubelwagen_G5.jpg">full-sized
+        image</a>).
+      </p>
+    </Image>
+
+    <CalloutContainer slot="cards">
+      <CalloutCard title="Reference material">
+        <li><a href = "/dyn/rigid_body_kinematics#rigid_bodies">Rigid bodies</a></li>
+        <li><a href = "/dyn/rigid_body_kinematics#constrained_motion">Constrained motion</a></li>
+      </CalloutCard>
+    </CalloutContainer>
+</Section>
+
+<SubSection title="Turning rigid bodies" id="turning_rigid_bodies">
+  <p>
+    When a rigid body turns in a circle, the four corners of the
+    body all move with different velocities and speeds. If we
+    think of a car as a single rigid body with wheels at the
+    corners, this means the four wheels move with different
+    speeds and also different directions. Car designers can
+    choose different steering arrangements, as shown below,
+    where the steering can be with the front two wheels only
+    (conventional cars), with the rear two wheels only
+    (forklifts), or with all four wheels in some
+    high-performance cars.
+  </p>
+
+  <PrairieDrawCanvas id="avs-ft-c" width="600" height="800">
+    <p class="controls">
+      <button class="anim-toggle:avs-ft-c" onclick="avs_ft_c.toggleAnim();">animation</button>
+      <button class="reset:avs-ft-c" onclick="avs_ft_c.reset();">reset</button>
+    </p>
+    <DisplayTable>
+      <tbody>
+        <tr>
+          <td style="border: 0px;">Show:</td>
+          <td style="border: 0px;" colspan="2">
+            <button class="option-toggle:avs-ft-c:showLabels" onclick="avs_ft_c.toggleOption('showLabels', this.value);">labels</button>
+            <button class="option-toggle:avs-ft-c:showCornerVelocities" onclick="avs_ft_c.toggleOption('showCornerVelocities', this.value);">corner velocities</button>
+            <button class="option-toggle:avs-ft-c:showRadialLines" onclick="avs_ft_c.toggleOption('showRadialLines', this.value);">radial lines</button>
+          </td>
+        </tr>
+      </tbody>
+      
+    </DisplayTable>
+
+    <Row> 
+      <Col values="12">
+          <div class="d-flex  align-items-baseline">
+              <p class="m-0 flex-shrink-1">Turn radius:</p>
+              <div class="flex-grow-1 d-flex align-items-baseline">
+                  <input type="range" min="1" max="5" value="5" step="0.1" class="data-input:avs-ft-c:radiusTurning flex-grow-1 mx-2" onchange="avs_ft_c.setOption('radius', this.value); document.querySelector('span[class*=radiusTurning]').innerText = this.value;;" oninput="avs_ft_c.setOption('radius', this.value); document.querySelector('span[class*=radiusTurning]').innerText = this.value;"/>
+                      \(r = \; \) <span class="data-option:avb-fp-c:radiusTurning">5</span>m
+              </div>
+          </div>
+      </Col>
+      <Col values="12">
+          <div class="d-flex  align-items-baseline">
+            <p class="m-0 flex-shrink-1">Vehicle offset:</p>
+              <div class="flex-grow-1 d-flex align-items-baseline">
+                  <input type="range" min="-100" max="100" value="0" step="1" class="data-input:avs-ft-c:vehicleoffset flex-grow-1 mx-2" onchange="avs_ft_c.setOption('offset', this.value); document.querySelector('span[class*=vehicleoffset]').innerText = this.value;" oninput="avs_ft_c.setOption('offset', this.value); document.querySelector('span[class*=vehicleoffset]').innerText = this.value;"/>
+                      \(d = \; \) <span class="data-option:avb-fp-c:vehicleoffset">0</span>%
+              </div>
+          </div>
+      </Col>
+  </Row>
+    <p class="figureCaption mt-2">
+      A car turning in a circle, showing the directions that the
+      wheels must point as the turn radius \(r\) and offset \(d\)
+      change.
+    </p>
+  </PrairieDrawCanvas>
+
+  <CalloutContainer slot="cards">
+    <CalloutCard>
+      <p>
+        <a
+        href="http://en.wikipedia.org/wiki/Forklift_truck">Forklifts</a>
+        typically have fixed front wheels and steer with the rear
+        wheels. This gives them great control over the position of
+        the front lifting forks, but makes steering harder for the
+        operator. Rear-wheel steering is a type of <i>non-minimum
+        phase</i> control system. The <a
+        href="http://en.wikipedia.org/wiki/Minimum_phase">technical
+        definition</a> of minimum phase is somewhat complicated,
+        but for vehicle steering it essentially means that we have
+        to steer the “wrong way”. For example, to turn right in a
+        forklift we have to first swing the back out to the
+        left. This makes it very easy to accidentally run into
+        obstacles, and is also unstable at higher speeds.
+      </p>
+
+      <Image src="/dyn/rigid_body_kinematics/avs_8116755483.jpg" alt="Forklift steering." width="8">
+        <p class="caption">
+          A Yale GLP-50VX forklift executing a sharp right-hand
+          turn. Image credit: <a
+          href="http://www.flickr.com/photos/asv_/8116755483/">Flickr
+          image</a> by <a
+          href="http://www.flickr.com/people/asv_/">Anastasia
+          Victor</a> (<a
+          href="http://creativecommons.org/licenses/by/2.0/">CC BY
+          2.0</a>) (<a href="avs_8116755483.jpg">full-sized
+          image</a>).
+        </p>
+      </Image>
+      <p>
+        Sometimes in cars it would be convenient to also steer
+        with the rear or trailing wheels, for example when trying
+        to park in a tight spot. We actually have a mechanism for
+        converting a car to trailing-wheel steering, which is to
+        drive backwards, such as when <a
+        href="http://en.wikipedia.org/wiki/Parallel_parking">parallel
+        parking</a>.
+      </p>
+    </CalloutCard>
+  </CalloutContainer>
+</SubSection>
+
+<SubSection title="Ackerman steering geometry"  id="ackerman_steering">
+  <p>
+    In a conventional car, the rear two wheels are fixed to
+    point straight ahead, while the front two wheels must turn
+    at different but matched angles. To achieve the correct
+    front wheel angles, cars typically use a four-bar linkage as
+    shown below. The pins at \(A\) and \(B\) are called
+    <em>kingpins</em> (normally actually ball joints in modern
+    cars), the \(CD\) rod is called the <em>tie rod</em>, and the
+    \(AD\) and \(BC\) rods are called <em>steering arms</em>. By
+    correctly choosing the lengths of the linkage rods, the car
+    steering will automatically produce nearly correctly matched
+    front wheel angles to make a perfect turn with any radius of
+    curvature.
+  </p>
+
+  <PrairieDrawCanvas id="avs-fr-c" width="600" height="800">
+    <p class="controls">
+      <button class="anim-toggle:avs-fr-c" onclick="avs_fr_c.toggleAnim();">animation</button>
+      <button class="option-toggle:avs-fr-c:showLabels" onclick="avs_fr_c.toggleOption('showLabels');">labels</button>
+      <button class="reset:avs-fr-c" onclick="avs_fr_c.reset();">reset</button>
+    </p>
+    <div class="w-100">
+      <div class="d-flex  align-items-baseline">
+        <p class="m-0 flex-shrink-1">Steering pivot offset angle:</p>
+          <div class="flex-grow-1 d-flex align-items-baseline">
+              <input type="range" min="-4" max="7" value="0" step="0.1" class="data-input:avs-fr-c:pivotAngleDeg flex-grow-1 mx-2" onchange="avs_fr_c.setOption('pivotAngleDeg', this.value); document.querySelector('span[class*=pivotAngleDegsteering]').innerText = this.value; console.log(this.value);" oninput="avs_fr_c.setOption('pivotAngleDeg', this.value); document.querySelector('span[class*=pivotAngleDegsteering]').innerText = this.value;"/>
+                  \(\theta = \; \) <span class="data-option:avb-fp-c:pivotAngleDegsteering">0</span>\(^\circ\)
+          </div>
+      </div>
+    </div>
+    <p class="figureCaption mt-2">
+      Adjustable Ackerman steering geometry. The graph shows the
+      radius of curvature for the two front wheels as a function
+      of the rack offset \(d\).
+    </p>
+  </PrairieDrawCanvas>
+
+  <CalloutContainer slot="cards">
+    <CalloutCard>
+      <p>
+            Three wheeled vehicles with two wheels in back and one in
+            front (a <em>delta</em> or <em>tricycle</em>
+            configuration) avoid the need for complicated steering
+            geometry, leading Karl Benz to use this system in the
+            world's <a
+            href="http://en.wikipedia.org/wiki/Benz_Patent_Motorwagen">first
+            automobile</a>.
+        </p>
+
+      <Image src="/dyn/rigid_body_kinematics/avs_Motorwagen_Serienversion_shaved_small.jpg" alt="Benz Patent-Motorwagen Nr. 3." width="8">
+        <p class="caption">
+          Benz Patent-Motorwagen Nr. 3 from 1888. Image credit:
+          <a
+          href="http://commons.wikimedia.org/wiki/File:Motorwagen_Serienversion.jpg">Wikimedia
+          Commons</a> (<a
+          href="http://creativecommons.org/licenses/publicdomain/">public
+          domain</a>) (<a
+          href="avs_Motorwagen_Serienversion.jpg">full-sized
+          image</a>).
+        </p>
+      </Image>
+      <p>
+        <a href="">Episode 4 of Season 9</a> of <a
+        href="http://en.wikipedia.org/wiki/Top_Gear_(2002_TV_series)">Top
+        Gear</a> featured a <a
+        href="http://www.youtube.com/watch?v=_bIn_ZgHJaE">segment</a>
+        on the <a
+        href="http://en.wikipedia.org/wiki/Reliant_Robin">Reliant
+        Robin</a>, a three-wheel car produced in the 1970s in the
+        United Kingdom. This Top Gear episode clearly demonstrates
+        some of the reasons that single-wheel steering systems for
+        cars have not achieved long-lasting commercial success.
+      </p>
+      <p>
+        <a
+        href="http://en.wikipedia.org/wiki/Three_wheeled_car">Three-wheeled
+        cars</a> were rather popular with British manufacturers in
+        the 1960s and 1970s. As well as single-wheel-in-front
+        models like the Reliant Robin, there were also production
+        cars with a single wheel in the back (a <em>tadpole</em>
+        configuration). An example of this is the smallest
+        production car ever made, the <a
+        href="http://en.wikipedia.org/wiki/Peel_P50">Peel 50</a>,
+        shown in another <a
+        href="http://www.youtube.com/watch?v=dJfSS0ZXYdo">Top Gear
+        episode</a> (Series 10, Episode 3).
+      </p>
+    </CalloutCard>
+  </CalloutContainer>
+</SubSection>
+
+  <div hidden>
+    <PrairieDrawCanvas id = "aml-fk-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "aml-fs-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "aml-fw-c" width = "1" height = "1"/>
+  </div>
+
+<script src="/dyn/rigid_body_kinematics/canvases.js" is:inline></script>
+</Layout>

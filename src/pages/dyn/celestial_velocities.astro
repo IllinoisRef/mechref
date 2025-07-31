@@ -1,0 +1,340 @@
+---
+import Layout from "../../layouts/Layout.astro" 
+import Image from "../../components/Image.astro" 
+import Section from "../../components/Section.astro" 
+import SubSection from "../../components/SubSection.astro" 
+import SubSubSection from "../../components/SubSubSection.astro" 
+import BlueText from "../../components/BlueText.astro" 
+import RedText from "../../components/RedText.astro" 
+import InlineEquation from "../../components/InlineEquation.astro"
+import DisplayEquation from "../../components/DisplayEquation.astro"
+import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import SubSubSubSection from "../../components/SubSubSubSection.astro"
+import DisplayEquationCustom from "../../components/DisplayEquationCustom.astro"
+import Enumerate from "../../components/Enumerate.astro" 
+import Item from "../../components/Item.astro" 
+import Itemize from "../../components/Itemize.astro"
+import Col from "../../components/Col.astro"
+import Row from "../../components/Row.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+import InlineCanvas from "../../components/InlineCanvas.astro"
+---
+
+
+<Layout title = "Celestial velocities" description = "Learn how particle kinematics applies to celestial velocities.">
+
+<div slot="navtree">
+  <ul class='list-group list-group-flush py-0'> 
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#periods_of_rotation'>Periods of rotation</a>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#solar_and_sidereal_time'>Solar and sidereal time</a>
+  </ul>
+</div>
+
+
+  <div hidden>
+    <PrairieDrawCanvas id = "rkv-fp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkv-fo-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkv-fa-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkv-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkr-fc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkr-fe-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkr-fg-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkt-fb-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkt-ft-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkt-fo-c" width = "1" height = "1"/>
+  </div>
+
+<Section title="Celestial velocities" id="celestial_velocities">
+
+    <p>
+      We normally think of our classroom or laboratory as being
+      stationary when we are doing dynamics. But how valid is this
+      assumption?
+    </p>
+    <p>
+      We will consider motion due to:
+    </p>
+    <Enumerate>
+      <Item>Spinning of the Earth about the North-South axis.</Item>
+      <Item>Orbit of the Earth about the Sun.</Item>
+      <Item>Rotation of the Sun around center the Milky Way.</Item>
+      <Item>Motion of the Milky Way through the universe.</Item>
+    </Enumerate>
+
+    <p>
+      As we will see below, some of these velocities are not
+      small. Why is normally valid to assume that we are in an
+      inertial reference frame?
+    </p>
+
+    <CalloutContainer slot="cards">
+<!--
+      <CalloutCard title="Reference material">
+        <Itemize margin="False">
+          <Item>Elementary motions</Item>
+        </Itemize>
+      </CalloutCard>
+-->
+      <CalloutCard title="Reference material">
+        <Itemize margin="False">
+          <Item>    
+<a href="/dyn/particle_kinematics#angular_velocity ">Angular velocity</a></Item>
+          <Item>    
+<a href="/dyn/particle_kinematics#angular_acceleration ">Angular acceleration</a></Item>
+        </Itemize>
+      </CalloutCard>
+    </CalloutContainer>
+</Section>
+
+<SubSection title="Periods of rotation" id = "periods_of_rotation">
+  <p>
+    The different types of motion have magnitudes roughly given
+    in the following table. These motions are not all in the
+    same direction, and may add to each other or act in opposite
+    or even orthogonal directions.
+  </p>
+
+  <DisplayTable id="periods_of_rotation_table" class_ = "table-sm">
+    <thead style="font-size: 1rem;">
+      <tr>
+        <th></th>
+        <th>Earth spin</th>
+        <th>Earth orbit</th>
+        <th>Milky Way</th>
+        <th>Through <a target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Cosmic_microwave_background">CMB</a></th>
+      </tr>
+    </thead>
+    <tbody style="font-size: 1rem;">
+    <tr>
+      <th rowspan="2">period \(T\)</th>
+      <td>\(24\rm\ h\)</td>
+      <td>\(365\rm\ d\)</td>
+      <td>\(200\rm\ My\)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>\(8.64 \times 10^4\rm\ s\)</td>
+      <td>\(3.16 \times 10^7\rm\ s\)</td>
+      <td><InlineEquation equation="6.31 \\times 10^{15}\\rm\\ s" /></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th rowspan="2">radius \(r\)</th>
+      <td>\(6370\rm\ km\)</td>
+      <td>\(1\rm\ AU\)</td>
+      <td>\(27.2\rm\ kly\)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>\(6.37 \times 10^6\rm\ m\)</td>
+      <td><InlineEquation equation="1.50 \\times 10^{11}\\rm\\ s" /></td>
+      <td><InlineEquation equation="2.57 \\times 10^{20}\\rm\\ s" /></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>ang. vel.</th>
+      <td>\(15.0^\circ/\rm h\)</td>
+      <td>\(0.986^\circ/\rm d\)</td>
+      <td>\(1.8^\circ/\rm My\)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>\(\omega = 2\pi/T\)</th>
+      <td><InlineEquation equation="7.27 \\times 10^{-5}\\rm\\ s" /></td>
+      <td><InlineEquation equation="1.99 \\times 10^{-7}\\rm\\ s" /></td>
+      <td><InlineEquation equation="9.97 \\times 10^{-16}\\rm\\ s" /></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>velocity</th>
+      <td>\(1670\rm\ km/h\)</td>
+      <td>\(107\,000\rm\ km/h\)</td>
+      <td>\(922\,000\rm\ km/h\)</td>
+      <td>\(1\,990\,000\rm\ km/h\)</td>
+    </tr>
+    <tr>
+      <th>\(v = r\omega\)</th>
+      <td>\(4.63 \times 10^2\rm\ m/s\)</td>
+      <td>\(2.98 \times 10^4\rm\ m/s\)</td>
+      <td>\(2.56 \times 10^5\rm\ m/s\)</td>
+      <td>\(5.52 \times 10^5\rm\ m/s\)</td>
+    </tr>
+    <tr>
+      <th>acceleration</th>
+      <td>\(0.343\%\ g\)</td>
+      <td>\(0.0605\%\ g\)</td>
+      <td><InlineEquation equation="2.60 \\times 10^{-9} \%\ g" /></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>\(a = r\omega^2\)</th>
+      <td><InlineEquation equation="3.37 \\times 10^{-2}\\rm\\ m/s^2" /></td>
+      <td><InlineEquation equation="5.93 \\times 10^{-3}\\rm\\ m/s^2" /></td>
+      <td><InlineEquation equation="2.55 \\times 10^{-10}\\rm\\ m/s^2" /></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </DisplayTable>
+
+  <CalloutContainer slot="cards">
+    <CalloutCard>
+      <p>
+        The first people to have a rough idea of the radius of the
+        Earth and the distance to the Sun were the ancient
+        Greeks. <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Eratosthenes">Eratosthenes</a>
+        (276–195 BCE) computed the radius of the Earth to be
+        40 000 <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Stadion_(unit_of_length)">stadia</a>
+        (6800 km) by measuring the difference in Sun angle between
+        <a target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Aswan">Aswan</a> and
+        <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Alexandria">Alexandria</a>.
+      </p>
+      <p class="mb-0">
+        <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Aristarchus_of_Samos">Aristarchus
+        of Samos</a> (310–230 BCE) obtained the <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Aristarchus_On_the_Sizes_and_Distances">first
+        estimates</a> of the distance to the Sun by using
+        observations of lunar eclipses and solar <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Parallax">parallax</a>. While
+        his method was in principle correct, poor observational
+        data meant that his computed Earth-Sun distance was quite
+        inaccurate.
+      </p>
+    </CalloutCard>
+  </CalloutContainer>
+</SubSection>
+
+<SubSection title="Solar and sidereal time" id = "solar_and_sidereal_time">
+  <p>
+    We all know that one day is 24 hours long. But the period of
+    the Earth's rotation is not 24 hours! This is because of the
+    difference between <i>solar time</i> and <i>sidereal
+    time</i>. Solar time is the time measured against the Sun,
+    as we normally do. Sidereal time is measured against the
+    stars, which is slightly different.
+  </p>
+
+  <PrairieDrawCanvas id="aov-fe-c" width="600" height="600">
+    <button class="anim-toggle:aov-fe-c" onclick="aov_fe_c.toggleAnim()">animate</button>
+    <button class="reset:aov-fe-c" onclick="aov_fe_c.reset()">reset</button>
+    <p class="figureCaption mt-3">
+      Schematic of the Earth's rotation about its own axis and
+      about the sun, counting solar days and sidereal days. Here
+      the Earth has just 8 solar days per year for better
+      visualization.
+    </p>
+  </PrairieDrawCanvas>
+
+  <p>
+    As we can see above, the Earth rotates one more sidereal day
+    each year than solar days. This means:
+  </p>
+  <p>
+    <DisplayEquation equation="\\text{1 solar year} = \\text{365 solar days}= \\text{366 sidereal days}" />
+  </p>
+  <p>
+    and so:
+  </p>
+  <p>
+    <DisplayEquation equation="\\begin{aligned}\\text{sidereal day} &amp;= \\frac{365}{366}\\ \\text{solar day} \\\\&amp;= \\frac{365}{366} \\times 24\\ {\\rm h} \\\\&amp;= 23.93{\\rm\\ h} \\\\&amp;= 23{\\rm\\ h}\\ 56{\\rm\\ min}\\end{aligned}" /> 
+  </p>
+  <p>
+    The Earth's orbital angular velocity is thus actually
+    <InlineEquation equation="\\omega = 360^\\circ / (23.93{\\rm\\ h}) = 15.04^\\circ/\\rm h" />.
+  </p>
+  <p>
+    The relationship between solar and sidereal days can also be
+    computed by considering just a single day, as shown
+    below.
+  </p>
+
+  <PrairieDrawCanvas id="aov-fd-c" width="600" height="600">
+    <p class="figureCaption">
+      Diagram of one solar day and one sidereal day for the
+      Earth, not drawn to scale. The fact that <InlineEquation equation="\\omega_{\\rm E}" />
+      and <InlineEquation equation="\\omega_{\\rm S}" /> are in the same direction means that
+      sidereal days are shorter than solar days (this is <a
+      target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Nebular_hypothesis">not
+      a coincidence</a>).
+    </p>
+  </PrairieDrawCanvas>
+
+  <p>
+    Just as for the definition of a day, there is a similar
+    distinction between the <em>synodic lunar month</em>, which
+    is the time between passes of the Moon between the Earth and
+    the Sun, and the <em>sidereal lunar month</em>, which is the
+    orbital period of the Moon in an inertial frame. In common
+    usage, the phrase <em>lunar month</em> refers to the synodic
+    month.
+  </p>
+
+  <CalloutContainer slot="cards">
+    <CalloutCard>
+      <p>
+        Just as sidereal days and solar days are different, the
+        exact length of one year depends on how we define it. The
+        <em>sidereal year</em> is the time for the Earth to
+        complete one orbit relative to the fixed stars, and has
+        length 365.256363 solar days. The <em>tropical year</em>
+        is the time for the Earth to return to the same point in
+        the seasons, which varies around a value of about
+        365.242189 solar days (about 20 minutes shorter than the
+        sidereal year). These years are different because of the
+        <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Axial_precession">axial
+        precession</a> of the Earth.
+      </p>
+      <p class=mb-0>
+        In common usage the word “year” refers to the tropical
+        year, as the seasons have historically been more important
+        for people than the motion of the stars. Observe that:
+      </p>
+        <div style="font-size: 1rem;">
+          <DisplayEquation equation="365.242 \\approx 365 + \\frac{1}{4} - \\frac{1}{100} + \\frac{1}{400}" />
+        </div>
+        
+      <p>
+        This is why leap years in our <a
+        target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Gregorian_calendar">Gregorian
+        calendar</a> add an extra day every 4 years, unless the
+        year is a whole century, except every 400 years. If our
+        calendar used sidereal years instead of tropical, the fact
+        that 365.256363 is slightly larger than 365.25 would mean
+        that about every 200 years we would need to have a double
+        leap year, when there would be two extra days (February
+        30?).
+      </p>
+      <p class="mb-0">
+        While leap years occur because the year is not an exact
+        integer number of days, a similar problem is caused by the
+        fact that the solar day is not exactly 24 × 60 × 60
+        seconds. The length of the day actually varies somewhat
+        unpredictably due to tidal friction as well as climactic
+        and geologic events such as glacier formation and mass
+        redistribution in the mantle, both of which change the
+        Earth's moment of inertia. To correct for these variations
+        a <a target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Leap_second">leap
+        second</a> is occasionally added, in which the last minute
+        of the day has 61 seconds.
+      </p>
+    </CalloutCard>
+  </CalloutContainer>
+</SubSection>
+    
+  <div hidden>
+    <PrairieDrawCanvas id = "avt-fc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avt-fe-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avt-ee-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avt-fs-c" width = "1" height = "1"/>
+  </div>
+
+</Layout>
+
+<script src="/dyn/particle_kinematics/canvases.js" is:inline></script>

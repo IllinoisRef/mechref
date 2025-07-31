@@ -1,0 +1,301 @@
+---
+import Layout from "../../layouts/Layout.astro" 
+import Image from "../../components/Image.astro" 
+import Section from "../../components/Section.astro" 
+import SubSection from "../../components/SubSection.astro" 
+import SubSubSection from "../../components/SubSubSection.astro" 
+import SubSubSubSection from "../../components/SubSubSubSection.astro" 
+import BlueText from "../../components/BlueText.astro" 
+import RedText from "../../components/RedText.astro" 
+import InlineEquation from "../../components/InlineEquation.astro"
+import DisplayEquation from "../../components/DisplayEquation.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import Center from "../../components/Center.astro"
+import Example from "../../components/Example.astro"
+import Itemize from "../../components/Itemize.astro"
+import Item from "../../components/Item.astro"
+import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import Row from "../../components/Row.astro"
+import Col from "../../components/Col.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+---
+<Layout title = "Projectiles with air resistance" description = "Learn how particle kinetics applies to projectiles with air resistance.">
+
+<div slot="navtree">
+  <ul class='list-group list-group-flush py-0'> 
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#drag_forces_and_drag_coefficients'>Drag forces and drag coefficients</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#drag_coefficients'>Drag coefficients as a function of Reynolds number</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#quadratic_drag_model'>Quadratic drag model</a></li>
+</ul>
+</div>
+
+
+  <div hidden>
+    <PrairieDrawCanvas id = "rep-ff-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rep-xl-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rep-xl-f" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "ava-fp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avb-fg-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avb-fp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avb-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avb-fb-c" width = "1" height = "1"/>
+  </div>
+
+
+<Section title="Projectiles with air resistance" id = "projectiles_air_resistance">
+
+    <p>
+        Consider a spherical object, such as a baseball, moving
+        through the air.  The motion of an object though a fluid is
+        one of the most complex problems in all of science, and it
+        is still not completely understood to this day.  One of the
+        reasons this problem is so challenging is that, in general,
+        there are many different forces acting on such objects,
+        including:
+      </p>
+    <Itemize>
+        <Item>gravity</Item>
+        <Item>drag</Item>
+        <Item>lift</Item>
+        <Item>thrust</Item>
+        <Item>buoyancy</Item>
+        <Item>bulk fluid motion, such as wind</Item>
+        <Item>inertial forces, such as the centrifugal and Coriolis forces</Item>
+    </Itemize>
+
+    <p>
+        In most introductory physics and dynamics courses, gravity
+        is the only force that is accounted for (this is equivalent
+        to assuming that the motion takes place in a vacuum).  Here
+        we will consider realistic and accurate models of air
+        resistance that are used to model the motion of projectiles
+        like baseballs.
+      </p>
+
+    <Image src="/dyn/particle_kinetics/baseball_field.jpg" width="8">
+        <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Wrigley_Field">
+        Wrigley
+        Field</a> in Chicago, Illinois is the home of
+        the <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Chicago_Cubs">Chicago
+        Cubs</a> baseball team. In baseball, an “out of the
+        park” <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Home_run">home
+        run</a> is scored when the ball is hit beyond the
+        green <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Outfield">outfield</a>
+        (past the
+        yellow <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Baseball_field#Foul_poles">foul
+        pole</a> at the left of the above image).  Image
+        source: <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://www.flickr.com/photos/jbash/1023071278">Flickr
+        image</a>
+        by <a target="_blank" rel="noopener noreferrer" href="http://www.flickr.com/photos/jbash/">Mike
+        Bash</a> (<a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-nd/2.0/">CC
+        BY NC ND 2.0</a>)
+        (<a href="/public/dyn/particle_kinetics/baseball_field_full.jpg">full-sized
+        image</a>).
+    </Image>
+  <CalloutContainer slot = "cards">
+    <CalloutCard title = "Reference material">
+      <p>
+        This application uses <a href = "/dyn/particle_kinetics">particle kinetics.</a>
+      </p>
+    </CalloutCard>
+  </CalloutContainer>
+</Section> 
+
+<SubSection title="Drag forces and drag coefficients" id = "drag_forces_and_drag_coefficients">
+    <p>
+        The <em>drag force</em> is always directly opposed to the velocity of
+        the object.  In vector notation,
+
+        <DisplayEquation equation="\\vec{F}_{\\rm D} = -F_{\\rm D} \\hat{v}," />
+
+        where <InlineEquation equation="F_{\\rm D}" /> is the magnitude of the drag force, and
+        <InlineEquation equation="\\hat{v}" /> is the unit vector in the direction of the
+        object's velocity.
+      </p>
+
+      <PrairieDrawCanvas id="afp-ff-c" width="600" height="600">
+        <Row> 
+            <Col values="12">
+                <div class="d-flex align-items-baseline mb-2">
+                    <p class="m-0 flex-shrink-1">Velocity angle from horizontal:</p>
+                    <div class="flex-grow-1 d-flex align-items-baseline">
+                        <input type="range" min="-180" max="180" value="30" class="data-option:afp-ff-c:vAngleDeg flex-grow-1 mx-2" onchange="afp_ff_c.setOption('vAngleDeg', this.value); document.querySelector('span[class*=vAngleDeg]').innerText = this.value; console.log(this.value);" oninput="afp_ff_c.setOption('vAngleDeg', this.value); document.querySelector('span[class*=vAngleDeg]').innerText = this.value;"/>
+                            \(\theta = \; \) <span class="data-option:avb-fp-c:vAngleDeg">30</span>\(^\circ\)
+                    </div>
+                </div>
+            </Col>
+        </Row>
+        <small>
+            <em><p class="figureCaption">
+                The free body diagram for a baseball subject to gravity
+                and air resistance. Observe that the drag due to air
+                resistance is always in the opposite direction to the
+                velocity. Image credit: Microsoft clip art.
+              </p></em>
+        </small>
+        
+      </PrairieDrawCanvas>
+
+
+      
+      <p>
+        The magnitude of the drag force is
+        characterized by the dimensionless <em>drag coefficient</em>
+        <InlineEquation equation="C_{\\rm D}"  />, given by
+
+        <DisplayEquation equation="C_{\\rm D} = \\frac{F_{\\rm D}}{\\frac{1}{2} \\rho A v^2}," />
+
+
+        where <InlineEquation equation="\\rho" /> is the density of the fluid (in this case,
+        air), <InlineEquation equation="A=(1/4)\\pi D^{2}" /> is the cross-sectional area of the object, and <InlineEquation equation="v" />        is the object's speed.
+      </p>
+
+      
+</SubSection>
+
+<SubSection title="Drag coefficients as a function of Reynolds number"  id="drag_coefficients">
+    
+    <p>
+        A dimensionless parameter that is very useful in fluid
+        dynamics is the Reynolds number, which is defined as
+
+        <DisplayEquation equation="{\\rm Re} = \\frac{\\rho v L}{\\mu}," />
+
+        where <InlineEquation equation="L" /> is a characteristic length for the flow (in this
+        case, the diameter <InlineEquation equation="D" /> of the ball), and <InlineEquation equation="\\mu" /> is the
+        dynamic viscosity of the fluid.  The Reynolds number gives a
+        ratio between inertial forces and viscous forces in a fluid
+        flow.  For very small Reynolds numbers, the viscous forces
+        are much stronger than the inertial forces (think of trying
+        to stir a cup of honey).  For very large Reynolds numbers,
+        the viscous forces are negligible, and we refer to the flow
+        as <em>inviscid</em> (think of stirring a cup of coffee).
+      </p>
+      <p>
+        An important result in fluid dynamics is that the drag
+        coefficient is a function only of the Reynolds number of the
+        fluid flow about the object.  That is,
+  
+        <DisplayEquation equation="C_{\\rm D} = C_{\\rm D}({\\rm Re})." />
+
+        This functional relationship has no closed form.  However,
+        the relationship has been established numerically based on
+        experimental data.  See <a href="#fig6">Figure #aft-fd</a>
+        for a schematic diagram of the drag coefficient's dependence
+        on the Reynolds number.</p>
+        
+        <Image id="aft-fd" src="/dyn/particle_kinetics/drag_coefficient.png" width="8">
+          <p>
+             Experimental dependence of drag coefficient on Reynolds
+             number for a sphere. Image
+             credit: <a target="_blank" rel="noopener noreferrer" href="http://www.grc.nasa.gov/WWW/k-12/airplane/dragsphere.html">NASA</a>
+             via <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Stokes_number#/media/File:Drag_sphere_nasa.svg">Wikipedia</a>.
+           </p>
+        </Image>
+
+</SubSection>
+
+<SubSection title="Quadratic drag model" id = "quadratic_drag_model">
+
+    <p>
+        Notice from <a href="#aft-fd">Figure #aft-fd</a> that there
+        is a range of Reynolds numbers (<InlineEquation equation="10^3 < {\\rm Re} < 10^5" />),
+        characteristic of macroscopic projectiles, for which the
+        drag coefficient is approximately constant at about 1/2 (see
+        the part of the curve labeled “4”
+        in <a href="#aft-fd">
+          Figure #aft-fd</a>).  That the drag 
+    coefficient is constant means that,
+        within this region, the magnitude of the drag force is
+        proportional to the square of the object’s speed.
+    Substituting <InlineEquation equation="C_{\\rm D}=1/2"/> into the definition of <InlineEquation equation="C_{D}" /> above,
+        we obtain
+
+        <DisplayEquation equation="F_{\\rm D} = \\frac{1}{4} \\rho A v^2 = c v^2,"/>
+      
+    where we have defined the <em>quadratic drag parameter</em> \(c\) as
+
+        <DisplayEquation equation="c = \\frac{1}{4} \\rho A = \\frac{\\pi}{16} \\rho D^2," />
+
+        which is a constant for a given projectile. This is referred to as <em>quadratic
+        drag</em>, because the drag force magnitude is proportional
+        to the <em>square</em> of the speed.
+    Using this result, we can write the drag force vector as
+      
+        <DisplayEquation equation="\\vec{F}_{\\rm D} = - c v^2 \\hat{v}." />
+        
+      <p>
+      <p>
+        In the presence of gravity and quadratic drag alone, the net
+        force on an object is given by
+
+        <DisplayEquation equation="\\sum \\vec{F} = m \\vec{g} - c v^2 \\hat{v}," />
+        
+
+        where <InlineEquation equation="m" /> is the mass of the object and <InlineEquation equation="\\vec{g}" /> is the
+        local acceleration due to gravity. Below is an interactive
+        graphic showing the trajectory of an object with gravity and
+        quadratic drag.  You can change the various parameters to
+        see their effects on the object’s motion.
+      </p>
+
+    <PrairieDrawCanvas id="afp-ft-c" width="600" height="600">
+      <Row>
+        <Col values="12">
+          <div class="d-flex align-items-baseline">
+            <p class="m-0 flex-shrink-1">Initial speed:</p>
+            <div class="flex-grow-1 d-flex align-items-baseline">
+              <input type="range" min="0" max="55" value="30" step="1" class="data-input:afp-ft-c:v0 flex-grow-1 mx-2" onchange="afp_ft_c.setOption('v0', this.value); document.querySelector('span[class*=v0baseball]').innerText = this.value;" oninput="afp_ft_c.setOption('v0', this.value); document.querySelector('span[class*=v0baseball]').innerText = this.value;"/>
+              \(v_0 = \;\) <span class="data-option:afp-ft-c:v0baseball">30</span> m/s
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Col values="12">
+        <div class="d-flex align-items-baseline">
+          <p class="m-0 flex-shrink-1">Initial angle:</p>
+          <div class="flex-grow-1 d-flex align-items-baseline">
+            <input type="range" min="0" max="90" value="45" step="1" class="data-input:afp-ft-c:v0AngleDeg flex-grow-1 mx-2" onchange="afp_ft_c.setOption('v0AngleDeg', this.value); document.querySelector('span[class*=v0AngleDegbaseball]').innerText = this.value;" oninput="afp_ft_c.setOption('v0AngleDeg', this.value); document.querySelector('span[class*=v0AngleDegbaseball]').innerText = this.value;"/>
+            \(\theta_0 = \;\) <span class="data-option:afp-ft-c:v0AngleDegbaseball">45</span>°
+          </div>
+        </div>
+      </Col>
+      <Col values="12">
+        <div class="d-flex align-items-baseline">
+          <p class="m-0 flex-shrink-1">Mass:</p>
+          <div class="flex-grow-1 d-flex align-items-baseline">
+            <input type="range" min="5" max="300" value="135" step="5" class="data-input:afp-ft-c:m_g flex-grow-1 mx-2" onchange="afp_ft_c.setOption('m_g', this.value); document.querySelector('span[class*=m_gbaseball]').innerText = this.value;" oninput="afp_ft_c.setOption('m_g', this.value); document.querySelector('span[class*=m_gbaseball]').innerText = this.value;"/>
+            \(m = \;\) <span class="data-option:afp-ft-c:m_gbaseball">135</span> g
+          </div>
+        </div>
+      </Col>
+      <Col values="12">
+        <div class="d-flex align-items-baseline">
+          <p class="m-0 flex-shrink-1">Diameter:</p>
+          <div class="flex-grow-1 d-flex align-items-baseline">
+            <input type="range" min="1" max="20" value="7.5" step="0.1" class="data-input:afp-ft-c:D_cm flex-grow-1 mx-2" onchange="afp_ft_c.setOption('D_cm', this.value); document.querySelector('span[class*=D_cmbaseball]').innerText = this.value;" oninput="afp_ft_c.setOption('D_cm', this.value); document.querySelector('span[class*=D_cmbaseball]').innerText = this.value;"/>
+            \(D = \;\) <span class="data-option:afp-ft-c:D_cmbaseball">7.5</span> cm
+          </div>
+        </div>
+      </Col>
+    </PrairieDrawCanvas>
+
+    <CalloutContainer slot="cards">
+        <CalloutCard>
+            <p>
+                There is no well-measured record for longest
+                baseball <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Home_run">home
+                run</a>. It is claimed
+                that <a target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Mickey_Mantle">Mickey
+                Mantle</a> hit a ball 643 feet (196 m), although this
+                apparently included rolling on the ground. Other power
+                hits by Mantle are reliably measured to be over 500 feet
+                (152 m).
+              </p>
+        </CalloutCard>
+    </CalloutContainer>
+</SubSection>
+</Layout>
+
+<script src="/dyn/particle_kinetics/canvases.js" is:inline></script>

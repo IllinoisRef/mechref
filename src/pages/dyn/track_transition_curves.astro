@@ -1,0 +1,405 @@
+---
+import Layout from "../../layouts/Layout.astro" 
+import Image from "../../components/Image.astro" 
+import Section from "../../components/Section.astro" 
+import SubSection from "../../components/SubSection.astro" 
+import SubSubSection from "../../components/SubSubSection.astro" 
+import BlueText from "../../components/BlueText.astro" 
+import RedText from "../../components/RedText.astro" 
+import InlineEquation from "../../components/InlineEquation.astro"
+import DisplayEquation from "../../components/DisplayEquation.astro"
+import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import SubSubSubSection from "../../components/SubSubSubSection.astro"
+import DisplayEquationCustom from "../../components/DisplayEquationCustom.astro"
+import Enumerate from "../../components/Enumerate.astro" 
+import Item from "../../components/Item.astro" 
+import Itemize from "../../components/Itemize.astro"
+import Col from "../../components/Col.astro"
+import Row from "../../components/Row.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+import InlineCanvas from "../../components/InlineCanvas.astro"
+---
+
+
+<Layout title = "Track transition curves" description = "Learn how particle kinematics applies to track transition curves.">
+
+<div slot="navtree">
+  <ul class='list-group list-group-flush py-0'> 
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#circular_arc_trans_curves'>Circular arcs for transition curves</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#smooth_transition_euler_spirals'>Smooth transition curves with Euler spirals</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#euler_spiral_equation'>Euler spiral equation</a></li>
+  </ul>
+</div>
+
+
+  <div hidden>
+    <PrairieDrawCanvas id = "rkv-fp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkv-fo-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkv-fa-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkv-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkr-fc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkr-fe-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkr-fg-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkt-fb-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkt-ft-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkt-fo-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "aov-fe-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "aov-fd-c" width = "1" height = "1"/>
+  </div>
+
+<Section title="Track transition curves" id="track_transition_curves">
+    
+    <p>
+      For passengers in a car or train, traveling in a straight
+      line at constant speed is the most comfortable motion, as
+      there is no acceleration. Roads or rail lines with only
+      straight lines are rather limiting, however, so we
+      frequently encounter curves, in the most extreme form in
+      large freeway interchanges such as <a href="#avt-ff">shown
+      below</a>.
+    </p>
+    <p>
+      When designing a freeway interchange, one of the most basic
+      questions just what shape the <em>transition curves</em>
+      between the straight-line roads should have. Other
+      considerations then follow, such as stacking the roads above
+      each other and <a href="particle_kinetics#banked_turns">banking</a> the angle of
+      the roads.
+    </p>
+    <p>
+      The difficultly in designing curves in roads arises from the
+      need to have a smooth ride for the passengers in the
+      vehicles as they traverse the curves at high speed. In
+      particular, we do not want to have sudden changes in
+      acceleration for the passengers.
+    </p>
+
+    <Image src="/dyn/particle_kinematics/highway.jpg" width="5">
+      <p class="figureCaption">
+        Aerial view of the <a
+        href="http://en.wikipedia.org/wiki/High_Five_Interchange">High
+        Five</a> multi-level <a
+        href="http://en.wikipedia.org/wiki/Stack_interchange">stack
+        interchange</a> between I-635 and US 75 in Dallas, Texas,
+        taken with a <a
+        href="http://en.wikipedia.org/wiki/Kite_aerial_photography">camera
+        suspended from a kite line</a>.  Image source: <a
+        href="http://www.fotopedia.com/items/flickr-6159432119">Fotopedia
+        image</a>, from the <a
+        href="http://www.flickr.com/photos/attawayjl/6159432119/">flikr
+        image </a> by <a
+        href="http://www.flickr.com/photos/attawayjl/">Jett
+        Attaway</a> <a
+        href="http://creativecommons.org/licenses/by/2.0/">(CC BY
+        2.0)</a> (<a href="avt_6159432119.jpg">full-sized
+        image</a>).
+      </p>
+    </Image>
+
+    <CalloutContainer slot="cards">
+      <CalloutCard title="Reference material">
+        <ul>
+          <li><a href="/dyn/particle_kinematics#velocity_acceleration_vectors">Position, velocity, and acceleration</a></li>
+          <li><a href="/dyn/particle_kinematics#tangential_normal_basis">Tangential/normal coordinates</a></li>
+        </ul>
+      </CalloutCard>
+    </CalloutContainer>
+    
+</Section>
+
+<SubSection title="Circular arcs for transition curves" id="circular_arc_trans_curves">
+  <p>
+    To understand the issues with transition curve design, we
+    will consider a simple oval track with two straight segments
+    joined by curves at both ends. The simplest curve shapes are
+    semi-circles (half-circles), as shown
+    below.
+  </p>
+  <a id="rvt-fc"></a>
+  <PrairieDrawCanvas id="avt-fc-c" width="600" height="600">
+    <p class="controls">
+      <button class="anim-toggle:avt-fc-c" onclick="avt_fc_c.toggleAnim()">animate</button>
+    </p>
+    <p class="figureCaption">
+      Car driving at constant speed around a track with straight line
+      segments joined to perfect semi-circle ends. The graph at
+      the bottom shows the acceleration magnitude versus
+      time. Note the sudden jump in acceleration magnitude when
+      the car switches from a straight line to the curve.
+    </p>
+  </PrairieDrawCanvas>
+
+  <p>
+    If we <button class="anim-toggle:avt-fc-c" onclick="avt_fc_c.toggleAnim()">animate</button>
+    the car driving around the track with semi-circle ends, then
+    we see that there is zero acceleration on the straight
+    segments, but on the semi-circular transition curves the
+    acceleration is inwards with magnitude <InlineEquation equation="v^2 / \\rho" />, where
+    <InlineEquation equation="\\rho" /> is the radius of curvature. A passenger would thus
+    feel no acceleration on the straight segments, but then
+    would suddenly feel a large sideways acceleration as the
+    vehicle switches to the semi-circles, which would be very
+    uncomfortable and potentially dangerous.
+  </p>
+  <p>
+    For passenger comfort, we do not want rapid changes in
+    acceleration for transition curves. That is, we want a low
+    value for the derivative of acceleration with respect to
+    time. The derivative of acceleration is known as
+    <em>jerk</em>, defined by <InlineEquation equation="\\vec{\\jmath} = \\dot{\\vec{a}}" />
+    (for vectors) or <InlineEquation equation="j = \\dot{a} " /> (for scalars). With perfect
+    semi-circular ends we see that the jerk is mathematically
+    infinite at the transition to the curve, although in reality
+    it would just be a very high value as the vehicle would not
+    transition to the semi-circle instantaneously.
+  </p>
+
+  <CalloutContainer slot="cards">
+    <CalloutCard title="Reference material">
+      <p>
+        While the terms <em>velocity</em> and
+        <em>acceleration</em> are standard for the 1st and 2nd
+        derivatives of position, the names for higher derivatives
+        are not so well-established. While <a
+        href="http://en.wikipedia.org/wiki/Jerk_(physics)">jerk</a>
+        is often used for the derivative of acceleration (so the
+        3rd derivative of position), the terms <em>jolt</em>,
+        <em>surge</em>, and <em>lurch</em> are also sometimes
+        encountered for this quantity. The derivative of jerk is
+        sometimes called <a
+        href="http://en.wikipedia.org/wiki/Jounce">jounce</a> (so
+        it is the 4th derivative of position). <a
+        href="http://dx.doi.org/10.1088/0264-9381/21/11/006">Another
+        suggestion</a> is to refer to the 4th, 5th, and 6th
+        derivatives of position as <em>snap</em>,
+        <em>crackle</em>, and <em>pop</em>, respectively.
+      </p>
+      <p>
+        Jerk and snap have many applications in engineering and
+        science. For example, jerk and snap have both been used to
+        measure human movement smoothness and diagnose stroke
+        patients (Rohrer et al., 2002) while minimizing snap is
+        often used as a design principle for quadcopter control
+        schemes (Mellinger and Kumar, 2011).
+      </p>
+      <p>
+        Changing accelerations (causing jerk) must result from
+        changing forces, due to Newton's second law. Although the
+        terminology is also somewhat loose in this case, the
+        derivative of force with respect to time is often referred
+        to as <a
+        href="http://en.wikipedia.org/wiki/Yank_(physics)">yank</a>,
+        and the derivative of yank is called <a
+        href="http://en.wikipedia.org/wiki/Tug_(physics)">tug</a>
+        (the second derivative of force). Third derivatives and
+        higher of force are very rarely encountered, and do not
+        seem to have any names in common usage.
+      </p>
+      <div class="references">
+        <h5 class="fw-bold">References</h5>
+        <ul class="references">
+          <li>
+            D. Mellinger and V. Kumar,
+            Minimum snap trajectory generation and control for quadrotors,
+            in <i>2011 IEEE International Conference on Robotics and Automation (ICRA)</i>,
+                2520–2525, 2011. DOI: <a href="http://dx.doi.org/10.1109/ICRA.2011.5980409">10.1109/ICRA.2011.5980409</a>
+          </li>
+          <li>
+            B. Rohrer, S. Fasoli, H. I. Krebs, R. Hughes, B. Volpe, W. R. Frontera, J. Stein, and N. Hogan,
+            Movement Smoothness Changes during Stroke Recovery,
+            <i>The Journal of Neuroscience</i>, 22(18): 8297–8304, 2002.
+                <a href="http://www.jneurosci.org/content/22/18/8297.abstract">Link.</a>
+          </li>
+        </ul>
+      </div>
+    </CalloutCard>
+  </CalloutContainer>
+</SubSection>
+
+<SubSection title="Smooth transition curves with Euler spirals" id="smooth_transition_euler_spirals">
+
+  <p>
+    Unlike the sudden switch <a href="#rvt-fc">shown above</a>
+    from a straight line segment (no curvature) to a curved
+    transition curve, we would prefer to have a more gradual
+    transition. An example of this is <a href="#rvt-fe">shown
+    below</a> with the right-hand transition curves changed to
+    use <em>Euler spiral</em> segments, which start curving
+    gradually and then increase the curvature the further the
+    vehicle moves around the curve, before reversing the process
+    on the second half of the curve. Euler spirals are one of
+    the common types of <a
+    href="http://en.wikipedia.org/wiki/Track_transition_curve">track
+    transition curves</a> and are special because the curvature
+    varies linearly along the curve.
+  </p>
+  <a id="rvt-fe"></a>
+  <PrairieDrawCanvas id="avt-fe-c" width="600" height="600">
+    <p class="controls">
+      <button class="anim-toggle:avt-fe-c" onclick="avt_fe_c.toggleAnim()">animate</button>
+    </p>
+    <p class="figureCaption">
+      Car driving at constant speed around a track with perfect straight line
+      segments joined to Euler-spiral segments on the right-hand
+      curve and a semi-circle on the left-hand curve. The red
+      curve is a perfect semi-circle for comparison. Note the
+      continuous transition in acceleration when the car
+      switches from a straight line to the left-hand curve.
+    </p>
+    
+  </PrairieDrawCanvas>
+
+  <p>
+    If we <button class="anim-toggle:avt-fe-c" onclick="avt_fe_c.toggleAnim()">animate</button>
+    the motion around the track with Euler spiral transitions,
+    then we can see from the acceleration magnitude plot that
+    the acceleration does not suddenly jump as the vehicle moves
+    around the right-hand curve. Instead it steadily increases
+    to a maximum value, before decreasing again to zero.  The
+    peak acceleration needed on the Euler spiral transitions is
+    somewhat higher than on the semi-circle transitions, but we
+    have avoided the sudden jerk associated with switching from
+    straight line to circular motion.
+  </p>
+
+  <CalloutContainer slot="cards">
+    <CalloutCard title="Reference material">
+      <p>
+        The equation for a spiral with linear curvature variation
+        was first derived by the Swiss mathematician <a
+        href="http://en.wikipedia.org/wiki/Leonhard_Euler">Leonard
+        Euler</a> in 1744, hence the name <em>Euler spiral</em>
+        for this curve. The spiral was then independently
+        rediscovered in the late 1800s by civil engineers who were
+        unaware of Euler's work and who named the resulting spiral
+        the <em>clothoid</em>, which is still a commonly used name
+        in traffic engineering. This spiral also arises in the
+        study of near-field diffraction in optics, as developed by
+        the French engineer <a
+        href="http://en.wikipedia.org/wiki/Augustin-Jean_Fresnel">Augustin-Jean
+        Fresnel</a> and the French physicist <a
+        href="http://en.wikipedia.org/wiki/Marie_Alfred_Cornu">Alfred
+        Cornu</a>, for which reason the spiral is also sometimes
+        called the <em>Cornu spiral</em>.
+      </p>
+    </CalloutCard>
+  </CalloutContainer>
+</SubSection>
+
+<SubSection title="Euler spiral equation" id="euler_spiral_equation">
+  <p>
+    An <em>Euler spiral</em> is a curve for which the
+    acceleration magnitude increases at a constant rate as we
+    travel along the curve at uniform velocity. Another way to
+    say this is that the curvature is a linear function of the
+    distance along the curve. To see that this is the same
+    thing, we write the acceleration in a <a
+    href="rvt.html">tangential/normal basis</a> as  For <DisplayEquation equation=" \\vec{a} =    \\ddot{s} \\, \\hat{e}_t + \\kappa v^2 \\, \\hat{e}_n. " />
+    constant-speed motion with speed \(v\), the distance along the
+    curve satisfies <InlineEquation equation=" \\dot{s} = v = \\text{constant}" />, so
+    <InlineEquation equation="\\ddot{s} = 0" />. The acceleration vector thus only has a
+    normal component, and this has magnitude proportional to the
+    curvature <InlineEquation equation="\\kappa = 1/\\rho" />, where <InlineEquation equation="\\rho" /> is the radius of
+    curvature. To have the acceleration increasing linearly
+    along the curve, we thus want the curvature to be a linear
+    function of distance, so <InlineEquation equation="\\kappa = \\alpha s" /> for some
+    constant <InlineEquation equation="\\alpha" />.
+  </p>
+  <p>
+    While specifying that <InlineEquation equation="\\kappa = \\alpha s" /> is enough to
+    define the shape of the Euler spiral curve, finding the
+    explicit equation for the curve is not so easy. We first
+    introduce the functions \(C(z)\) and \(S(z)\), known as <em>Fresnel
+    integrals</em> and defined by:
+  </p>
+
+  <DisplayEquation id="avt-ef" title="Fresnel integrals" background="True" equation="\\begin{aligned}C(z) &amp;= \\int_0^z \\cos\\Big(\\frac{1}{2} \\pi u^2\\Big) du \\\\S(z) &amp;= \\int_0^z \\sin\\Big(\\frac{1}{2} \\pi u^2\\Big) du\\end{aligned}"/>
+
+  <p>
+    The Fresnel integrals do not have any simpler forms in terms
+    of elementary functions, as the integrals in them cannot be
+    computed in closed form.
+  </p>
+  <p>
+    Now we define the constant <InlineEquation equation="\\ell = \\sqrt{\\pi/\\alpha}" />, and
+    then the position at distance \(s\) along an Euler spiral
+    curve is:
+  </p>
+
+  <DisplayEquation id="avt-ee" title="Euler spiral"  equation="\\vec{r} = \\ell C(s / \\ell) \\, \\hat{\\imath}+ \\ell S(s / \\ell) \\, \\hat{\\jmath}" background="True" derivation="True">
+    <InlineCanvas id="avt-ee-c" width="300" height="200" />
+
+    <p>
+      We start the spiral curve from the origin, initially
+      moving horizontally to the right and curving upwards
+      with constant speed \(v\). Using a tangential/normal
+      basis, let \(\theta\) be the angle of <InlineEquation equation="\\hat{e}_t" /> as
+      shown. Then <InlineEquation equation="\\dot{\\theta}" /> can be found by considering
+      two expressions for the acceleration. First, from the tangential/normal acceleration
+      formula, we have <DisplayEquation equation=" \\vec{a} = \\ddot{s} \\, \\hat{e}_t +      \\kappa v^2 \\, \\hat{e}_n = \\alpha s v^2 \\, \\hat{e}_n, " />
+      where we used the fact that <InlineEquation equation="\\ddot{s} = \\dot{v} = 0" />
+      (constant speed) and that <InlineEquation equation="\\kappa = \\alpha s " /> for some
+      constant \(\alpha\) (the definition of the Euler spiral is
+      that curvature is a linear function of distance \(s\)).
+    </p>
+    <p>
+      The second expression for acceleration uses the angular
+      velocity <InlineEquation equation="\\vec{\\omega} = \\dot\\theta \\, \\hat{k}" /> of the
+      tangential/normal basis vectors. Recalling that <InlineEquation equation="\\vec{v}      = v \\, \\hat{e}_t" /> and \(v\) is constant, we have
+      <DisplayEquation equation=" \\begin{aligned}      \\vec{a} = \\dot{\\vec{v}} = v \\, \\dot{\\hat{e}}_t      = v \\, \\vec{\\omega} \\times \\vec{e}_t      = v \\dot{\\theta} \\, \\hat{e}_n. \\end{aligned}" />
+    </p>
+    <p>
+      Comparing the two expressions for <InlineEquation equation="\\vec{a}" /> and using <InlineEquation equation="s = vt" /> we see that
+      <DisplayEquation equation=" \\dot{\\theta} = \\alpha s v = \\alpha v^2 t " /> and we can
+      integrate this (with the initial condition that $\(\theta\)
+      starts at zero) to give <DisplayEquation equation=" \\theta = \\frac{1}{2} \\alpha      v^2 t^2. " />
+    </p>
+    <p>
+      To find the equation for <InlineEquation equation="\\vec{r}" /> we can integrate the
+      equation <DisplayEquation equation=" \\dot{\\vec{r}} = v \\, \\hat{e}_t = v      \\cos\\theta \\, \\hat{\\imath} + v \\sin\\theta \\,      \\hat{\\jmath} " /> 
+      starting from <InlineEquation equation="\\vec{r}=0" /> to obtain 
+      
+      <DisplayEquation equation="      \\begin{aligned} \\vec{r} &amp;= \\int_0^t \\left(v      \\cos\\Big(\\frac{1}{2} \\alpha v^2 \\tau^2\\Big) \\,      \\hat{\\imath} + v \\sin\\Big(\\frac{1}{2} \\alpha v^2 \\tau^2      \\Big) \\, \\hat{\\jmath}\\right) d\\tau \\\\ &amp;= \\ell      \\int_0^{s/\\ell} \\left( \\cos\\Big(\\frac{1}{2} \\pi u^2\\Big)      \\, \\hat{\\imath} + \\sin\\Big(\\frac{1}{2} \\pi u^2\\Big) \\,      \\hat{\\jmath} \\right) du, \\end{aligned} " />
+      
+       where we made
+      the substitution <InlineEquation equation="\\tau = \\ell u / v" /> with <InlineEquation equation="\\ell =      \\sqrt{\\pi/\\alpha}" />. Using the definitions of the
+      <a href="#avt-ef">Fresnel integrals</a> now gives the <a
+      href="#avt-ee">desired expression</a>.
+    </p>
+  </DisplayEquation>
+
+  <p>
+    Plotting the Euler spiral equation gives the curve below,
+    which starts out at the origin with zero curvature, and the
+    then has steadily increasing curvature as we move along it.
+  </p>
+
+  <PrairieDrawCanvas id="avt-fs-c" width="400" height="400">
+    <p class="figureCaption">
+      Euler spiral shape defined by the <a
+      href="#avt-ee">equation above</a>. Changing the value of
+      \(\alpha\) or \(\ell\) simply scales the whole curve to make
+      it bigger or smaller, without changing the shape.
+    </p>
+  </PrairieDrawCanvas>
+
+  <p>
+    The full Euler spiral is unsuitable for track transitions,
+    as the curvature increases without limit. Instead, we can
+    piece together short segments of the Euler spiral to form
+    our transition curve. For example, the right-hand curve in
+    the <a href="#rvt-fe">smooth track above</a> is composed of
+    two copies of the first quarter-turn of the Euler spiral,
+    with one copy flipped upside down. This means the curvature
+    starts at zero, increases linearly to a maximum halfway
+    around the curve, then decreases linearly again back to zero
+    to join the straight segment.
+  </p>
+</SubSection>
+
+</Layout>
+
+<script src="/dyn/particle_kinematics/canvases.js" is:inline></script>

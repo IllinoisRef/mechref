@@ -1,0 +1,997 @@
+---
+import Layout from "../../layouts/Layout.astro" 
+import Image from "../../components/Image.astro" 
+import Section from "../../components/Section.astro" 
+import SubSection from "../../components/SubSection.astro" 
+import SubSubSection from "../../components/SubSubSection.astro" 
+import BlueText from "../../components/BlueText.astro" 
+import RedText from "../../components/RedText.astro" 
+import InlineEquation from "../../components/InlineEquation.astro"
+import Center from "../../components/Center.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import Enumerate from "../../components/Enumerate.astro"
+import Item from "../../components/Item.astro"
+import Warning from "../../components/Warning.astro"
+import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import DisplayEquation from "../../components/DisplayEquation.astro"
+import DisplayEquationCustom from "../../components/DisplayEquationCustom.astro"
+import Example from "../../components/Example.astro"
+import InlineCanvas from "../../components/InlineCanvas.astro"
+import Row from "../../components/Row.astro"
+import Col from "../../components/Col.astro"
+import SubSubSubSection from "../../components/SubSubSubSection.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+---
+
+<Layout title = "Four-bar linkages" description = "Learn how rigid body kinematics applies to four bar linkages.">
+
+
+<div slot="navtree">
+  <ul class='list-group list-group-flush py-0'> 
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#rotating_cranks_and_reciprocating_rockers'>Rotating cranks and reciprocating rockers</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#coupler_dynamics'>Coupler dynamics</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#limiting_the_input_angle'>Limiting the input angle</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#example_pumpjack_rotary_to_reciprocal'>Example: pumpjack (rotary to reciprocal)</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#example_bicycle_pedaling_reciprocal_to_rotary'>Example: bicycle pedaling (reciprocal to rotary)</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#knee_joint'>Knee joint</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#suspensions_linkage'>Suspensions with Watt's linkage</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#example_parrofish_jaw_force_multiplication'>Example: parrotfish jaw (force multiplication)</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#full_linkage_model'>Full linkage model</a></li>
+</ul>
+</div>
+
+
+
+
+  <div hidden>
+    <PrairieDrawCanvas id = "rkg-fw-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-fr-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-xp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-xc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkg-fd-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-cm-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcl-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcp-cs" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcf-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xcf-s" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xlc-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-sa" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-s1" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "rkc-xtp-s2" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avs-ft-c" width = "1" height = "1"/>
+    <PrairieDrawCanvas id = "avs-fr-c" width = "1" height = "1"/>
+  </div>
+
+<Section title = "Four-bar linkages">
+        <p>
+          A planar four-bar linkage consists of four rigid rods in the
+          plane connected by pin joints. We call the rods:
+        </p>
+        <ul>
+          <li>Ground link <InlineEquation equation = "g:"/> fixed to anchor pivots <InlineEquation equation = "A"/> and <InlineEquation equation = "B."/></li>
+          <li>Input link <InlineEquation equation = "a:"/> driven by input angle <InlineEquation equation = "\\alpha."/></li>
+          <li>Output link <InlineEquation equation = "b:"/> gives output angle <InlineEquation equation = "\\beta."/></li>
+          <li>Floating link <InlineEquation equation = "f:"/> connects the two moving pins <InlineEquation equation = "C"/> and <InlineEquation equation = "D."/></li>
+        </ul>
+        <p>
+          We often think of a four-bar linkage as being driven at the
+          input angle <InlineEquation equation = "\\alpha,"/>, resulting in the output angle
+          <InlineEquation equation = "\\beta."/> We only need one input, because the system has
+          exactly <InlineEquation equation = "N_{\\rm DOF} = 1"/> degree of freedom. We can count
+          the DOF as 9 free variables (three moving rigid bodies with
+          three variables each) minus 8 constraints (four pin joints
+          with two constraints each).
+        </p>
+        <table class="alignTop figureLeftControl">
+          <tr>
+            <td>
+              <canvas id="aml-ft-c" width="600" height="300">
+              </canvas>
+            </td>
+            <td class="controls">
+              <button class="anim-toggle:aml-ft-c">animation</button>
+              <button class="reset:aml-ft-c">reset</button>
+              <table class="alignTop">
+                <tr>
+                  <td>Show:</td>
+                  <td>
+                    <button class="option-toggle:aml-ft-c:showLabels">labels</button>
+                    <button class="option-toggle:aml-ft-c:showPivots">pivots</button>
+                  </td>
+                </tr>
+              </table>
+              <table>
+                <tr><td>Input \(\alpha\):</td><td><span class="data-option:aml-ft-c:inputType"></span></td></tr>
+                <tr><td>Output \(\beta\):</td><td><span class="data-option:aml-ft-c:outputType"></span></td></tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <p>
+          Four-bar linkages can be used for many mechanical purposes, including to:
+        </p>
+        <ol>
+          <li>convert rotational motion to reciprocating motion (e.g., <a href="#aml-sp">pumpjack</a> examples below)</li>
+          <li>convert reciprocating motion to rotational motion (e.g., <a href="#aml-sb">bicycle</a> examples below)</li>
+          <li>constrain motion (e.g., <a href="#aml-sk">knee joint</a> and <a href="#aml-sw">suspension</a> examples below)</li>
+          <li>magnify force (e.g., <a href="#aml-sj">parrotfish jaw</a> examples below)</li>
+        </ol>
+</Section>
+
+<SubSection title = "Rotating cranks and reciprocating rockers" id = "rotating_cranks_and_reciprocating_rockers">
+        <p>
+          Four-bar linkages can convert between different types of
+          motion. We call these:
+        </p>
+        <ul>
+          <li>Crank rod: rotating motion through a complete circle.</li>
+          <li>Rocker rod: reciprocating motion with a total angle less than <InlineEquation equation = "360 ^ \\circ"/></li>
+        </ul>
+        <p>
+          On the linkage below, adjusting the lengths of the input rod
+          <InlineEquation equation = "a"/> and the output rod <InlineEquation equation = "b"/> shows that we can have an input
+          crank and output rocker or the other way around, depending
+          on whether <InlineEquation equation = "a &lt; b"/> or <InlineEquation equation = "a &gt; b."/> The case when <InlineEquation equation = "a = b"/>
+          is special.
+        </p>
+        <table class="alignTop figureLeftControl">
+          <tr>
+            <td>
+              <canvas id="aml-fr-c" width="600" height="300">
+              </canvas>
+            </td>
+            <td class="controls">
+              <button class="anim-toggle:aml-fr-c">animation</button>
+              <button class="reset:aml-fr-c">reset</button>
+              <table class="alignTop">
+                <tr>
+                  <td>Show:</td>
+                  <td>
+                    <button class="option-toggle:aml-fr-c:showLabels">labels</button>
+                    <button class="option-toggle:aml-fr-c:showPivots">pivots</button>
+                  </td>
+                </tr>
+              </table>
+              <table>
+                <tr><td>Input \(\alpha\):</td><td><span class="data-option:aml-fr-c:inputType"></span></td></tr>
+                <tr><td>Output \(\beta\):</td><td><span class="data-option:aml-fr-c:outputType"></span></td></tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <table class="options">
+          <col class="label" />
+          <col class="input" />
+          <col class="value" />
+          <tr>
+            <td>Input link length:</td>
+            <td><input type="range" min="5" max="40" value="0" step="1" class="data-input:aml-fr-c:a" /></td>
+            <td>\(a = \) <span class="data-option:aml-fr-c:a"></span> cm</td>
+          </tr>
+          <tr>
+            <td>Output link length:</td>
+            <td><input type="range" min="5" max="40" value="0" step="1" class="data-input:aml-fr-c:b" /></td>
+            <td>\(b = \) <span class="data-option:aml-fr-c:b"></span> cm</td>
+          </tr>
+        </table>
+</SubSection>
+
+<SubSection title = "Coupler dynamics" id = "coupler_dynamics">
+        <p>
+          The joints <InlineEquation equation = "C"/> and <InlineEquation equation = "D"/> always move in circles or
+          semi-circles. More complex motion can be achieved with a
+          coupler point <InlineEquation equation = "P"/> attached to the floating link <InlineEquation equation = "f,"/> as
+          shown below where the position of <InlineEquation equation = "P"/> can be
+          adjusted. Adding a coupler technically makes this a six-bar
+          linkage (four original links plus <InlineEquation equation = "CP"/> and <InlineEquation equation = "DP"/>).
+        </p>
+        <p>
+          Here the input and output links are listed as a 0-rocker and
+          π-rocker, as they reciprocate about the angles <InlineEquation equation = "\\alpha = 0 ^ \\circ"/>
+          and <InlineEquation equation = "\\beta = 180 ^ \\circ = \\pi \\rm \\ rad,"/>
+          respectively.
+        </p>
+        <table class="alignTop figureLeftControl">
+          <tr>
+            <td>
+              <canvas id="aml-fc-c" width="600" height="300">
+              </canvas>
+            </td>
+            <td class="controls">
+              <button class="anim-toggle:aml-fc-c">animation</button>
+              <button class="reset:aml-fc-c">reset</button>
+              <table class="alignTop">
+                <tr>
+                  <td>Zoom:</td>
+                  <td><span><input style="width:84px;" type="range" min="10" max="100"
+                  value="100" step="5" class="data-input:aml-fc-c:zoom" />
+                  <span class="data-option:aml-fc-c:zoom"></span>%</span></td>
+                </tr>
+                <tr>
+                  <td>Show:</td>
+                  <td>
+                    <button class="option-toggle:aml-fc-c:showLabels">labels</button>
+                    <button class="option-toggle:aml-fc-c:showPivots">pivots</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trace:</td>
+                  <td>
+                    <button class="option-toggle:aml-fc-c:traceC">C</button>
+                    <button class="option-toggle:aml-fc-c:traceD">D</button>
+                    <button class="option-toggle:aml-fc-c:traceP">P</button>
+                  </td>
+                </tr>
+              </table>
+              <table>
+                <tr><td>Input \(\alpha\):</td><td><span class="data-option:aml-fc-c:inputType"></span></td></tr>
+                <tr><td>Output \(\beta\):</td><td><span class="data-option:aml-fc-c:outputType"></span></td></tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <table class="options">
+          <col class="label" />
+          <col class="input" />
+          <col class="value" />
+          <tr>
+            <td>Coupler position:</td>
+            <td><input type="range" min="-400" max="400" value="0" step="10" class="data-input:aml-fc-c:PPosition" /></td>
+            <td><InlineEquation equation = "P_{\\rm pos} ="/> <span class="data-option:aml-fc-c:PPosition"></span>%
+            from DC midpoint towards C
+            </td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Coupler offset:</td>
+            <td><input type="range" min="-200" max="200" value="0" step="10" class="data-input:aml-fc-c:POffset" /></td>
+            <td><InlineEquation equation = "P_{\\rm off} ="/> <span class="data-option:aml-fc-c:POffset"></span>%
+            of DC length
+            </td>
+          </tr>
+        </table>
+</SubSection>
+
+<SubSection title = "Limiting the input angle" id = "limiting_the_input_angle">
+        <p>
+          It is often helpful to limit the input angle in a mechanism,
+          even when the linkage could allow for greater movement. For
+          example, to have a lifting platform the linkage below uses a
+          crank limited to a smaller reciprocating input range. The
+          input center angle <InlineEquation title = "\\alpha_{||rm cent}"/> and range
+          <InlineEquation equation = "\\Delta \\alpha"/> can be adjusted to control the range of
+          movement of the platform.
+        </p>
+        <table class="alignTop figureLeftControl">
+          <tr>
+            <td>
+              <canvas id="aml-fi-c" width="600" height="300">
+              </canvas>
+            </td>
+            <td class="controls">
+              <button class="anim-toggle:aml-fi-c">animation</button>
+              <button class="reset:aml-fi-c">reset</button>
+              <table class="alignTop">
+                <tr>
+                  <td>Show:</td>
+                  <td>
+                    <button class="option-toggle:aml-fi-c:showLabels">labels</button>
+                    <button class="option-toggle:aml-fi-c:showPivots">pivots</button>
+                    <button class="option-toggle:aml-fi-c:showInputRange">input range</button>
+                  </td>
+                </tr>
+              </table>
+              <table>
+                <tr><td>Input \(\alpha\):</td><td><span class="data-option:aml-fi-c:inputType"></span></td></tr>
+                <tr><td>Output \(\beta\):</td><td><span class="data-option:aml-fi-c:outputType"></span></td></tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <table class="options">
+          <col class="label" />
+          <col class="input" />
+          <col class="value" />
+          <tr>
+            <td>Input angle center:</td>
+            <td><input type="range" min="0" max="100" value="0" step="5" class="data-input:aml-fi-c:oscCenter" /></td>
+            <td><InlineEquation equation = "\\alpha_{\\rm cent} ="/> <span class="data-option:aml-fi-c:oscCenter"></span>% from 0° to 360°</td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Input angle range:</td>
+            <td><input type="range" min="0" max="100" value="0" step="5" class="data-input:aml-fi-c:oscMagnitude" /></td>
+            <td><InlineEquation equation = "\\Delta \\alpha ="/> <span class="data-option:aml-fi-c:oscMagnitude"></span>% of 180°</td>
+          </tr>
+        </table>
+</SubSection>
+
+<SubSection title = "Example: pumpjack (rotary to reciprocal)" id = "example_pumpjack_rotary_to_reciprocal">
+        <p>
+          In areas where underground oil is not under enough pressure
+          to drive it all the way to the surface, it is necessary for
+          oil wells to actively pump up the oil. One standard method
+          for achieving this is to use a reciprocating piston that
+          pumps the oil up the shaft. As most motors (electrical or
+          internal combustion) provide a rotating drive shaft, some
+          way is needed to convert the rotary engine motion into
+          reciprocating pump motion. A <a
+          href="http://en.wikipedia.org/wiki/Pumpjack">pumpjack</a> is
+          a drive mechanism to achieve this, consisting of a four-bar
+          linkage as shown below. The heavy rotating counterweight is
+          arranged so that it is falling while the pump is performing
+          the up-stroke, and thus lifting the oil against
+          gravity. This allows a smaller engine to be used.
+        </p>
+        <div class="figureContainer width600" id="aml-fp">
+          <canvas id="aml<p>
+          Bicycles are an efficient means of human-powered
+          transportation due to their use of rotary wheel
+          motion. Humans cannot directly produce indefinite rotations,
+          however, so some mechanism is required to translate
+          reciprocating human motion into rotary motion. Bicycles
+          achieve this conversion with two four-bar linkages, each
+          consisting of the two segments of the riders leg, the
+          bicycle frame, and the <a
+          href="http://en.wikipedia.org/wiki/Crank_(mechanism)">crank</a>,
+          as shown below.
+        </p>
+        <div class="figureContainer width600" id="aml-fb">
+          <canvas id="aml-fb-c" width="600" height="400" class="figureImage" >
+          </canvas>
+          <p class="controls">
+            <button class="option-toggle:aml-fb-c:showLinkage">show linkage</button>
+            <button class="anim-toggle:aml-fb-c">animation</button>
+            <button class="reset-time:aml-fb-c">reset</button>
+          </p>
+          <p class="figureCaption">
+            A man riding a bicycle at the port of <a
+            href="http://en.wikipedia.org/wiki/Vannes">Vannes</a>,
+            Brittany, in the north-west of France. Image source: <a
+            href="http://www.flickr.com/photos/adulau/7705967112/">Flickr
+            image</a> by <a
+            href="http://www.flickr.com/people/adulau/">Alexandre
+            Dulaunoy</a> (<a
+            href="http://creativecommons.org/licenses/by-sa/2.0/deed.en">CC
+            BY 2.0</a>) (<a href="aml_7705967112.jpg">full-sized
+            image</a>).
+          </p>
+        </div>
+        <p>
+          While the four links in the bicycle linkage are
+          approximately rigid rods, only two of the joints are in fact
+          reasonable models of a pin joint (the knee and lower
+          crank). At the pedal and seat, only compression is allowed,
+          as there is no way for the rider to pull up on the pedal or
+          seat. This doesn't normally matter, as the rider's weight
+          serves to maintain the connection at the seat, while the
+          pedal joint only has force exerted during the down-stroke on
+          each side, and the two legs are offset by 180&#176; so one
+          is always pushing down. An alternative approach is used on
+          racing bikes, where the feet are clipped to the pedals and
+          so each foot can pull up as well as push down.
+          </p>-fp-c" width="600" height="431" class="figureImage" >
+          </canvas>
+          <p class="controls">
+            <button class="option-toggle:aml-fp-c:showLinkage">show linkage</button>
+            <button class="anim-toggle:aml-fp-c">animation</button>
+            <button class="reset-time:aml-fp-c">reset</button>
+          </p>
+          <p class="figureCaption">
+            A pumpjack (also known as a nodding donkey) pump in
+            Northeast Colorado.  Image credit: <a
+            href="http://www.flickr.com/photos/37467370@N08/7632673158/">Flickr
+            image</a> by <a
+            href="http://www.flickr.com/people/37467370@N08/">Greg
+            Goebel</a> (<a
+            href="http://creativecommons.org/licenses/by-sa/2.0/deed.en">CC
+            BY-SA 2.0</a>) (<a href="aml_7632673158.jpg">full-sized
+            image</a>).
+          </p>
+        </div>
+</SubSecton>
+
+<SubSection title = "Example: bicycle pedaling (reciprocal to rotary)" id = "example_bicycle_pedaling_reciprocal_to_rotary">
+        <p>
+          Bicycles are an efficient means of human-powered
+          transportation due to their use of rotary wheel
+          motion. Humans cannot directly produce indefinite rotations,
+          however, so some mechanism is required to translate
+          reciprocating human motion into rotary motion. Bicycles
+          achieve this conversion with two four-bar linkages, each
+          consisting of the two segments of the riders leg, the
+          bicycle frame, and the <a
+          href="http://en.wikipedia.org/wiki/Crank_(mechanism)">crank</a>,
+          as shown below.
+        </p>
+        <div class="figureContainer width600" id="aml-fb">
+          <canvas id="aml-fb-c" width="600" height="400" class="figureImage" >
+          </canvas>
+          <p class="controls">
+            <button class="option-toggle:aml-fb-c:showLinkage">show linkage</button>
+            <button class="anim-toggle:aml-fb-c">animation</button>
+            <button class="reset-time:aml-fb-c">reset</button>
+          </p>
+          <p class="figureCaption">
+            A man riding a bicycle at the port of <a
+            href="http://en.wikipedia.org/wiki/Vannes">Vannes</a>,
+            Brittany, in the north-west of France. Image source: <a
+            href="http://www.flickr.com/photos/adulau/7705967112/">Flickr
+            image</a> by <a
+            href="http://www.flickr.com/people/adulau/">Alexandre
+            Dulaunoy</a> (<a
+            href="http://creativecommons.org/licenses/by-sa/2.0/deed.en">CC
+            BY 2.0</a>) (<a href="aml_7705967112.jpg">full-sized
+            image</a>).
+          </p>
+        </div>
+        <p>
+          While the four links in the bicycle linkage are
+          approximately rigid rods, only two of the joints are in fact
+          reasonable models of a pin joint (the knee and lower
+          crank). At the pedal and seat, only compression is allowed,
+          as there is no way for the rider to pull up on the pedal or
+          seat. This doesn't normally matter, as the rider's weight
+          serves to maintain the connection at the seat, while the
+          pedal joint only has force exerted during the down-stroke on
+          each side, and the two legs are offset by 180&#176; so one
+          is always pushing down. An alternative approach is used on
+          racing bikes, where the feet are clipped to the pedals and
+          so each foot can pull up as well as push down.
+          </p>
+      <div class="infoCol">
+        <div id="aml-ib" class="infoBox factBox">
+          <p>
+            While the current form of the bicycle may seem obvious,
+            with a rotary crank connected by a chain to the rear
+            wheel, it took over 50 years for it <a
+            href="http://en.wikipedia.org/wiki/History_of_the_bicycle">to
+            be developed</a>. Before this time, many different systems
+            for bicycle propulsion were tried. The <a
+            href="http://en.wikipedia.org/wiki/Laufmaschine">first
+            bicycle</a>, invented by <a
+            href="http://en.wikipedia.org/wiki/Karl_Drais">Karl
+            Drais</a> in <a
+            href="http://en.wikipedia.org/wiki/Mannheim">Mannheim</a>,
+            Germany in 1818, used direct human propulsion along the
+            ground, as shown below.  Mannheim was an important
+            location for vehicle invention, as it was also the city
+            where <a href="avb.html#avb-is">Karl Benz invented the
+            modern automobile in 1885</a>.
+          </p>
+          <div class="imageBox width250">
+            <img src="aml_Draisine1817_clipped_small.jpg" alt="A Draisine bicycle."></img>
+            <p class="caption">
+              Image credit: <a
+              href="http://commons.wikimedia.org/wiki/File:Draisine1817.jpg">Wikimedia
+              Commons</a> (<a
+              href="http://creativecommons.org/licenses/publicdomain/">public
+              domain</a>) (<a href="aml_Draisine1817.jpg">full-sized
+              image</a>).
+            </p>
+          </div>
+          <p>
+            Later bicycle propulsion mechanisms used pedals directly
+            attached to the hub of the front wheel (the so-called <a
+            href="http://en.wikipedia.org/wiki/Boneshaker_(bicycle)#Boneshaker">bone-shaker</a>),
+            which caused difficulties in pedaling while turning. This
+            direct drive also had gearing problems, as a comfortable
+            ratio of pedal frequency to velocity required very large
+            wheels, leading to the <a
+            href="http://en.wikipedia.org/wiki/Penny-farthing">penny-farthing</a>. An
+            alternative approach to cranks was to use <a
+            href="http://en.wikipedia.org/wiki/Treadle_bicycle">treadles</a>,
+            allowing the pedals to be positioned away from the wheel
+            hub. This series of inventions finally resulted in the <a
+            href="http://en.wikipedia.org/wiki/Safety_bicycle">safety
+            bicycle</a> in 1876, which is the modern form we still use
+            today.
+          </p>
+        </div>
+      </div>
+</SubSection>
+
+<SubSection title="Knee joint"  id="knee_joint">
+    <p>
+      The human knee joint is a type of biological <a
+      href="http://en.wikipedia.org/wiki/Hinge_joint">hinge</a>,
+      which allows movement in only one primary angle. The knee
+      connects the <a
+      href="http://en.wikipedia.org/wiki/Femur">femur</a> (the
+      upper leg bone) to the <a
+      href="http://en.wikipedia.org/wiki/Tibia">tibia</a> (the
+      larger of the two lower leg bones). These two bones sit next
+      to each other and are free to rotate about a single axis. A
+      mechanism is needed to keep the two legs bones attached to
+      each other, while still allowing rotation. In the case of
+      the human knee this is achieved with a four-bar linkage
+      consisting of the two bones together with the <a
+      href="http://en.wikipedia.org/wiki/Anterior_cruciate_ligament">anterior
+      cruciate ligament (ACL)</a> and <a
+      href="http://en.wikipedia.org/wiki/Posterior_cruciate_ligament">posterior
+      cruciate ligament (PCL)</a>, as shown below.
+    </p>
+
+    <PrairieDrawCanvas id="aml-fk-c" width="600" height="596" class="figureImage">
+      <p class="controls">
+        <button class="option-toggle:aml-fk-c:showLinkage" onclick="aml_fk_c.toggleOption('showLinkage')">show linkage</button>
+        <button class="anim-toggle:aml-fk-c" onclick="aml_fk_c.toggleAnim()">animation</button>
+        <button class="reset-time:aml-fk-c" onclick="aml_fk_c.resetTime()">reset</button>
+      </p>
+      <p class="figureCaption">
+        <i> An <a href="http://en.wikipedia.org/wiki/Magnetic_resonance_imaging">MRI</a> image of a <a
+        href="http://en.wikipedia.org/wiki/Sagittal_plane">sagittal
+        section</a> through a human <a
+        href="http://en.wikipedia.org/wiki/Knee">knee joint</a>,
+        showing the <a
+        href="http://en.wikipedia.org/wiki/Anterior_cruciate_ligament">ACL</a>
+        and <a
+        href="http://en.wikipedia.org/wiki/Posterior_cruciate_ligament">PCL</a>
+        ligaments.  Image credit: <a
+        href="http://en.wikipedia.org/wiki/File:MRT_ACL_PCL_01.jpg">Wikimedia
+        Commons image</a> (<a
+        href="http://creativecommons.org/licenses/by-sa/2.0/deed.en">CC
+        BY-SA 2.0</a>). </i>
+      </p>
+      <p>
+        The four-bar model of the knee is only approximate, and
+        neglects many important mechanical features. In particular,
+        the ACL and PCL are not rigid rods, and can only provide
+        tensile forces (they act as mechanical ropes). The
+        compressive force is actually provided by the <a
+        href="http://en.wikipedia.org/wiki/Meniscus_(anatomy)">meniscus</a>
+        that separates the femur and tibia bones. In the simple
+        four-bar knee model shown here, the rigid rods include the
+        effects of both the ligaments and the meniscus.
+      </p>
+    </PrairieDrawCanvas>
+
+    <div class="references">
+      <h5 style="text-align:center;">References</h3>
+      <ul class="references">
+        <li>
+          A. B. Zavatsky and J. J. O'Connor.
+          A model of human knee ligaments in the sagittal plane: Part 1: Response to passive flexion.
+          <i>Proceedings of the Institution of Mechanical Engineers, Part H: Journal of Engineering in Medicine</i>,
+          206(3):125–134, 1992.
+          DOI: <a href="http://dx.doi.org/10.1243/PIME_PROC_1992_206_280_02">10.1243/PIME_PROC_1992_206_280_02</a>
+        </li>
+      </ul>
+    </div>
+    <CalloutContainer slot="cards">
+      <CalloutCard>
+        <p>
+          No joints in the human body have the rotating bone fully
+          constrained by the enclosing socket bone. Instead, like
+          the knee, they have a partial socket or cylinder and the
+          rotating bone is held in place by ligaments. This type of
+          arrangement is typical for most animals, with one rare
+          exception being the <a
+          href="http://en.wikipedia.org/wiki/European_badger">European
+          Badger (Meles Meles)</a>. In older badgers, the jaw
+          rotates on an entirely enclosed pivot, as shown
+          below. This means that the badger cannot waggle its jaw
+          side-to-side as humans can, and also means that the badger
+          jaw cannot be dislocated or disconnected without breaking
+          the bone.
+        </p>
+        <PrairieDrawCanvas id="aml-fs-c" width="250" height="155" class="figureImage">
+          <p class="controls">
+            <button class="option-toggle:aml-fs-c:showPivot" onclick="aml_fs_c.toggleOption('showPivot')">show jaw pivot</button>
+          </p>
+          <p class="caption">
+            Image credit: <a
+            href="http://commons.wikimedia.org/wiki/File:Blaireau.jpg">Wikimedia
+            Commons</a> (<a
+            href="http://creativecommons.org/licenses/by-sa/3.0/deed.en">CC
+            BY-SA 3.0</a>) (<a href="/dyn/rigid_body_kinematics/aml_Blaireau.jpg">full-sized image</a>).
+          </p>
+        </PrairieDrawCanvas>
+      </CalloutCard>
+    </CalloutContainer>
+      
+</SubSection>
+
+<SubSection title="Suspensions with Watt's linkage"  id="suspensions_linkage">
+    <p>Apart from being one of the inventors of the <a
+      href="http://en.wikipedia.org/wiki/Watt_steam_engine">steam
+      engine</a> and having <a
+      href="http://en.wikipedia.org/wiki/Watt">an SI unit</a> named
+      after him, <a
+      href="http://en.wikipedia.org/wiki/James_Watt">James Watt</a>
+      also developed a linkage to produce approximate straight line
+      motion. <a
+      href="http://en.wikipedia.org/wiki/Watt's_linkage">Watt's
+      linkage</a> consists of two long near-parallel links and a
+      small floating link between them, with the near-linear motion
+      occurring for a coupler point midway along the floating
+      link. This linkage is commonly used in suspension systems, as
+      shown below.
+      </p>
+
+      <PrairieDrawCanvas id="aml-fw-c" width="600" height="288" class="figureImage">
+  
+        <p class="controls">
+          <button class="option-toggle:aml-fw-c:showLinkage" onclick="aml_fw_c.toggleOption('showLinkage')">show linkage</button>
+          <button class="anim-toggle:aml-fw-c" onclick="aml_fw_c.toggleAnim()">animation</button>
+          <button class="reset-time:aml-fw-c" onclick="aml_fw_c.resetTime()">reset</button>
+        </p>
+        <p class="figureCaption">
+          <i>The rear suspension of a 1998 <a
+          href="http://en.wikipedia.org/wiki/Ford_Ranger_EV">Ford
+          Ranger EV</a>.  Image credit: <a
+          href="http://commons.wikimedia.org/wiki/File:GSFRRearViewUnderCropped.jpg">Wikimedia
+          Commons</a> (<a
+          href="http://creativecommons.org/licenses/sa/1.0/">CC SA
+          1.0</a>) (<a
+          href="aml_GSFRRearViewUnderCropped.jpg">full-sized
+          image</a>).</i>
+        </p>
+      </PrairieDrawCanvas>
+</SubSection>
+
+<SubSection title = "Example: parrotfish jaw (force multiplication)" id = "example_parrotfish_jaw_force_multiplication">
+        <p>
+          Parrotfish live in shallow tropical waters on coral reefs,
+          where they feed on the the algae that live inside the
+          coral. To get to the algae, they eat the coral itself and
+          then grind it up to release the algae-filled coral polyps
+          inside. The name of parrotfish comes from their teeth, which
+          are packed tightly together to form a parrot-like beak and
+          which grow continuously as they are worn down by feeding.
+        </p>
+        <div class="figureContainer" id="aml-ff">
+          <img class="figureImage" alt="A Bleeker's Parrotfish swimming in front of coral" src="aml_reef4416_small.jpg" />
+          <p class="figureCaption">
+            A <a
+            href="http://en.wikipedia.org/wiki/Pieter_Bleeker">Bleeker's</a>
+            <a
+            href="http://en.wikipedia.org/wiki/Parrotfish">Parrotfish</a>
+            (<a
+            href="http://www.fishbase.us/summary/Chlorurus-bleekeri.html">Chlorurus
+            bleekeri</a>) swimming in front of coral in Fiji.  Image
+            credit: Image <a
+            href="http://www.photolib.noaa.gov/htmls/reef4416.htm">reef4416</a>
+            from <a href="http://www.photolib.noaa.gov/reef/">NOAA's
+            Coral Kingdom Collection</a> by Julie Bedford. (Public
+            domain, U.S. Federal Government). (<a
+            href="aml_reef4416.jpg">full-sized image</a>).
+          </p>
+        </div>
+        <p>
+          To eat the calcium carbonate coral skeleton, parrotfish need
+          not only extremely strong teeth, but they also need a very
+          powerful biting motion of their jaws. To achieve this, they
+          use a four-bar linkage in their jaws to enable the muscle
+          force to obtain a significant mechanical advantage when the
+          jaws are closing, as shown below. The opening motion is
+          comparatively weak, but this is unimportant for normal
+          feeding.
+        </p>
+        <div class="figureContainer width600" id="aml-fj">
+          <canvas id="aml-fj-c" width="600" height="550" class="figureImage" >
+          </canvas>
+          <p class="controls">
+            <button class="option-toggle:aml-fj-c:showLinkage">show linkage</button>
+            <button class="anim-toggle:aml-fj-c">animation</button>
+            <button class="option-toggle:aml-fj-c:showForces">show forces</button>
+            <button class="reset-time:aml-fj-c">reset</button>
+          </p>
+          <p class="figureCaption">
+            The skull of a Bleeker's Parrotfish, showing the main
+            components of the jaw. Image credit: <a
+            href="http://www.biolib.cz/en/image/dir0/id82373/">BioLab
+            image</a> by <a
+            href="http://www.biolib.cz/en/person/id258/">Pavel
+            Zuber</a> <a
+            href="http://creativecommons.org/licenses/by/2.0/">(CC BY
+            2.0)</a> (<a href="aml_id82373_original.jpg">full-sized
+            image</a>).
+          </p>
+        </div>
+        <div class="references">
+          <h3>References</h3>
+          <ul class="references">
+            <li>
+              M. Muller.
+              A Novel Classification of Planar Four-Bar Linkages and its Application to the Mechanical Analysis of Animal Systems.
+              <i>Philosophical Transactions of the Royal Society B</i>,
+              351(1340):689–720, 1996.
+              DOI: <a href="http://dx.doi.org/10.1098/rstb.1996.0065">10.1098/rstb.1996.0065</a>
+            </li>
+          </ul>
+        </div> 
+      <div class="infoCol">
+        <div id="aml-ij" class="infoBox factBox">
+          <p>
+            Parrotfish have two sets of jaws: the regular set of oral
+            jaws that we can see, and a second set of <a
+            href="http://en.wikipedia.org/wiki/Pharyngeal_jaw">pharyngeal
+            jaws</a> located at the start of their throat (the <a
+            href="http://en.wikipedia.org/wiki/Pharynx">pharynx</a>). The
+            pharyngeal jaws are used to crush the coral that has been
+            bitten off by the main oral jaws.
+          </p>
+          <p>
+            Many species of fish have secondary pharyngeal jaws. A
+            particularly striking example is the <a
+            href="http://en.wikipedia.org/wiki/Moray_eel">Moray
+            eel</a>, shown below, which launches its pharyngeal jaws
+            up into the mouth to actively capture prey and drag it
+            back into the throat. This is the basis for <a
+            href="http://en.wikipedia.org/wiki/Alien_(Alien_franchise)">the
+            Alien</a> from the <a
+            href="http://en.wikipedia.org/wiki/Alien_(film_series)">film
+            series</a>, which could launch its inner pharyngeal jaws
+            well beyond its body.
+          </p>
+          <div class="imageBox width250">
+            <canvas id="aml-fm-c" width="250" height="312">
+            </canvas>
+            <p class="controls">
+              <button class="option-toggle:aml-fm-c:showJaws">show pharyngeal jaws</button>
+            </p>
+            <p class="caption">
+              Image credit: R. S. Mehta and P. C. Wainwright,
+              Raptorial jaws in the throat help moray eels swallow
+              large prey, <i>Nature</i> 449, 79-82, 2007. DOI: <a
+              href="http://dx.doi.org/10.1038/nature06062">10.1038/nature06062</a>. (full-sized
+              images: <a
+              href="aml_moray_pharyngeal_closed.png">closed</a>, <a
+              href="aml_moray_pharyngeal_open.png">open</a>).
+            </p>
+          </div>
+        </div>
+      </div>
+</SubSection>
+
+<SubSection title = "Full linkage model" id = "full_linkage_model">
+        <p>
+          The linkage model below can have its geometry set either by
+          the link lengths <InlineEquation equation = "(g, a, b, f)"/> or by the excess
+          quantities <InlineEquation equation = "(T_1, T_2, T_3)."/> Whether each of the <InlineEquation equation = "T_i"/>
+          are positive or negative determines the type of input and
+          output (crank, rocker, etc.). For example, if <InlineEquation equation = "T_3"/> is
+          negative then <InlineEquation equation = "T_3 = f + b - g - a &lt; 0,"/> which means <InlineEquation equation = "g + a > f + b."/>
+          This implies that the input angle <InlineEquation equation = "\\alpha"/>
+          cannot rotate around to <InlineEquation equation = "180 ^ \\circ,"/> as <InlineEquation equation = "D"/> would be too far
+          from <InlineEquation equation = "B,"/> and so the input rod can't be a crank and must be
+          some type of rocker.
+        </p>
+        <p>
+          Two other useful geometric quantities shown below are the
+          Grashof index <InlineEquation equation = "G"/> and the validity index <InlineEquation equation = "V."/> If <InlineEquation equation = "G \gt 0"/>
+          then the shortest link is able to fully rotate through
+          <InlineEquation equation = "360 ^ \\circ"/> (the linkage is “Grashof”), while if <InlineEquation equation = "G \\lt 0"/>
+          then the shortest link only reciprocates (the linkage is
+          “non-Grashof”). If <InlineEquation equation = "V \\lt 0"/> then the linkage is impossible,
+          as the longest link is longer than the total length of the
+          other three links.
+        </p>
+        <table class="alignTop figureLeftControl">
+          <tr>
+            <td>
+              <canvas id="aml-fl-c" width="600" height="300">
+              </canvas>
+            </td>
+            <td class="controls">
+              <button class="anim-toggle:aml-fl-c">animation</button>
+              <button class="reset:aml-fl-c">reset</button>
+              <table class="alignTop">
+                <tr>
+                  <td>Zoom:</td>
+                  <td><span><input style="width:84px;" type="range" min="10" max="100"
+                  value="100" step="5" class="data-input:aml-fl-c:zoom" />
+                  <span class="data-option:aml-fl-c:zoom"></span>%</span></td>
+                </tr>
+                <tr>
+                  <td>Show:</td>
+                  <td>
+                    <button class="option-toggle:aml-fl-c:showLabels">labels</button>
+                    <button class="option-toggle:aml-fl-c:showPivots">pivots</button>
+                    <button class="option-toggle:aml-fl-c:showInputRange">input range</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trace:</td>
+                  <td>
+                    <button class="option-toggle:aml-fl-c:traceC">C</button>
+                    <button class="option-toggle:aml-fl-c:traceD">D</button>
+                    <button class="option-toggle:aml-fl-c:traceP">P</button>
+                  </td>
+                </tr>
+              </table>
+              <table>
+                <tr><td>Input \(\alpha\):</td><td><span class="data-option:aml-fl-c:inputType"></span></td></tr>
+                <tr><td>Output \(\beta\):</td><td><span class="data-option:aml-fl-c:outputType"></span></td></tr>
+                <tr><td>Shortest link:</td><td><span class="data-option:aml-fl-c:GrashofInfo"></span></td></tr>
+                <tr><td></td><td>(<span class="data-option:aml-fl-c:GrashofType"></span>)</td></tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <table class="options">
+          <col class="label" />
+          <col class="input" />
+          <col class="value" />
+          <tr class="bottomBorder">
+            <td>Orientation:</td>
+            <td colspan="2">
+              <button class="option-toggle:aml-fl-c:reversed">reverse input angle</button>
+              <button class="option-toggle:aml-fl-c:flipped">flip output-floating triangle</button>
+            </td>
+          </tr>
+          <tr>
+            <td><input type="radio" name="aml-fl-c-controlMethod" value="lengths" class="data-input:aml-fl-c:controlMethod" /> set link lengths</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Ground link length:</td>
+            <td><input type="range" min="5" max="40" value="0" step="1" class="data-input:aml-fl-c:g lengthInput" /></td>
+            <td>\(g = \) <span class="data-option:aml-fl-c:g"></span> cm</td>
+          </tr>
+          <tr>
+            <td>Input link length:</td>
+            <td><input type="range" min="5" max="40" value="0" step="1" class="data-input:aml-fl-c:a lengthInput" /></td>
+            <td>\(a = \) <span class="data-option:aml-fl-c:a"></span> cm</td>
+          </tr>
+          <tr>
+            <td>Output link length:</td>
+            <td><input type="range" min="5" max="40" value="0" step="1" class="data-input:aml-fl-c:b lengthInput" /></td>
+            <td>\(b = \) <span class="data-option:aml-fl-c:b"></span> cm</td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Floating link length:</td>
+            <td><input type="range" min="5" max="40" value="0" step="1" class="data-input:aml-fl-c:f lengthInput" /></td>
+            <td>\(f = \) <span class="data-option:aml-fl-c:f"></span> cm</td>
+          </tr>
+          <tr>
+            <td><input type="radio" name="aml-fl-c-controlMethod" value="excesses" class="data-input:aml-fl-c:controlMethod" /> set excess values</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Ground-free excess:</td>
+            <td><input type="range" min="-40" max="40" value="0" step="1" class="data-input:aml-fl-c:T1 excessInput" /></td>
+            <td>\(T_1 = g + f - b - a = \) <span class="data-option:aml-fl-c:T1"></span> cm</td>
+          </tr>
+          <tr>
+            <td>Output-ground excess:</td>
+            <td><input type="range" min="-40" max="40" value="0" step="1" class="data-input:aml-fl-c:T2 excessInput" /></td>
+            <td>\(T_2 = b + g - f - a = \) <span class="data-option:aml-fl-c:T2"></span> cm</td>
+          </tr>
+          <tr>
+            <td>Free-output excess:</td>
+            <td><input type="range" min="-40" max="40" value="0" step="1" class="data-input:aml-fl-c:T3 excessInput" /></td>
+            <td>\(T_3 = f + b - g - a = \) <span class="data-option:aml-fl-c:T3"></span> cm</td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Total length:</td>
+            <td><input type="range" min="10" max="200" value="0" step="1" class="data-input:aml-fl-c:L excessInput" /></td>
+            <td>\(L = g + f + b + a = \) <span class="data-option:aml-fl-c:L"></span> cm</td>
+          </tr>
+          <tr>
+            <td>Coupler position:</td>
+            <td><input type="range" min="-400" max="400" value="0" step="10" class="data-input:aml-fl-c:PPosition" /></td>
+            <td><InlineEquation equation = "P_{\\rm pos} ="/> <span class="data-option:aml-fl-c:PPosition"></span>%
+            from DC midpoint towards C
+            </td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Coupler offset:</td>
+            <td><input type="range" min="-200" max="200" value="0" step="10" class="data-input:aml-fl-c:POffset" /></td>
+            <td><InlineEquation equation = "P_{\\rm off} ="/> <span class="data-option:aml-fl-c:POffset"></span>%
+            of DC length
+            </td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Ground link angle:</td>
+            <td><input type="range" min="-180" max="180" value="0" step="5" class="data-input:aml-fl-c:gAngleDeg" /></td>
+            <td><InlineEquation equation = "\\theta_{\\rm g} ="/> <span class="data-option:aml-fl-c:gAngleDeg"></span>°
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <button class="option-toggle:aml-fl-c:oscInput">limited reciprocating input</button>
+              <button class="option-toggle:aml-fl-c:showInputRange">show input range</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Input angle center:</td>
+            <td><input type="range" min="0" max="100" value="0" step="5" class="data-input:aml-fl-c:oscCenter oscInput" /></td>
+            <td><span class="oscInput">
+              <InlineEquation equation = "\\alpha_{\\rm cent} ="/> <span class="data-option:aml-fl-c:oscCenter"></span>%
+              <span class="limitedDesc">from <InlineEquation equation = "\\alpha_{\\rm min}"/> to <InlineEquation equation = "\\alpha_{\\rm max}"/></span>
+              <span class="unlimitedDesc">from 0° to 360°</span>
+            </span></td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Input angle range:</td>
+            <td><input type="range" min="0" max="100" value="0" step="5" class="data-input:aml-fl-c:oscMagnitude oscInput" /></td>
+            <td><span class="oscInput">
+              \(\Delta\alpha = \) <span class="data-option:aml-fl-c:oscMagnitude"></span>%
+              <span class="limitedDesc">from <InlineEquation equation = "\\alpha_{\\rm cent}"/> to nearest <InlineEquation equation = "\\alpha_{\\rm min} / \\alpha_{\\rm max}"/></span>
+              <span class="unlimitedDesc">of 180°</span>
+            </span></td>
+          </tr>
+          <tr>
+            <td>Grashof index:</td>
+            <td></td>
+            <td>\(G = s + l - p - q = \) <span class="data-option:aml-fl-c:GrashofIndex"></span> cm
+            <span class="data-option:aml-fl-c:GrashofRelation"></span></td>
+          </tr>
+          <tr>
+            <td>Validity index:</td>
+            <td></td>
+            <td>\(V = l - s - p - q = \) <span class="data-option:aml-fl-c:ValidityIndex"></span> cm
+            <span class="data-option:aml-fl-c:ValidityRelation"></span></td>
+          </tr>
+        </table>
+        <p>
+          The variables \(s\) and \(l\) are the shortest and longest
+          side lengths, respectively, while \(p\) and \(q\) are the
+          remaining two side lengths.
+        </p>
+        <p>
+          The type of input and output links is determined by whether
+          each of <InlineEquation equation = "T_1, T_2,"/> and <InlineEquation equation = "T_3"/> are positive, zero, or
+          negative. The full table of possibilities is given below.
+        </p>
+        <table class="smallGrid">
+          <tr>
+            <th>\(T_1\)</th><th>\(T_2\)</th><th>\(T_3\)</th><th>Input \(\alpha\)</th><th class="midColGroup">Output \(\beta\)</th>
+            <th>\(T_1\)</th><th>\(T_2\)</th><th>\(T_3\)</th><th>Input \(\alpha\)</th><th class="midColGroup">Output \(\beta\)</th>
+            <th>\(T_1\)</th><th>\(T_2\)</th><th>\(T_3\)</th><th>Input \(\alpha\)</th><th>Output \(\beta\)</th>
+          </tr>
+          <tr>
+            <td>+</td><td>+</td><td>+</td><td>crank   </td><td class="midColGroup">rocker  </td>
+            <td>+</td><td>+</td><td>0</td><td>crank   </td><td class="midColGroup">π-rocker</td>
+            <td>+</td><td>+</td><td>-</td><td>0-rocker</td><td>π-rocker</td>
+          </tr>
+          <tr>
+            <td>0</td><td>+</td><td>+</td><td>crank   </td><td class="midColGroup">π-rocker</td>
+            <td>0</td><td>+</td><td>0</td><td>crank   </td><td class="midColGroup">π-rocker</td>
+            <td>0</td><td>+</td><td>-</td><td>0-rocker</td><td>π-rocker</td>
+          </tr>
+          <tr>
+            <td>-</td><td>+</td><td>+</td><td>π-rocker</td><td class="midColGroup">π-rocker</td>
+            <td>-</td><td>+</td><td>0</td><td>π-rocker</td><td class="midColGroup">π-rocker</td>
+            <td>-</td><td>+</td><td>-</td><td>rocker  </td><td>rocker  </td>
+          </tr>
+          <tr>
+            <td>+</td><td>0</td><td>+</td><td>crank   </td><td class="midColGroup">0-rocker</td>
+            <td>+</td><td>0</td><td>0</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>+</td><td>0</td><td>-</td><td>0-rocker</td><td>crank   </td>
+          </tr>
+          <tr>
+            <td>0</td><td>0</td><td>+</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>0</td><td>0</td><td>0</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>0</td><td>0</td><td>-</td><td>0-rocker</td><td>crank   </td>
+          </tr>
+          <tr>
+            <td>-</td><td>0</td><td>+</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>-</td><td>0</td><td>0</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>-</td><td>0</td><td>-</td><td>0-rocker</td><td>0-rocker</td>
+          </tr>
+          <tr>
+            <td>+</td><td>-</td><td>+</td><td>π-rocker</td><td class="midColGroup">0-rocker</td>
+            <td>+</td><td>-</td><td>0</td><td>π-rocker</td><td class="midColGroup">crank   </td>
+            <td>+</td><td>-</td><td>-</td><td>rocker  </td><td>crank   </td>
+          </tr>
+          <tr>
+            <td>0</td><td>-</td><td>+</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>0</td><td>-</td><td>0</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>0</td><td>-</td><td>-</td><td>0-rocker</td><td>crank   </td>
+          </tr>
+          <tr>
+            <td>-</td><td>-</td><td>+</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>-</td><td>-</td><td>0</td><td>crank   </td><td class="midColGroup">crank   </td>
+            <td>-</td><td>-</td><td>-</td><td>0-rocker</td><td>0-rocker</td>
+          </tr>
+        </table>
+</SubSection>
+
+<script src="/dyn/rigid_body_kinematics/canvases.js" is:inline></script>
+</Layout>

@@ -1,0 +1,609 @@
+---
+import Layout from "../../layouts/Layout.astro" 
+import Image from "../../components/Image.astro" 
+import Section from "../../components/Section.astro" 
+import SubSection from "../../components/SubSection.astro" 
+import SubSubSection from "../../components/SubSubSection.astro" 
+import BlueText from "../../components/BlueText.astro" 
+import RedText from "../../components/RedText.astro" 
+import Itemize from "../../components/Itemize.astro" 
+import Item from "../../components/Item.astro" 
+import DisplayEquation from "../../components/DisplayEquation.astro"
+import DisplayEquationCustom from "../../components/DisplayEquationCustom.astro"
+import PrairieDrawCanvas from "../../components/PrairieDrawCanvas.astro"
+import InlineCanvas from "../../components/InlineCanvas.astro"
+import InlineEquation from "../../components/InlineEquation.astro"
+import Example from "../../components/Example.astro"
+import Center from "../../components/Center.astro"
+import SubSubSubSection from "../../components/SubSubSubSection.astro"
+import Warning from "../../components/Warning.astro"
+import CalloutCard from "../../components/CalloutCard.astro"
+import CalloutContainer from "../../components/CalloutContainer.astro"
+import DisplayTable from "../../components/DisplayTable.astro"
+import Col from "../../components/Col.astro"
+import Row from "../../components/Row.astro"
+---
+<Layout title = "Banked turns" description = "Learn how rigid body kinetics applies to banked turns.">
+
+<div slot="navtree">
+  <ul class='list-group list-group-flush py-0'> 
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#track_geometry'>Track geometry</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#point_mass_model'>Point mass model</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#2d_rigid_body_model'>2D rigid body model</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#design_of_roads_tracks_and_rail'>Design of roads, tracks, and rail</a></li>
+    <li class = 'list-group-item py-0'><a class = 'text-decoration-none subsection' href = '#bus_model'>Bus model</a></li>
+  </ul>
+</div>
+
+
+    <div hidden>
+        <PrairieDrawCanvas id = "rcm-cm-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xc-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xc-s1" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xc-s2" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-cm-cb" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xl-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xl-cd" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-xl-cf" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-er-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-et-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-ee-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-eg-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-ei-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-ec-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rcm-es-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ei-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ec-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xs-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xs-c3" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-el-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xc-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xc-c3" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ea-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xl-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-xl-cd" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ep-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-el-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-er-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ey-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-es-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-eo-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ek-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-eh-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-eb-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "rem-ew-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "ava-fp-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "ava-fr-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "ava-fm-c" width = "1" height = "1"/>
+        <PrairieDrawCanvas id = "ava-fc-c" width = "1" height = "1"/>
+    </div>
+
+<Section title="Banked turns"  id="banked_turns">
+
+<p>
+        Turning in a circle requires a vehicle to have a centripetal acceleration inwards
+        on the turn, and so there must be some centripetal force
+        that produces this acceleration. For a vehicle driving on
+        flat ground, this force must be produced by a sideways
+        friction force on the tires. This introduces two problems:
+      </p>
+      <ol>
+        <li>
+          If the coefficient of friction is not high enough (say the
+          road is wet or icy), then the friction force will be
+          insufficient and the vehicle will slide off the road.
+        </li>
+        <li>
+          Even if the friction force is high enough, because it acts
+          at the bottom of the tires, it produces a net moment about
+          the center of mass, which can cause the vehicle to roll
+          over.
+        </li>
+      </ol>
+      <p>
+        To avoid both of these problems, the road can be <a href=
+        "https://en.wikipedia.org/wiki/Banked_turn">banked</a>
+        inwards, so that the outer edge of the road is higher than
+        the inner edge. This is called <em>superelevation</em> and
+        means that some of the centripetal force can be provided by
+        the normal force with the road, reducing the friction force
+        and minimizing the risk of slip or roll.
+      </p>
+      <p>
+        The figure below shows a bus driving around a sharp corner
+        at high speed on a heavily banked road. To understand the
+        dynamics of this vehicle and the design tradeoffs for
+        cornering on banked turns, we need a model. We will start
+        below with a simple point mass model, which will be enough
+        to understand friction and sliding, and then move on to a 2D
+        rigid-body body to understand roll behavior.
+      </p>
+        <Image src="/dyn/particle_kinetics/avb_09A186_small.jpg">
+            <p class="figureCaption">
+            <a
+            target="_blank" rel="noopener noreferrer" href="http://www.setra.de/en/coaches-buses/topclass/models/s-411-hd.html">
+            Setra
+            S 411 HD coach</a> from the TopClass 400 series on the
+            Mercedes-Benz Untertürkheim test track. This 10.16 m long
+            coach model is relatively compact and has short overhangs,
+            allowing it to traverse the sharp banked corner at about
+            100 km/h. The vehicle is powered by an OM 501 LA V6-engine
+            developing 300 kW (408 hp). Image source:
+            <a href=
+            "http://media.daimler.com/dcmedia/0-921-657769-1-1183792-1-0-1-0-0-1-12639-854946-0-1-0-0-0-0-0.html">
+            Daimler Global Media Site</a> (<a
+            href="avb_09A186.jpg">full-sized image</a>).
+            </p>
+        </Image>
+        
+        
+        <CalloutContainer slot="cards">
+            <CalloutCard title="Required material">
+                <ul>
+                    <li><a href="/dyn/particle_kinetics">Kinetics of point masses</li>
+                    <li><a href="/dyn/rigid_body_kinetics">Kinetics of rigid bodies</a></li>
+                  </ul>
+            </CalloutCard>
+            <CalloutCard title="Extras!">
+                <ul>
+                    <li><a
+                    target="_blank" rel="noopener noreferrer" href="http://www.youtube.com/watch?v=yukC-zdj2Y8#t=05m20s">Video of
+                    a Dodge Challenger</a> on the Untertürkheim track
+                    curve.</li>
+                    <li><a
+                    target="_blank" rel="noopener noreferrer" href="http://www.youtube.com/watch?v=TK59zTPlL4g">Video of
+                    the bus</a> shown in coach figure.</li>
+                    <li><a
+                    target="_blank" rel="noopener noreferrer" href="http://www.youtube.com/watch?v=MXtfsxhAHfs">Video
+                    taken from inside a car</a> driving around the
+                    Untertürkheim track.</li>
+                  </ul>
+            </CalloutCard>
+        </CalloutContainer>
+</Section>
+
+<SubSection title="Track geometry" id="track_geometry">
+    <p>
+        To understand the dynamics of the bus
+        above, we first need a simple model of the geometry of
+        the road. A satellite photo of the track is shown below. The
+        bus was photographed while on the far-left-hand curve, which we
+        can see is approximately a half-circle with radius about 50
+        m.
+      </p>
+      <Image id="avb-ft" src="/dyn/particle_kinetics/avb_unterturkheim_border.png">
+        <p class="figureCaption">
+          Satellite image of the Mercedes-Benz test track at
+          Untertürkheim, on the <a
+          target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Neckar">Neckar
+          River</a> just outside of <a
+          target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Stuttgart">Stuttgart</a>,
+          Germany. The <a href="#avb-fc">picture of the bus</a>
+          above was taken on the far-left-hand corner, which has a
+          radius of curvature of about 50 m. Integrated with the
+          test track is the excellent <a
+          target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Mercedes-Benz_Museum">Mercedes-Benz
+          Museum</a>.
+        </p>
+      </Image>
+      <p>
+        To make a simple model, let us consider a track with
+        straight segments and half-circular ends, as shown below. If
+        we <button class="anim-toggle:avb-fg-c" onclick="avb_fg_c.toggleAnim()">animate</button> the
+        bus then we can see the <button
+        class="option-toggle:avb-fg-c:vectors" onclick="avb_fg_c.toggleOption('vectors')">vectors</button> for
+        velocity, acceleration, and force as the bus drives around
+        the track. We assume constant speed, so there is only an
+        acceleration when the velocity
+        changes direction around the corners. This model assumes
+        semi-circular track ends, but this is
+        not a good idea in practice.
+      </p>
+        <PrairieDrawCanvas id="avb-fg-c" width="600" height="600">
+            <p>
+                <button class="anim-toggle:avb-fg-c" onclick="avb_fg_c.toggleAnim()">animate</button>
+                <button class="option-toggle:avb-fg-c:vectors" onclick="avb_fg_c.toggleOption('vectors')">show vectors</button>
+              </p>
+        </PrairieDrawCanvas>  
+      
+      <p>
+        The centripetal acceleration must be caused by an inwards
+        force while going around the corners. To understand the
+        magnitude and source of this force, we now consider a simple
+        point mass model.
+      </p>
+
+      <CalloutContainer slot="cards">
+        <CalloutCard>
+            <p>
+                The modern automobile was invented in 1885 by <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Karl_Benz">Karl
+                Benz</a> in <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Mannheim">Mannheim</a>,
+                Germany, about 100 km from Stuttgart. The commercial
+                success of the new invention was significantly aided by
+                Benz' wife <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Bertha_Benz">Bertha</a>,
+                who marketed the automobile by making the world's first <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Road_trip">road
+                trip</a>, inventing <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Brake_lining">brake
+                linings</a> in the process. Driven by the post-WWI <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic">German
+                economic crisis and hyperinflation</a>, the Benz company
+                later merged with <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Daimler_Motoren_Gesellschaft">Daimler</a>
+                to form <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Daimler-Benz">Daimler-Benz</a>,
+                and began producing <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Mercedes-Benz">Mercedes-Benz</a>
+                cars in Untertürkheim, just outside of Stuttgart, where it
+                is still headquartered. One of the company's engineers, <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Ferdinand_Porsche">Ferdinand
+                Porsche</a>, later founded his <a
+                target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Porsche">own
+                company</a>, which is also still based in Stuttgart.
+              </p>
+        </CalloutCard>
+    </CalloutContainer>
+</SubSection>
+
+<SubSection title="Point mass model" id = "point_mass_model">
+    <p>
+        Consider the bus as a single point mass on the track while
+        going around the corner. The diagram below shows the bus
+        front-on, so the inside of the track is towards the left. We
+        start by assuming there is no bank on the road and that the
+        bus is stationary. The <button
+        class="seq-toggle:avb-fp-c:fbd">free body diagram</button>
+        shows that the gravity force \(W\) is balanced by the normal
+        force \(N\) from the road. If we now increase the bank
+        angle \(\theta\) below, then we see that a friction force
+        \(F\) tangential to the road is needed to keep the bus from
+        sliding. In practice, this force will be limited by \(F \le
+        \mu N\), where \(\mu\) is the coefficient of friction. If we
+        incline the track until it is nearly vertical, we see that
+        there a huge friction force would be required but only a
+        tiny normal force is available. As this would not be
+        possible without gluing the tires to the road, this
+        situation would result in the bus sliding downwards towards
+        the center of the track.
+      </p>
+        <PrairieDrawCanvas id="avb-fp-c" width="600" height="600" >
+            <p>
+                <button class="seq-toggle:avb-fp-c:fbd" onclick="avb_fp_c.stepSequence('fbd')">free body diagram</button>
+                <button class="option-toggle:avb-fp-c:components" onclick="avb_fp_c.toggleOption('components')">components</button>
+              </p>
+            <Row> 
+                <Col values="12">
+                    <div class="d-flex  align-items-baseline">
+                        <p class="m-0 flex-shrink-1">Road bank angle:</p>
+                        <div class="flex-grow-1 d-flex align-items-baseline">
+        
+                        
+                            <input type="range" min="0" max="85" value="45" class="data-input:avb-fp-c:thetaDeg flex-grow-1 mx-2" onchange="avb_fp_c.setOption('thetaDeg', this.value); document.querySelector('span[class*=thetaDegBus1]').innerText = this.value; console.log(this.value);" oninput="avb_fp_c.setOption('thetaDeg', this.value); document.querySelector('span[class*=thetaDegBus1]').innerText = this.value;"/>
+                                \(\theta = \; \) <span class="data-option:avb-fp-c:thetaDegBus1">45</span>\(^\circ\)
+                        </div>
+                    </div>
+                </Col>
+                <Col values="12">
+                    <div class="d-flex  align-items-baseline">
+                        <p class="m-0 flex-shrink-1">Bus speed: </p>
+                        <div class="flex-grow-1 d-flex align-items-baseline">
+                            <input type="range" min="0" max="40" value="30" class="data-input:avb-fp-c:velocity flex-grow-1 mx-2" onchange="avb_fp_c.setOption('velocity', this.value); document.querySelector('span[class*=velocityBus1]').innerText = this.value; console.log(this.value);" oninput="avb_fp_c.setOption('velocity', this.value); document.querySelector('span[class*=velocityBus1]').innerText = this.value;" />
+                            \(v = \; \) <span class="data-option:avb-fp-c:velocityBus1">30</span> \(\rm m/s\)
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+        </PrairieDrawCanvas>
+
+      
+      <p>
+        Now set the bank angle back to \(0^\circ\) and make sure the
+        speed is zero and that the <button
+        class="seq-toggle:avb-fp-c:fbd" onclick="avb_fp_c.stepSequence('fbd')">free body diagram</button>
+        is visible. Now increase the speed of the bus to produce a
+        centripetal acceleration. <a
+        href="/sta/introduction#rkn-en">Newton's law</a> implies that there
+        must be a centripetal friction force producing this
+        acceleration. As the speed increases, we will eventually
+        reach a point when the friction force required is too large
+        and the bus will slide outwards on the track.
+      </p>
+      <p>
+        To avoid sliding outwards, we can increase the bank on the
+        road. This increases the normal force and decreases the
+        friction force, making it less likely that sliding will
+        occur. For any given speed, there is some angle that exactly
+        cancels the friction force, so that all the force is normal
+        force. This is a very safe driving situation, as no sliding
+        is possible, even in very slippery road conditions. On the
+        <a href="#avb-fc">real track</a>, the bank angle increases
+        as the bus drives higher. This allows the driver to select
+        the correct incline angle to minimize sliding risk. We can
+        also show the forces in <button
+        class="option-toggle:avb-fp-c:components" onclick="avb_fp_c.toggleOption('components')">components</button>
+        or as total vectors as we change the bank angle and bus
+        speed.
+      </p>
+      <p>
+        While this simple point mass model allows us to understand
+        how banking the road can help with the problem of sliding,
+        it does not tell us anything about rolling of the vehicle,
+        because point masses can't rotate. We thus need a rigid body
+        model to investigate roll.
+      </p>
+
+      <CalloutContainer slot="cards">
+        <CalloutCard>
+            <p>
+                Higher speed and a smaller radius of curvature on a
+                circular track requires higher bank angles, as in the photo
+                below.
+            </p>
+            <div class="imageBox width250">
+                <Image src="/dyn/particle_kinetics/avb_114255874071-32_vertical_small.jpg" alt="Mercedes cars on the Untertürkheim test track."/>
+                <p class="caption">
+                Mercedes-Benz models 450 SL and 450 SLC in the front,
+                with models 450 SE and 450 SEL behind, on the
+                Untertürkheim test track in 1973. Image credit: <a
+                target="_blank" rel="noopener noreferrer" href="http://media.daimler.com/dcmedia/0-921-1090569-1-1309207-1-0-0-0-0-1-12759-614216-0-0-@ac.clink104771_3842-0-0-0-0.html">Daimler
+                Global Media Site</a> (<a
+                href="avb_114255874071-32_vertical.jpg">full-sized
+                image</a>, <a href="avb_114255874071-32.jpg">original
+                rotated image</a>).
+                </p>
+            </div>
+        </CalloutCard>
+    </CalloutContainer>
+</SubSection>
+<SubSection title="2D rigid body model" id = "2d_rigid_body_model">
+          <p>
+            We now use a single rigid body model for the bus and we will
+            do everything in 2D. Below we see a front-on diagram of the
+            bus, with the inside of the track to the left. If we turn on
+            the <button class="seq-toggle:avb-fr-c:fbd" onclick="avb_fr_c.stepSequence('fbd');">free body
+            diagram</button>, then we see that the weight of the bus is
+            supported by two forces, one on each wheel. If we increase
+            \(\theta\) then the weight is supported more by the
+            down-slope wheel, and we also see sideways friction forces
+            appear to stop the bus from sliding. If the slope becomes
+            too steep, then the normal force on the up-slope wheel
+            reverses direction, indicating that it is holding the wheel
+            down onto the road. Physically this cannot happen, so at
+            this point the bus would tip over. We needed this rigid-body
+            model to understand this tipping behavior, as we couldn't
+            model this with the <a href="#avb-sp">point mass
+            model</a>. Depending on the value of the friction
+            coefficient, the bus may either slide or roll first as
+            \(\theta\) increases.
+          </p>
+
+            <PrairieDrawCanvas id="avb-fr-c" width="600" height="600">
+                <p>
+                    <button class="seq-toggle:avb-fr-c:fbd" onclick="avb_fr_c.stepSequence('fbd')">free body diagram</button>
+                    <button class="option-toggle:avb-fr-c:components" onclick="avb_fr_c.toggleOption('components')">components</button>
+                  </p>
+                <Row> 
+                    <Col values="12">
+                        <div class="d-flex  align-items-baseline">
+                            <p class="m-0 flex-shrink-1">Road bank angle:</p>
+                            <div class="flex-grow-1 d-flex align-items-baseline">
+            
+                            
+                                <input type="range" min="0" max="85" value="45" class="data-input:avb-fr-c:thetaDeg flex-grow-1 mx-2" onchange="avb_fr_c.setOption('thetaDeg', this.value); document.querySelector('span[class*=thetaDegBus1]').innerText = this.value; console.log(this.value);" oninput="avb_fr_c.setOption('thetaDeg', this.value); document.querySelector('span[class*=thetaDegBus1]').innerText = this.value;"/>
+                                    \(\theta = \; \) <span class="data-option:avb-fr-c:thetaDegBus1">45</span>\(^\circ\)
+                            </div>
+                        </div>
+                    </Col>
+                    <Col values="12">
+                        <div class="d-flex  align-items-baseline">
+                            <p class="m-0 flex-shrink-1">Bus speed: </p>
+                            <div class="flex-grow-1 d-flex align-items-baseline">
+                                <input type="range" min="0" max="40" value="30" class="data-input:avb-fr-c:velocity flex-grow-1 mx-2" onchange="avb_fr_c.setOption('velocity', this.value); document.querySelector('span[class*=velocityBus1]').innerText = this.value; console.log(this.value);" oninput="avb_fr_c.setOption('velocity', this.value); document.querySelector('span[class*=velocityBus1]').innerText = this.value;" />
+                                \(v = \; \) <span class="data-option:avb-fr-c:velocityBus1">30</span> \(\rm m/s\)
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
+            </PrairieDrawCanvas>
+          
+          <p>
+            If we now set the bank angle \(\theta\) back to zero, we
+            can start to increase the speed \(v\). Now we see that the
+            wheel on the inside of the track takes less of the weight,
+            and the friction forces now stop the bus from sliding
+            outwards on the track. If the bus goes too fast then it will
+            roll outwards on the track (assuming the friction
+            coefficient is high enough that it didn't slide first).
+          </p>
+          <p>
+            Having considered both a banked road with stationary bus,
+            and a moving bus on a horizontal road, we can now combine
+            them to see the advantage of having a banked road when the
+            bus is cornering. Choose a bus velocity, and then change the
+            bank angle \(\theta\), so that the friction force is reduced
+            (helping to avoid sliding) and the normal forces on the
+            wheels are more evenly balanced (helping to avoid
+            rolling). For any given speed, we can choose a bank angle so
+            that there is simultaneously no sideways friction force and
+            also exactly balanced normal forces. This is the safest bank
+            angle for this speed.
+          </p>
+</SubSection>
+<SubSection title="Design of roads, tracks, and rail" id = "design_of_roads_tracks_and_rail">
+          <p>
+            A straight road generally has the center somewhat higher
+            than the edges to allow water to run off. This is called <a
+            target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Cross_slope">cross
+            slope</a> or camber. When it is desired to have a banked
+            turn, then the outer edge of the road is raised to produce
+            <em>superelevation</em>, with the outer edge rising above
+            both the center and the inner edge. The bank angle is chosen
+            based on the radius of curvature of the turn and the
+            expected speed of cars going around the turn, while still
+            allowing for the fact that cars might be moving slowly or
+            even stopped. The angle should thus not be chosen to
+            eliminate all friction forces when cars are traveling at
+            maximum speed, as this would be dangerous if traffic had to
+            stop on the road.
+          </p>
+          <p>
+            <a
+            target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Velodrome">Velodromes</a>
+            are arenas with tracks designed for high-speed bicycle
+            races, as shown below, with speeds up to 85 km/h. The bank
+            angle on velodrome tracks is chosen to minimize sideways
+            forces on the bicycles when they are traveling at near
+            maximum speeds, so the angle chosen depends on the radius of
+            curvature of the track corners. For example, the Blaine
+            velodrome track pictured below is 250 m long and has a
+            43&#xb0; bank angle on the corners and 15&#xb0; banking on
+            the straightaways.
+          </p>
+        <Image alt="Bicycle riders in a velodrome" src="/dyn/rigid_body_kinetics/avb_3886159972_71e0dc52d8_o_600.jpg">
+            <p class="figureCaption">
+              Bicycle riders on a banked turn at the <a
+              target="_blank" rel="noopener noreferrer" href="http://velodrome.nscsports.org/">Blaine
+              velodrome</a>, part of the <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/National_Sports_Center">National
+              Sports Center</a> in <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Blaine,_Minnesota">Blaine,
+              Minnesota</a>. Image source: <a
+              target="_blank" rel="noopener noreferrer" href="http://www.flickr.com/photos/flyinswede/3886159972/">flikr
+              user flyinfoto</a> <a
+              target="_blank" rel="noopener noreferrer" href="http://creativecommons.org/licenses/by/2.0/deed.en">(CC
+              BY 2.0)</a> (<a
+              href="avb_3886159972_71e0dc52d8_o.jpg">full-sized
+              image</a>).
+            </p>
+        </Image>
+          <p>
+            High-speed trains such as the French <a
+            target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/TGV">TGV</a> operate at
+            speeds of over 300 km/h and have run at <a
+            target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/TGV_world_speed_record">up
+            to 575 km/h</a>. To accommodate cornering at such speeds,
+            track bends are constructed with a large radius of curvature
+            (at least 7 km for new tracks) and a bank angle of up to
+            about 7&#xb0; (180 mm maximum superelevation with <a
+            target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Standard_gauge">Standard
+            gauge</a> of 1435 mm). For railways, banking the track is
+            know as <a
+            target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Cant_%28road/rail%29">cant</a>.
+          </p>
+          <p>
+            An alternative approach for cornering with trains is to
+            leave the track relatively flat and to <a
+            target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Tilting_train">tilt the
+            train</a> as it travels around a corner. This allows
+            high-speed trains to operate on regular tracks, while
+            maintaining safety and comfort for the passengers. For
+            example, the <a
+            target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/QR_Tilt_Train">Queensland
+            Rail Tilt Train</a> operates at 180 km/h by tilting at up to
+            5&#xb0; around corners. As we see from our <a
+            href="#avb-sr">rigid body analysis</a> above, tilting the
+            train will help with avoiding tipping over at high speeds,
+            but will not help with reducing horizontal friction
+            forces. Even with a tilting train, entering a curve at too
+            high a speed will lead to <a
+            target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Cairns_Tilt_Train_derailment">disastrous
+            results</a>.
+          </p>
+
+        <CalloutContainer slot='cards'>
+            <CalloutCard>
+            <p>
+              The <a target="_blank" rel="noopener noreferrer" href="http://velodrome.nscsports.org/">Blaine
+              velodrome</a> in Minnesota was designed by the famous <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Schuermann">Schuermann</a>
+              velodrome architects and built from the extremely durable
+              African <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Afzelia">Afzelia</a>
+              hardwood.  Velodrome races are always counter-clockwise
+              and use <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Velodrome#Bicycles_and_track_design">special
+              bikes</a> with fixed chains (no freewheeling, no gears)
+              and <em>no brakes</em>. The corners are scarily steep:
+            </p>
+              <Image src="/dyn/rigid_body_kinetics/avb_velodrome_track_small.jpg"> 
+              <!-- alt="woman leaning against a velodrome track">< -->
+              <p class="caption">
+                Image credit: <a
+                target="_blank" rel="noopener noreferrer" href="http://cycletc.com/2011/06/30/track-cycling-we-have-a-what-nsc-velodrome-in-blaine-mn-by-nicole/">Tom
+                McGoldrick</a> (<a href="/dyn/rigid_body_kinetics/avb_velodrome_track.jpg">full
+                sized image</a>).
+
+              </p>
+            </Image>
+        </CalloutCard>
+        <CalloutCard>
+            <p>
+              High-speed trains such as the <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/TGV">French TGV</a> and
+              <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Intercity-Express">German
+              ICE</a> require many sophisticated engineering techniques
+              to enable travel at extreme speed. Very smooth rails are
+              needed, so the track is formed by welding the segments
+              together into one precisely-aligned continuous steel
+              line. The steel rails conduct heat too well for
+              conventional welding, so <a href="">thermite</a> welding
+              is used to join the track segments.
+            </p>
+            <p>
+              At high speeds the train drivers are unable to see railway
+              signals on the side of the track. Electronic signaling
+              systems are used to communicate to the drivers, either <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Transmission_Voie-Machine">through
+              the tracks</a> for the TGV or <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Linienzugbeeinflussung">via
+              additional cables</a> for the ICE.
+            </p>
+            <p>
+              Friction-based brakes produce too much heat, as they would
+              need to absorb the kinetic energy of several hundred
+              tonnes of train moving at over 300 km/h. Instead, <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Dynamic_braking">dynamic
+              breaking</a> is used, in which the electric motors
+              powering the trains are run in reverse as generators and
+              the energy is shed as heat in resistor arrays. At
+              extremely high speeds, the wheels themselves cannot
+              provide sufficient traction to enable braking, so
+              technologies like <a
+              target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Eddy_current_brake">magnetic
+              induction brakes</a> are being developed, which directly
+              push against the rails without involving the wheels at
+              all.
+            </p>
+        </CalloutCard>
+    </CalloutContainer>
+</SubSection>
+<SubSection title="Bus model" id = "bus_model">
+          <p>
+            The bus model used above is a <a
+            target="_blank" rel="noopener noreferrer" href="http://en.wikipedia.org/wiki/Setra">Setra</a> <a
+            target="_blank" rel="noopener noreferrer" href="http://www.setra.de/en/coaches-buses/topclass/models/s-411-hd.html">S
+            411 HD</a> coach. The mass of the vehicle is 12.6 t and the
+            dimensions are shown below.
+          </p>
+          <table>
+            <tr>
+              <td>
+                <PrairieDrawCanvas id="avb-fb-c" width="300" height="300" show_border=False>
+              </td>
+              <td>
+                <p>
+                    <DisplayEquation equation="\\begin{aligned}    h_1 &amp;= {0.31\\rm\\ m} &amp; \\ell_1 &amp;= {0.98\\rm\\ m} \\\\    h_2 &amp;= {0.29\\rm\\ m} &amp; \\ell_2 &amp;= {1.41\\rm\\ m} \\\\    h_3 &amp;= {0.79\\rm\\ m} &amp; \\ell_3 &amp;= {1.41\\rm\\ m} \\\\    &amp; &amp; \\ell_4 &amp;= {0.80\\rm\\ m}    \\end{aligned}" />
+                </p>
+              </td>
+            </tr>
+          </table>
+</SubSection>
+
+
+</Layout>
+
+<script src="/dyn/rigid_body_kinetics/canvases.js" is:inline></script>

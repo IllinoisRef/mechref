@@ -201,6 +201,7 @@ $(document).ready(function(){
         this.addOption("r2x", 2);
         this.addOption("m1", 1);
         this.addOption("m2", 1);
+        this.addOption("movement", "translate");
 
         
 
@@ -295,6 +296,7 @@ $(document).ready(function(){
         this.addOption("r2x", 2);
         this.addOption("m1", 1);
         this.addOption("m2", 1);
+        this.addOption("movement", "translate");
 
         var r1x = this.getOption("r1x");
         var r2x = this.getOption("r2x");

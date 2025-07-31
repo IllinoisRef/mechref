@@ -1989,23 +1989,23 @@ $(document).ready(function() {
         /********************************************************************************/
 
     $( window ).on( "resize", function() {
-        rkt_fb_c.redraw();
-        rkr_fg_c.redraw();
-        rkr_fe_c.redraw();
-        rkr_fc_c.redraw();
+        rkv_fp_c.redraw();
         rkg_fr_c.redraw();
+        rkv_fo_c.redraw();
+        rkv_fa_c.redraw();
+        rkv_fr_c.redraw();
+        rkr_fc_c.redraw();
+        rkr_fe_c.redraw();
+        rkr_fg_c.redraw();
+        rkt_fb_c.redraw();
         rkt_ft_c.redraw();
         rkt_fo_c.redraw();
         aov_fe_c.redraw();
         aov_fd_c.redraw();
-        rkv_fp_c.redraw();
-        rkv_fo_c.redraw();
-        rkv_fa_c.redraw();
-        rkv_fr_c.redraw();
         avt_fc_c.redraw();
         avt_fe_c.redraw();
-        avt_fs_c.redraw();
         avt_ee_c.redraw();
+        avt_fs_c.redraw();
     } );
 
 }); // end of document.ready()
